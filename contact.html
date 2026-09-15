@@ -4,28 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Northstar Business Solutions</title>
-<meta name="description" content="Talk to Northstar Business Solutions about ERP, BI dashboards, strategic advisory, web solutions, or SEO. Email, call, or send a message directly.">
+<meta name="description" content="Start a conversation with Northstar about ERP, business intelligence, or digital advisory for your business.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Contact — Northstar Business Solutions">
-<meta property="og:description" content="Talk to Northstar Business Solutions about ERP, BI dashboards, strategic advisory, web solutions, or SEO. Email, call, or send a message directly.">
-<meta property="og:image" content="hero-starfield.jpg">
+<meta property="og:description" content="Start a conversation with Northstar about your business.">
 <meta name="twitter:card" content="summary_large_image">
-
-<link rel="icon" href="star-mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="progress-bar" aria-hidden="true"></div>
-<canvas id="starfield" aria-hidden="true"></canvas>
-<div class="page-shell">
 
 <nav class="nav">
   <a href="index.html" class="nav-brand">
-    <img src="star-mark.png" alt="">
-    <span>Northstar<small>BUSINESS&nbsp;SOLUTIONS</small></span>
+    <span class="mark"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50,4 L54,42 L78,18 L58,46 L96,50 L58,54 L78,82 L54,58 L50,96 L46,58 L22,82 L42,54 L4,50 L42,46 L22,18 L46,42 Z"/></svg></span>
+    <span class="nav-brand-text"><span class="name">Northstar</span><span class="sub">Business Solutions</span></span>
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -35,148 +28,131 @@
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <div class="nav-cta">
-    <a href="contact.html" class="btn btn-primary">Start a project</a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a conversation</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
   </div>
 </nav>
 
 <header class="page-header">
   <div class="container">
-    <span class="eyebrow">CONTACT</span>
-    <h1 data-reveal="words">Let's talk about what's slowing you down.</h1>
-    <p class="lede" data-reveal="rise" style="margin-top:24px;">Reach us directly, or send the details through and we'll come back with next steps — not a sales script.</p>
+    <span class="eyebrow" data-reveal>CONTACT</span>
+    <h1 class="h-xl" data-reveal>Let's talk about what's next.</h1>
+    <p class="lede" data-reveal>Tell us a little about your business and where things are getting stuck — we'll take it from there.</p>
   </div>
 </header>
 
 <section class="section-tight">
-  <div class="container contact-grid">
-
-    <div>
+  <div class="container two-col">
+    <div data-reveal>
       <span class="eyebrow">DIRECT</span>
-      <div style="margin-top:26px;">
+      <div class="mt-24"></div>
+      <div class="contact-info">
         <div class="contact-info-item">
-          <span class="label">EMAIL</span>
-          <a href="mailto:burhanuddin.motiwala7@gmail.com">burhanuddin.motiwala7@gmail.com</a>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:burhanuddin.motiwala7@gmail.com">burhanuddin.motiwala7@gmail.com</a>
+          </div>
         </div>
         <div class="contact-info-item">
-          <span class="label">PHONE</span>
-          <a href="tel:+918879327052">+91 88793 27052</a>
+          <div>
+            <h4>Phone / WhatsApp</h4>
+            <a href="tel:+918879327052">+91 88793 27052</a>
+          </div>
         </div>
         <div class="contact-info-item">
-          <span class="label">LINKEDIN</span>
-          <a href="https://linkedin.com/in/burhanuddinmotiwala" target="_blank" rel="noopener">linkedin.com/in/burhanuddinmotiwala</a>
+          <div>
+            <h4>LinkedIn</h4>
+            <a href="https://linkedin.com/in/burhanuddinmotiwala" target="_blank" rel="noopener">linkedin.com/in/burhanuddinmotiwala</a>
+          </div>
         </div>
         <div class="contact-info-item">
-          <span class="label">LOCATION</span>
-          <span>Mumbai, India — working with businesses everywhere</span>
+          <div>
+            <h4>Based In</h4>
+            <p>Mumbai, India — working with businesses everywhere</p>
+          </div>
         </div>
       </div>
-      <p style="margin-top:32px; font-size:14.5px;">Prefer a straight conversation over a form? Call or message directly — you'll reach the people who actually do the work, not a call centre.</p>
     </div>
 
-    <div>
+    <div data-reveal>
       <span class="eyebrow">SEND A MESSAGE</span>
-      <form id="contact-form" style="margin-top:26px;" class="stack-md">
-        <div class="form-row-2">
-          <div class="form-field">
-            <label for="name">FULL NAME</label>
+      <form id="contact-form" class="mt-24">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
           </div>
-          <div class="form-field">
-            <label for="company">COMPANY</label>
+          <div class="field">
+            <label for="company">Company</label>
             <input type="text" id="company" name="company">
           </div>
         </div>
-        <div class="form-row-2">
-          <div class="form-field">
-            <label for="email">EMAIL</label>
+        <div class="form-grid">
+          <div class="field">
+            <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
           </div>
-          <div class="form-field">
-            <label for="phone">PHONE (OPTIONAL)</label>
-            <input type="tel" id="phone" name="phone">
+          <div class="field">
+            <label for="service">Area of interest</label>
+            <select id="service" name="service">
+              <option value="">Select one</option>
+              <option>ERP Implementation &amp; Optimization</option>
+              <option>Business Intelligence &amp; Dashboards</option>
+              <option>Data Analytics &amp; Reporting</option>
+              <option>Process &amp; Workflow Automation</option>
+              <option>AI Automation</option>
+              <option>Change Management &amp; User Adoption</option>
+              <option>Cloud &amp; IT Infrastructure Advisory</option>
+              <option>Strategic Advisory</option>
+              <option>Digital Transformation Strategy</option>
+              <option>Web Solutions</option>
+              <option>SEO Optimization</option>
+              <option>Not sure yet</option>
+            </select>
           </div>
         </div>
-        <div class="form-field">
-          <label for="service">AREA OF INTEREST</label>
-          <select id="service" name="service">
-            <option>ERP Implementation &amp; Optimization</option>
-            <option>Business Intelligence Dashboards</option>
-            <option>Strategic Advisory</option>
-            <option>Web Solutions</option>
-            <option>SEO Optimization</option>
-            <option>Process &amp; Workflow Automation</option>
-            <option>Change Management &amp; User Adoption</option>
-            <option>Cloud &amp; IT Infrastructure Advisory</option>
-            <option>Data Analytics &amp; Reporting</option>
-            <option>AI Automation</option>
-            <option>Not sure yet</option>
-          </select>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="A little about your business and what's prompting this."></textarea>
         </div>
-        <div class="form-field">
-          <label for="message">MESSAGE</label>
-          <textarea id="message" name="message" required placeholder="What's happening in your business right now?"></textarea>
-        </div>
-        <div>
-          <button type="submit" class="btn btn-primary">Send message</button>
-          <p class="form-note" id="form-status">We'll get back to you within one business day.</p>
-        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="width:100%;">Send message</button>
+        <p class="field-note mt-16">This opens your email client with the message pre-filled — it doesn't send automatically. <!-- To wire this up to send directly without opening an email client, connect the form to a service like Formspree (formspree.io) or Netlify Forms and swap the JS submit handler in main.js for a fetch() POST to your endpoint. --></p>
+        <p id="form-status" class="form-status"></p>
       </form>
-      <!--
-        Implementation note: this form currently opens the visitor's email
-        client with the details pre-filled (no backend required). To collect
-        submissions directly instead, connect a form service such as
-        Formspree, Getform, or Netlify Forms — replace the submit handler in
-        main.js with a POST to that endpoint. No other markup changes needed.
-      -->
     </div>
-
   </div>
 </section>
 
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="logo-lockup.png" alt="Northstar Business Solutions">
-        <p>ERP, business intelligence, and digital systems for growing businesses — built for adoption, not just go-live.</p>
+      <div>
+        <a href="index.html" class="footer-brand">
+          <span class="mark"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50,4 L54,42 L78,18 L58,46 L96,50 L58,54 L78,82 L54,58 L50,96 L46,58 L22,82 L42,54 L4,50 L42,46 L22,18 L46,42 Z"/></svg></span>
+          <span>Northstar</span>
+        </a>
+        <p class="footer-tag">ERP, business intelligence, and digital advisory for growing businesses — mapped to how you work, built for full adoption.</p>
       </div>
       <div class="footer-col">
-        <h4>SITE</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="insights.html">Insights</a></li>
-        </ul>
+        <h4>Company</h4>
+        <ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul>
       </div>
       <div class="footer-col">
-        <h4>SERVICES</h4>
-        <ul>
-          <li><a href="services.html#systems-operations">ERP Implementation</a></li>
-          <li><a href="services.html#data-intelligence">BI Dashboards</a></li>
-          <li><a href="services.html#digital-growth">Web &amp; SEO</a></li>
-          <li><a href="services.html#advisory-infrastructure">Strategic Advisory</a></li>
-        </ul>
+        <h4>Services</h4>
+        <ul><li><a href="services.html#systems-operations">Systems &amp; Operations</a></li><li><a href="services.html#data-intelligence">Data &amp; Intelligence</a></li><li><a href="services.html#digital-growth">Digital &amp; Growth</a></li><li><a href="services.html#advisory-infrastructure">Advisory</a></li></ul>
       </div>
       <div class="footer-col">
-        <h4>CONTACT</h4>
-        <ul>
-          <li><a href="mailto:burhanuddin.motiwala7@gmail.com">burhanuddin.motiwala7@gmail.com</a></li>
-          <li><a href="tel:+918879327052">+91 88793 27052</a></li>
-          <li><a href="https://linkedin.com/in/burhanuddinmotiwala" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><span>Mumbai, India</span></li>
-        </ul>
+        <h4>Contact</h4>
+        <ul><li><a href="mailto:burhanuddin.motiwala7@gmail.com">Email us</a></li><li><a href="tel:+918879327052">+91 88793 27052</a></li><li><a href="https://linkedin.com/in/burhanuddinmotiwala" target="_blank" rel="noopener">LinkedIn</a></li></ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Northstar Business Solutions. All rights reserved.</span>
-      <span>Turning operational complexity into business clarity.</span>
+      <p>© 2026 Northstar Business Solutions. Mumbai, India.</p>
+      <p>Turning operational complexity into business clarity.</p>
     </div>
   </div>
 </footer>
 
-</div>
 <script src="main.js"></script>
 </body>
 </html>
