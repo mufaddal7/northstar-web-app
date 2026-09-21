@@ -1,0 +1,3 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Privacy" };
+export default function PrivacyPage() { return <section className="legal-page"><div className="shell"><p className="eyebrow">Privacy</p><h1>Privacy statement</h1><p>Northstar collects only the information needed to respond to an enquiry submitted through this website. We do not sell personal information or use it for unrelated marketing.</p><h2>Contact form information</h2><p>When you contact us, we use the details you provide to respond to your request and discuss the relevant business need. Do not include sensitive information in the form.</p><h2>Contact</h2><p>For privacy questions, email <a href="mailto:hello@northstar53.com">hello@northstar53.com</a>.</p></div></section> }

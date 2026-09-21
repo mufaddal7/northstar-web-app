@@ -1,0 +1,3 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Terms" };
+export default function TermsPage() { return <section className="legal-page"><div className="shell"><p className="eyebrow">Terms</p><h1>Website terms</h1><p>The content on this website is provided for general information about Northstar&apos;s capabilities. It does not form a proposal, commitment or professional advice.</p><h2>Intellectual property</h2><p>Northstar&apos;s brand, website content and visual assets may not be reused without permission.</p><h2>Contact</h2><p>For questions about these terms, email <a href="mailto:hello@northstar53.com">hello@northstar53.com</a>.</p></div></section> }

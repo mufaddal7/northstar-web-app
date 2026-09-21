@@ -1,0 +1,9 @@
+{
+  "name": "Northstar",
+  "short_name": "Northstar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C132A",
+  "theme_color": "#0C132A",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

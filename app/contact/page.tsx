@@ -1,0 +1,8 @@
+import type { Metadata } from "next";
+import { ArrowUpRight } from "@/components/icons";
+import { ContactForm } from "@/components/contact-form";
+import { BOOKING_URL, WHATSAPP_URL } from "@/lib/site-data";
+
+export const metadata: Metadata = { title: "Contact", description: "Tell Northstar what you are trying to achieve and start a conversation about where technology can make the greatest difference." };
+
+export default function ContactPage() { return <><section className="page-hero page-hero--ink"><div className="shell"><p className="eyebrow">Contact</p><h1>Let&apos;s find your<br/><em>Northstar.</em></h1><p>Tell us what you&apos;re trying to achieve. We&apos;ll help you identify where technology can make the greatest difference.</p></div></section><section className="section"><div className="shell contact-layout"><div className="contact-details"><p className="eyebrow">Start here</p><h2>A focused conversation can clarify the next move.</h2><p>Share the context behind your challenge. We&apos;ll respond with a practical conversation, not a sales script.</p><div className="contact-links"><a href="mailto:hello@northstar53.com"><span>Email</span>hello@northstar53.com <ArrowUpRight/></a><a href="tel:+916268535490"><span>Phone</span>+91 62685 35490 <ArrowUpRight/></a><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"><span>WhatsApp</span>Send a message <ArrowUpRight/></a><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer"><span>Meeting</span>Book a 30-minute conversation <ArrowUpRight/></a></div></div><div><p className="eyebrow">Tell us about it</p><ContactForm/></div></div></section></> }
