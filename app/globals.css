@@ -80,7 +80,9 @@ svg { display: block; }
 .menu-button i { position: absolute; left: 26%; width: 48%; height: 1px; background: var(--text); transition: transform .25s var(--ease); }
 .menu-button i:first-of-type { top: 42%; }.menu-button i:last-of-type { top: 58%; }
 .menu-button--open i:first-of-type { transform: translateY(3px) rotate(45deg); }.menu-button--open i:last-of-type { transform: translateY(-3px) rotate(-45deg); }
-
+[data-theme="dark"] .brand {
+  color: #ffffff;
+}
 /* Hero */
 .hero { position: relative; overflow: hidden; min-height: min(790px, calc(100svh - 5rem)); background: var(--navy); color: var(--white); }
 .hero__grid { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 690px; }
