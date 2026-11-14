@@ -277,10 +277,10 @@ export function SiteHeader() {
         <nav
           aria-hidden={!mobileOpen}
           aria-label="Mobile navigation"
-          className={`fixed right-0 top-[72px] z-30 h-[calc(100dvh-72px)] w-[min(88vw,380px)] overflow-y-auto border-l border-border bg-surface p-5 shadow-xl transition-[transform,visibility] duration-300 ease-out motion-reduce:transition-none lg:hidden ${
+          className={`fixed right-0 top-[72px] z-30 h-[calc(100dvh-72px)] w-[min(88vw,380px)] overflow-y-auto border-l border-border bg-surface p-5 shadow-xl transition-[opacity,visibility] duration-300 ease-out motion-reduce:transition-none lg:hidden ${
             mobileOpen
-              ? "visible translate-x-0"
-              : "invisible translate-x-full"
+              ? "visible opacity-100"
+              : "invisible opacity-0"
           }`}
           id={mobilePanelId}
         >

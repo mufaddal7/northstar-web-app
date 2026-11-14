@@ -39,32 +39,32 @@ export function ContactDialog({
       <dialog
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
-        className="m-auto max-h-[min(90dvh,52rem)] w-[min(94vw,44rem)] overflow-y-auto rounded-sm border border-border bg-surface p-0 text-foreground shadow-2xl backdrop:bg-brand-navy/75 backdrop:backdrop-blur-sm"
+        className="m-auto max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-[44rem] overscroll-contain overflow-y-auto rounded-sm border border-border bg-surface p-0 text-foreground shadow-2xl backdrop:bg-brand-navy/75 backdrop:backdrop-blur-sm"
         id={dialogId}
         onClick={(event) => {
           if (event.target === event.currentTarget) dialogRef.current?.close();
         }}
         ref={dialogRef}
       >
-        <div className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-border bg-surface/95 px-5 py-4 backdrop-blur sm:px-8">
-          <div>
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b border-border bg-surface/95 px-4 py-4 backdrop-blur sm:gap-5 sm:px-8">
+          <div className="min-w-0">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
               A useful first conversation
             </p>
-            <h2 className="mt-1 font-display text-2xl" id={titleId}>
+            <h2 className="mt-1 break-words font-display text-xl sm:text-2xl" id={titleId}>
               Tell us what you want to improve.
             </h2>
           </div>
           <button
             aria-label="Close inquiry form"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-border text-lg transition-colors hover:bg-surface-muted"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-border text-lg transition-colors hover:bg-surface-muted"
             onClick={() => dialogRef.current?.close()}
             type="button"
           >
             ×
           </button>
         </div>
-        <div className="p-5 sm:p-8">
+        <div className="p-4 sm:p-8">
           <p className="mb-6 text-sm leading-6 text-muted" id={descriptionId}>
             Share a little context. We’ll get back to you and discuss the right
             next step. There’s no obligation.

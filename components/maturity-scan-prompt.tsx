@@ -137,7 +137,7 @@ export function MaturityScanPrompt() {
       aria-labelledby={titleId}
       aria-live="polite"
       aria-modal="false"
-      className="maturity-scan-prompt fixed bottom-4 right-4 z-[60] w-[calc(100vw-2rem)] max-w-[360px] rounded-sm border border-brand-gold/40 bg-surface p-5 text-foreground shadow-2xl shadow-brand-navy/20"
+      className="maturity-scan-prompt fixed bottom-4 left-4 right-4 z-[60] mx-auto max-h-[calc(100dvh-2rem)] w-auto max-w-[360px] overscroll-contain overflow-y-auto rounded-sm border border-brand-gold/40 bg-surface p-4 text-foreground shadow-2xl shadow-brand-navy/20 sm:p-5"
       role="dialog"
     >
       <div className="flex items-start justify-between gap-4">
