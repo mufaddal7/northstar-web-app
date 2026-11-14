@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ServiceWorker } from "@/components/service-worker";
+import { MaturityScanPrompt } from "@/components/maturity-scan-prompt";
 import { SITE_URL } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <MaturityScanPrompt />
         <ServiceWorker />
         <script type="application/ld+json">{organizationSchema}</script>
         <Script
