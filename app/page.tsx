@@ -8,9 +8,9 @@ import { ButtonLink, Eyebrow, Section, SectionHeading, Shell } from "@/component
 import { pageMetadata } from "@/lib/metadata";
 import { WHATSAPP_URL } from "@/lib/site-data";
 
-const pageTitle = "ERP Implementation & Business Systems";
+const pageTitle = "Business Transformation and Technology Services";
 const pageDescription =
-  "Northstar helps businesses implement ERP systems around the way they work, connect core operations and build the digital capabilities they need next.";
+  "Northstar helps businesses improve operations with ERP, CRM, data and AI, strategy, and digital engineering. Practical technology built around the way you work.";
 
 export const metadata: Metadata = pageMetadata(
   pageTitle,
@@ -18,13 +18,27 @@ export const metadata: Metadata = pageMetadata(
   "/",
 );
 
-const operatingAreas = [
-  "Finance",
-  "Sales & CRM",
-  "Inventory",
-  "Procurement",
-  "Manufacturing",
-  "Projects",
+const serviceHighlights = [
+  {
+    title: "ERP & business systems",
+    copy: "Connect core operations",
+    href: "/erp-implementation",
+  },
+  {
+    title: "CRM & customer operations",
+    copy: "Improve sales and service handoffs",
+    href: "/what-we-do/modernize/crm-customer-operations",
+  },
+  {
+    title: "Data, AI & automation",
+    copy: "Turn information into useful action",
+    href: "/what-we-do/intelligence",
+  },
+  {
+    title: "Digital products & strategy",
+    copy: "Build what your business needs next",
+    href: "/what-we-do/build",
+  },
 ] as const;
 
 const challenges = [
@@ -98,28 +112,26 @@ export default function HomePage() {
         </div>
         <Shell className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="max-w-3xl">
-            <Eyebrow inverse>ERP implementation · Business transformation</Eyebrow>
+            <Eyebrow inverse>Business transformation · Technology services</Eyebrow>
             <h1 className="font-display text-4xl leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
-              ERP implementation that helps your business{" "}
-              <span className="text-brand-gold-light">run as one.</span>
+              Make technology work for{" "}
+              <span className="text-brand-gold-light">your business.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:mt-7 sm:text-lg sm:leading-8">
-              Connect finance, sales, inventory and delivery in a system shaped
-              around how your teams work. Start with the business problem, then
-              build a practical path to implementation.
+              From ERP and CRM to data, AI and digital products, we help you
+              solve the right problems and deliver changes your teams can use.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ContactDialog
-                initialInterest="ERP implementation"
-                label="Plan an ERP conversation"
+                label="Talk through your priorities"
                 className="min-h-14 px-6"
               />
               <ButtonLink
-                href="#services"
+                href="/what-we-do"
                 secondary
                 className="min-h-14 border-white/35"
               >
-                Explore our services <ArrowUpRight />
+                Explore all services <ArrowUpRight />
               </ButtonLink>
             </div>
             <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-5 text-white/55">
@@ -140,39 +152,46 @@ export default function HomePage() {
           </div>
 
           <div
-            aria-label="Illustration of connected business operations"
+            aria-label="Overview of Northstar services"
             className="relative mx-auto w-full max-w-xl rounded-sm border border-white/15 bg-white/[0.04] p-5 shadow-2xl shadow-black/20 backdrop-blur sm:p-7"
           >
             <div className="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold-light">
-                  A connected operation
+                  Connected capabilities
                 </p>
                 <p className="mt-1 font-display text-2xl">
-                  One clearer view of work
+                  Support for the work ahead
                 </p>
               </div>
               <span className="rounded-full border border-brand-gold/40 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-gold-light">
-                ERP
+                Northstar
               </span>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3">
-              {operatingAreas.map((area, index) => (
-                <div
-                  className="flex min-h-20 items-center gap-3 rounded-sm border border-white/10 bg-brand-navy/70 p-3 sm:p-4"
-                  key={area}
+              {serviceHighlights.map((service, index) => (
+                <Link
+                  className="group flex min-h-24 flex-col justify-between rounded-sm border border-white/10 bg-brand-navy/70 p-3 transition-colors hover:border-brand-gold/50 sm:p-4"
+                  href={service.href}
+                  key={service.title}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-gold/15 text-xs font-bold text-brand-gold-light">
+                  <span className="flex items-center justify-between text-[10px] font-bold text-brand-gold-light">
                     0{index + 1}
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
-                  <span className="text-sm font-semibold text-white/85">
-                    {area}
+                  <span>
+                    <span className="block text-xs font-semibold leading-5 text-white/90 sm:text-sm">
+                      {service.title}
+                    </span>
+                    <span className="mt-1 block text-[10px] leading-4 text-white/55 sm:text-xs">
+                      {service.copy}
+                    </span>
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
             <p className="mt-4 border-t border-white/15 pt-4 text-xs leading-5 text-white/55">
-              The right scope depends on your processes, people and priorities.
+              Start with the challenge. We’ll help you find the right next step.
             </p>
           </div>
         </Shell>
@@ -182,9 +201,9 @@ export default function HomePage() {
         <Shell>
           <ul className="grid gap-5 text-sm sm:grid-cols-3 sm:gap-8">
             {[
-              "Business-first process discovery",
-              "Phased scope and visible decisions",
-              "Adoption planned before go-live",
+              "Business-first thinking",
+              "Clear priorities and practical delivery",
+              "Solutions shaped around your teams",
             ].map((item) => (
               <li className="flex items-center gap-3 font-semibold" key={item}>
                 <span

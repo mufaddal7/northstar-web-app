@@ -4,9 +4,15 @@ import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
-import { Eyebrow, PageHero, Section, SectionHeading, Shell } from "@/components/ui";
+import {
+  ButtonLink,
+  Eyebrow,
+  Section,
+  SectionHeading,
+  Shell,
+} from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE_URL } from "@/lib/site-data";
+import { SITE_URL, WHATSAPP_URL } from "@/lib/site-data";
 
 const pageTitle = "ERP Implementation for Growing Businesses";
 const pageDescription =
@@ -60,6 +66,15 @@ const principles = [
   ],
 ] as const;
 
+const operatingAreas = [
+  "Finance",
+  "Sales & CRM",
+  "Inventory",
+  "Procurement",
+  "Manufacturing",
+  "Projects",
+] as const;
+
 export default function ErpImplementationPage() {
   return (
     <>
@@ -67,30 +82,99 @@ export default function ErpImplementationPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <PageHero
-        dark
-        eyebrow="ERP implementation"
-        title={
-          <>
-            Put your business processes{" "}
-            <span className="text-brand-gold-light">in sync.</span>
-          </>
-        }
-        description="Plan an ERP system around the work your business needs to do, from finance and inventory to operations and reporting. Start with process fit, then choose the platform and rollout that make sense."
-      >
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <ContactDialog
-            initialInterest="ERP implementation"
-            label="Discuss an ERP project"
-          />
-          <Link
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-white/35 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10"
-            href="#erp-scope"
-          >
-            What ERP can connect <ArrowUpRight />
-          </Link>
+      <section className="relative isolate overflow-hidden bg-brand-navy py-16 text-white sm:py-24 lg:py-28">
+        <div
+          aria-hidden="true"
+          className="absolute -right-36 -top-32 -z-10 h-[38rem] w-[38rem] rounded-full border border-white/10 sm:right-[-5rem]"
+        >
+          <div className="absolute inset-12 rounded-full border border-brand-gold/20" />
+          <div className="absolute inset-28 rounded-full border border-brand-gold/30" />
+          <div className="absolute inset-44 rounded-full border border-brand-gold/40" />
         </div>
-      </PageHero>
+        <Shell className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          <div className="max-w-3xl">
+            <Eyebrow inverse>ERP implementation · Business transformation</Eyebrow>
+            <h1 className="font-display text-4xl leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+              ERP implementation that helps your business{" "}
+              <span className="text-brand-gold-light">run as one.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:mt-7 sm:text-lg sm:leading-8">
+              Connect finance, sales, inventory and delivery in a system shaped
+              around how your teams work. Start with the business problem, then
+              build a practical path to implementation.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ContactDialog
+                initialInterest="ERP implementation"
+                label="Plan an ERP conversation"
+                className="min-h-14 px-6"
+              />
+              <ButtonLink
+                href="#erp-scope"
+                secondary
+                className="min-h-14 border-white/35"
+              >
+                What ERP can connect <ArrowUpRight />
+              </ButtonLink>
+            </div>
+            <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-5 text-white/55">
+              <span>Prefer to speak directly?</span>
+              <a
+                className="font-semibold text-brand-gold-light hover:underline"
+                href="tel:+916268535490"
+              >
+                +91 62685 35490
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                className="font-semibold text-brand-gold-light hover:underline"
+                href={WHATSAPP_URL}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+            </p>
+          </div>
+
+          <div
+            aria-label="Illustration of connected business operations"
+            className="relative mx-auto w-full max-w-xl rounded-sm border border-white/15 bg-white/[0.04] p-5 shadow-2xl shadow-black/20 backdrop-blur sm:p-7"
+          >
+            <div className="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold-light">
+                  A connected operation
+                </p>
+                <p className="mt-1 font-display text-2xl">
+                  One clearer view of work
+                </p>
+              </div>
+              <span className="rounded-full border border-brand-gold/40 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-gold-light">
+                ERP
+              </span>
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {operatingAreas.map((area, index) => (
+                <div
+                  className="flex min-h-20 items-center gap-3 rounded-sm border border-white/10 bg-brand-navy/70 p-3 sm:p-4"
+                  key={area}
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-gold/15 text-xs font-bold text-brand-gold-light">
+                    0{index + 1}
+                  </span>
+                  <span className="text-sm font-semibold text-white/85">
+                    {area}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 border-t border-white/15 pt-4 text-xs leading-5 text-white/55">
+              The right scope depends on your processes, people and priorities.
+            </p>
+          </div>
+        </Shell>
+      </section>
 
       <Section tone="muted" className="py-8 sm:py-10">
         <Shell>

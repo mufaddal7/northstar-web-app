@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { Card, PageHero, Section, Shell, Eyebrow } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
@@ -33,12 +35,21 @@ export default function InsightsPage() {
         <Shell>
           <Eyebrow>Ideas to put to work</Eyebrow>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {insightArticles.map(({ category, title, summary }, index) => (
-              <Card key={title} className="p-6 sm:p-7">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-gold">{category} · 0{index + 1}</span>
-                <h2 className="mt-5 font-display text-2xl leading-tight">{title}</h2>
-                <p className="mt-3 text-sm leading-6 text-muted">{summary}</p>
-              </Card>
+            {insightArticles.map(({ category, slug, title, summary }, index) => (
+              <Link
+                className="group block rounded-sm focus-visible:outline-offset-4"
+                href={`/insights/${slug}`}
+                key={slug}
+              >
+                <Card className="h-full p-6 transition-colors group-hover:border-brand-gold sm:p-7">
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-gold">{category} · 0{index + 1}</span>
+                  <h2 className="mt-5 font-display text-2xl leading-tight transition-colors group-hover:text-brand-gold">{title}</h2>
+                  <p className="mt-3 text-sm leading-6 text-muted">{summary}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-gold">
+                    Read the article <ArrowUpRight />
+                  </span>
+                </Card>
+              </Link>
             ))}
           </div>
         </Shell>

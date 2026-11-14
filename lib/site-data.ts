@@ -462,42 +462,49 @@ export const insightTopics = [
 
 export const insightArticles = [
   {
+    slug: "erp-business-constraint",
     category: "Modernization",
     title: "5 Signs Your ERP Has Become a Business Constraint",
     summary:
       "Watch for workarounds that have become routine, slow or unreliable reporting, duplicated data, and process changes that require disproportionate effort. These signals point to a fit and workflow review. They do not automatically mean a full replacement.",
   },
   {
+    slug: "legacy-platform-modernization",
     category: "Modernization",
     title: "What Actually Happens During a Legacy Platform Modernization",
     summary:
       "Modernization starts with understanding dependencies, operational risk and user needs. Teams can then prioritize the changes, choose an incremental path, and validate each release while keeping essential services running.",
   },
   {
+    slug: "ai-automation-enterprise-value",
     category: "AI & Automation",
     title: "Where AI Automation Can Create Measurable Enterprise Value",
     summary:
       "Look for repeatable work with clear inputs, predictable decisions and a meaningful cost to delay. Establish a baseline, define where people stay in control, and measure quality and cycle time as well as effort saved.",
   },
   {
+    slug: "dashboards-to-decision-intelligence",
     category: "Data & Intelligence",
     title: "From Dashboards to Decision Intelligence",
     summary:
       "A useful dashboard begins with a decision, its owner and the signal that should prompt action. Agree on definitions and data quality first, then present only the measures that help teams respond.",
   },
   {
+    slug: "cost-fragmented-business-systems",
     category: "Modernization",
     title: "The Hidden Cost of Fragmented Business Systems",
     summary:
       "Disconnected systems create costs beyond licensing: reconciliation, repeated data entry, delayed decisions and fragile handoffs. Map how information moves across a process before deciding whether integration, workflow redesign or platform change is needed.",
   },
   {
+    slug: "digital-capabilities-without-rebuild",
     category: "Digital Engineering",
     title: "Building Digital Capabilities Without Rebuilding Everything",
     summary:
       "A new digital experience does not always require replacing every underlying system. Identify the capabilities that differentiate the business, connect to existing systems where practical, and modernize foundations in stages.",
   },
   {
+    slug: "technology-strategy-practical-roadmap",
     category: "Technology Strategy",
     title: "Turning a Technology Strategy Into a Practical Roadmap",
     summary:

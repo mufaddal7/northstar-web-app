@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
-import { allServices, pillars, SITE_URL } from "@/lib/site-data";
+import {
+  allServices,
+  insightArticles,
+  pillars,
+  SITE_URL,
+} from "@/lib/site-data";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "",
@@ -41,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    ...insightArticles.map(({ slug }) => ({
+      url: `${SITE_URL}/insights/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }
