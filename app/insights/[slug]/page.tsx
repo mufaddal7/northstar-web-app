@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "@/components/icons";
+import {
+  ErpAiAdoptionRoadmap,
+  ErpAiLoop,
+} from "@/components/erp-ai-infographics";
 import { ContactDialog } from "@/components/contact-dialog";
 import {
   Eyebrow,
@@ -29,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     article.summary,
     `/insights/${article.slug}`,
   );
+  const imageUrl = `${SITE_URL}/insights/${article.slug}/opengraph-image`;
   return {
     ...metadata,
     openGraph: {
@@ -39,12 +44,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${SITE_URL}/insights/${article.slug}`,
       images: [
         {
-          url: `${SITE_URL}/opengraph-image`,
+          url: imageUrl,
           width: 1200,
           height: 630,
           alt: `${article.title} | Northstar`,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${article.title} | Northstar`,
+      description: article.summary,
+      images: [imageUrl],
     },
   };
 }
@@ -73,7 +84,7 @@ export default async function InsightArticlePage({ params }: Props) {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
     },
-    image: `${SITE_URL}/opengraph-image`,
+    image: `${SITE_URL}/insights/${article.slug}/opengraph-image`,
     mainEntityOfPage: `${SITE_URL}/insights/${article.slug}`,
   };
 
@@ -103,6 +114,12 @@ export default async function InsightArticlePage({ params }: Props) {
             <p className="text-lg leading-8 text-foreground sm:text-xl sm:leading-9">
               {content.opening}
             </p>
+            {content.infographics?.loop ? (
+              <ErpAiLoop
+                description={content.infographics.loop.description}
+                heading={content.infographics.loop.heading}
+              />
+            ) : null}
             <div className="mt-10 space-y-10">
               {content.sections.map((section, index) => (
                 <section key={section.heading}>
@@ -134,6 +151,12 @@ export default async function InsightArticlePage({ params }: Props) {
                 </section>
               ))}
             </div>
+            {content.infographics?.adoption ? (
+              <ErpAiAdoptionRoadmap
+                description={content.infographics.adoption.description}
+                heading={content.infographics.adoption.heading}
+              />
+            ) : null}
           </article>
 
           <aside className="h-fit rounded-sm border border-border bg-surface-muted p-5 sm:p-6 lg:sticky lg:top-28">

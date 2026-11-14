@@ -4,6 +4,10 @@ type InsightSlug = (typeof insightArticles)[number]["slug"];
 
 type InsightContent = {
   opening: string;
+  infographics?: {
+    loop?: { heading: string; description: string };
+    adoption?: { heading: string; description: string };
+  };
   sections: {
     heading: string;
     paragraphs: string[];
@@ -83,6 +87,93 @@ export const insightContent: Record<InsightSlug, InsightContent> = {
     related: [
       "cost-fragmented-business-systems",
       "technology-strategy-practical-roadmap",
+    ],
+  },
+  "ai-in-erp-implementation": {
+    opening:
+      "AI in an ERP system can help teams use operational data to spot exceptions, make recommendations and prepare routine actions. It does not require replacing the ERP or handing decisions to an unchecked model. Start with a high-friction workflow, reliable data, measurable outcomes and a clear path for human review.",
+    infographics: {
+      loop: {
+        heading: "How the AI-in-ERP loop works",
+        description:
+          "Connect business context to a controlled action, then use measured outcomes and human corrections to improve the next cycle.",
+      },
+      adoption: {
+        heading: "A practical path from assistance to automation",
+        description:
+          "Prove value on a focused workflow before increasing the level of automation.",
+      },
+    },
+    sections: [
+      {
+        heading: "How AI can work with an ERP",
+        paragraphs: [
+          "The ERP remains the system of record. AI connects through approved APIs, events or an integration layer, receives only the data and permissions needed for a specific task, and returns a recommendation or structured action for the workflow to validate.",
+          "Examples include summarizing purchase-order exceptions, flagging potential stock risks, or drafting invoice-coding suggestions. What is practical depends on the ERP’s interfaces, data quality, business rules and the AI capabilities available to the organization.",
+        ],
+        points: [
+          "ERP data provides approved business context.",
+          "AI prepares a recommendation or proposed action.",
+          "Workflow rules and people determine what happens next.",
+        ],
+      },
+      {
+        heading: "Benefits start with a problem you can measure",
+        paragraphs: [
+          "AI is most useful when it improves a specific decision or repeatable task, not when it is added as a feature without an owner. Choose a baseline and measure whether the workflow improves after the pilot.",
+        ],
+        points: [
+          "Reduce time spent sorting routine exceptions or entering information.",
+          "Help teams respond sooner to order, inventory or invoice issues.",
+          "Give users relevant context before they approve a decision.",
+          "Track resolution time, rework, correction rates and user adoption.",
+        ],
+      },
+      {
+        heading: "A responsible feedback loop improves the workflow",
+        paragraphs: [
+          "A practical loop starts with an ERP event or user question. AI interprets the approved context and proposes a next step. A person or a policy check approves, corrects or rejects it. The system records what happened, so the team can evaluate quality and adjust the workflow.",
+          "A loop does not mean the model should retrain itself after every click. Feedback should be reviewed and used through controlled changes to prompts, thresholds, business rules or evaluated training data. Keep model changes versioned and test them before release.",
+        ],
+      },
+      {
+        heading: "Move toward AI features in manageable stages",
+        paragraphs: [
+          "A staged approach limits risk and gives users a chance to shape the workflow before it becomes routine. Begin with assistance and recommendations, then automate only the actions that are predictable, permitted and well tested.",
+        ],
+        points: [
+          "Map one workflow, its data sources, exceptions and decision owners.",
+          "Check access, data quality, privacy, audit and integration requirements.",
+          "Pilot one narrow task with human review, fallback and clear escalation.",
+          "Measure results, refine the process and expand only when evidence supports it.",
+        ],
+      },
+      {
+        heading: "How Northstar helps put ERP AI into practice",
+        paragraphs: [
+          "Northstar starts with the work, not a model demo. We help teams identify a valuable workflow, understand the ERP data and integration boundaries, and set a baseline for quality, effort and cycle time.",
+          "From there, we shape a focused pilot with appropriate permissions, human checkpoints, exception handling and monitoring. We work with users to validate the experience, review measured outcomes and plan the next step, whether that is improving the process, extending the integration or widening automation.",
+        ],
+      },
+    ],
+    decisionPrompt:
+      "Which recurring ERP decision would benefit most from better context or faster exception handling?",
+    service: {
+      heading: "Start with an ERP workflow, not an AI model",
+      copy:
+        "Explore AI and automation opportunities with a clear business outcome, the right data and people in control of consequential decisions.",
+      label: "Explore AI & automation",
+      href: "/what-we-do/intelligence/ai-automation",
+    },
+    cta: {
+      title: "Make AI useful in your ERP, one workflow at a time.",
+      copy:
+        "Bring us a manual process or recurring decision. We can help assess the opportunity, data readiness and a sensible first pilot.",
+      contactLabel: "Discuss AI in ERP",
+    },
+    related: [
+      "ai-automation-enterprise-value",
+      "dashboards-to-decision-intelligence",
     ],
   },
   "legacy-platform-modernization": {

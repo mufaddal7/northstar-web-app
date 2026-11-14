@@ -674,6 +674,13 @@ export const insightArticles = [
       "Look for routine workarounds, unreliable reporting, slow process changes, users avoiding the system, and fragile customizations or integrations. These signs call for a fit review, not an automatic replacement.",
   },
   {
+    slug: "ai-in-erp-implementation",
+    category: "AI & ERP",
+    title: "AI in ERP: Use Cases, Benefits & Adoption",
+    summary:
+      "Learn how AI can connect to ERP data and workflows, where it can help teams make decisions and reduce rework, how feedback closes the loop, and how to pilot it responsibly.",
+  },
+  {
     slug: "legacy-platform-modernization",
     category: "Modernization",
     title: "What Actually Happens During a Legacy Platform Modernization",

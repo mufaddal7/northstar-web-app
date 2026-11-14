@@ -1,0 +1,188 @@
+.diagram {
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface-muted);
+  padding: 1.25rem;
+}
+
+.caption {
+  max-width: 42rem;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heading {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.description {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  min-width: 0;
+  min-height: 9.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.85rem;
+}
+
+.step:not(:last-child)::after {
+  position: absolute;
+  top: 0.9rem;
+  right: -1.05rem;
+  z-index: 1;
+  color: var(--gold);
+  content: "→";
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.number {
+  display: inline-flex;
+  width: 1.8rem;
+  height: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(197 160 89 / 55%);
+  border-radius: 50%;
+  background: rgb(197 160 89 / 12%);
+  color: var(--foreground);
+  font-size: 0.63rem;
+  font-weight: 700;
+  animation: step-glow 3.2s ease-in-out infinite;
+}
+
+.step:nth-child(2) .number {
+  animation-delay: 0.8s;
+}
+
+.step:nth-child(3) .number {
+  animation-delay: 1.6s;
+}
+
+.step:nth-child(4) .number {
+  animation-delay: 2.4s;
+}
+
+.stepTitle {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.stepDescription {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  border: 1px solid rgb(197 160 89 / 35%);
+  background: rgb(197 160 89 / 8%);
+  padding: 0.8rem 1rem;
+  color: var(--foreground);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.loopIcon {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 1.6rem;
+  line-height: 1;
+  animation: loop-turn 5s linear infinite;
+}
+
+.note {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.roadmap {
+  margin-top: 2.5rem;
+}
+
+@keyframes step-glow {
+  0%,
+  20%,
+  100% {
+    box-shadow: none;
+  }
+
+  10% {
+    box-shadow: 0 0 0 4px rgb(197 160 89 / 15%);
+  }
+}
+
+@keyframes loop-turn {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (min-width: 640px) {
+  .diagram {
+    padding: 1.5rem;
+  }
+
+  .step {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .step {
+    min-height: unset;
+  }
+
+  .step:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -1.45rem;
+    transform: rotate(90deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .number,
+  .loopIcon {
+    animation: none;
+  }
+}
