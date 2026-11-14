@@ -256,10 +256,7 @@
   },
   "implementation": {
     "defaultTheme": "light",
-    "supportedThemes": [
-      "light",
-      "dark"
-    ],
+    "supportedThemes": ["light", "dark"],
     "primaryFont": "Montserrat",
     "displayFont": "Tenor Sans"
   }

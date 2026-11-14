@@ -1,13 +1,11 @@
-
 const SHEET_NAME = "Responses";
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
 
   try {
-    const expectedSecret = PropertiesService
-      .getScriptProperties()
-      .getProperty("API_SECRET");
+    const expectedSecret =
+      PropertiesService.getScriptProperties().getProperty("API_SECRET");
 
     const data = JSON.parse(e.postData.contents || "{}");
 
@@ -28,35 +26,35 @@ function doPost(e) {
       "AI & Automation",
       "Build a digital product",
       "Technology Strategy",
-      "Something else"
+      "Something else",
     ];
 
     if (!name || !company || !challenge) {
       return jsonResponse({
         success: false,
-        error: "Please complete all required fields."
+        error: "Please complete all required fields.",
       });
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return jsonResponse({
         success: false,
-        error: "Please provide a valid work email."
+        error: "Please provide a valid work email.",
       });
     }
 
     if (!allowedOptions.includes(interest)) {
       return jsonResponse({
         success: false,
-        error: "Invalid inquiry category."
+        error: "Invalid inquiry category.",
       });
     }
 
     lock.waitLock(10000);
 
-    const spreadsheetId = PropertiesService
-      .getScriptProperties()
-      .getProperty("1LYxAmctYfTES26f8fc9UVPHJPpzknWZqMQK0itgh2mk");
+    const spreadsheetId = PropertiesService.getScriptProperties().getProperty(
+      "1LYxAmctYfTES26f8fc9UVPHJPpzknWZqMQK0itgh2mk",
+    );
 
     if (!spreadsheetId) {
       throw new Error("Missing SPREADSHEET_ID configuration.");
@@ -75,19 +73,17 @@ function doPost(e) {
       safeCell(email),
       safeCell(company),
       safeCell(interest),
-      safeCell(challenge)
+      safeCell(challenge),
     ]);
 
     return jsonResponse({ success: true });
-
   } catch (error) {
     console.error(error);
 
     return jsonResponse({
       success: false,
-      error: "Unable to process your submission."
+      error: "Unable to process your submission.",
     });
-
   } finally {
     if (lock.hasLock()) {
       lock.releaseLock();
@@ -106,7 +102,7 @@ function safeCell(value) {
 }
 
 function jsonResponse(data) {
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(
+    ContentService.MimeType.JSON,
+  );
 }

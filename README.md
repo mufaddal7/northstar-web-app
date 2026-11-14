@@ -258,17 +258,17 @@ The exact commands depend on the project's `package.json`.
 
 Typical commands include:
 
-| Command | Description |
-|---|---|
-| `yarn dev` | Start development server |
-| `yarn build` | Create production build |
-| `yarn start` | Start production server |
-| `yarn lint` | Run ESLint |
-| `yarn test` | Run tests, if configured |
-| `yarn install` | Install dependencies |
-| `yarn add <package>` | Add a dependency |
+| Command                 | Description                  |
+| ----------------------- | ---------------------------- |
+| `yarn dev`              | Start development server     |
+| `yarn build`            | Create production build      |
+| `yarn start`            | Start production server      |
+| `yarn lint`             | Run ESLint                   |
+| `yarn test`             | Run tests, if configured     |
+| `yarn install`          | Install dependencies         |
+| `yarn add <package>`    | Add a dependency             |
 | `yarn add -D <package>` | Add a development dependency |
-| `yarn remove <package>` | Remove a dependency |
+| `yarn remove <package>` | Remove a dependency          |
 
 ---
 

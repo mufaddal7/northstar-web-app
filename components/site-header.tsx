@@ -37,7 +37,12 @@ export function SiteHeader() {
           aria-label="Primary navigation"
         >
           {links.map(([label, href]) => (
-            <Link style={{fontSize: "14px"}} key={href} href={href} onClick={() => setOpen(false)}>
+            <Link
+              style={{ fontSize: "14px" }}
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+            >
               {label}
             </Link>
           ))}
