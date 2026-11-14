@@ -174,14 +174,13 @@ Add the required environment variables.
 Example:
 
 ```env
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# API
-API_BASE_URL=http://localhost:8080
-
-# Public client-side configuration
-NEXT_PUBLIC_API_URL=http://localhost:8080
+GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwfL3Zbrk7oXY-7QjPHj7hBVShAQEPFXA1uS5AbRYdnvVFvUWReaM_-4GTPbbtWFEFP/exec
+GOOGLE_SCRIPT_SECRET=replace-with-your-app-script-secret
 ```
+
+Set `GOOGLE_SCRIPT_SECRET` in `.env.local` for development and in your hosting
+provider’s server-side environment for deployment. Never use a `NEXT_PUBLIC_`
+prefix for this key.
 
 ### Environment File Usage
 

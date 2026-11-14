@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { randomUUID } from "node:crypto";
 
 const fields = ["name", "email", "company", "interest", "challenge"] as const;
 
@@ -14,6 +15,8 @@ const allowedInterests = [
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
+  const requestId = randomUUID();
+
   try {
     let payload: Record<string, unknown>;
 
@@ -87,10 +90,10 @@ export async function POST(request: Request) {
     const apiSecret = process.env.GOOGLE_SCRIPT_SECRET;
 
     if (!scriptUrl || !apiSecret) {
-      console.error("Google Sheets integration is not configured.");
+      console.error(`[contact:${requestId}] Google Sheets integration is not configured.`);
 
       return NextResponse.json(
-        { message: "Unable to submit your inquiry right now." },
+        { message: "Unable to submit your inquiry right now.", requestId },
         { status: 500 },
       );
     }
@@ -102,37 +105,54 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        secret: apiSecret,
         name: values.name,
         workEmail: values.email,
         company: values.company,
         interest: values.interest,
         challenge: values.challenge,
-        secret: apiSecret,
       }),
       cache: "no-store",
       signal: AbortSignal.timeout(15000),
     });
 
-    const result = await googleResponse.json();
+    const responseText = await googleResponse.text();
+    let result: { success?: unknown; error?: unknown } | null = null;
 
-    if (!googleResponse.ok || result.success !== true) {
-      console.error("Google Sheets rejected a contact submission.");
+    try {
+      const parsed: unknown = JSON.parse(responseText);
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        result = parsed as { success?: unknown; error?: unknown };
+      }
+    } catch {
+      // The response body is logged below as a parse failure, without logging contact data.
+    }
+
+    if (!googleResponse.ok || result?.success !== true) {
+      const upstreamError =
+        typeof result?.error === "string" ? result.error : "Invalid Apps Script response.";
+      console.error(
+        `[contact:${requestId}] Apps Script rejected submission (HTTP ${googleResponse.status}): ${upstreamError}`,
+      );
 
       return NextResponse.json(
-        { message: "Unable to submit your inquiry right now." },
+        { message: "Unable to submit your inquiry right now.", requestId },
         { status: 502 },
       );
     }
 
+    console.info(
+      `[contact:${requestId}] Apps Script confirmed the contact submission (HTTP ${googleResponse.status}).`,
+    );
     return NextResponse.json(
-      { message: "Thanks. Your message has been received." },
+      { message: "Thanks. Your message has been received.", requestId },
       { status: 200 },
     );
   } catch (error) {
-    console.error("Contact submission failed:", error);
+    console.error(`[contact:${requestId}] Contact submission failed:`, error);
 
     return NextResponse.json(
-      { message: "Unable to submit your inquiry right now." },
+      { message: "Unable to submit your inquiry right now.", requestId },
       { status: 502 },
     );
   }

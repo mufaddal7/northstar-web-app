@@ -19,15 +19,29 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      const body = (await response.json()) as { message?: string };
-      if (!response.ok)
+      const body = (await response.json()) as {
+        message?: string;
+        requestId?: string;
+      };
+      if (!response.ok) {
+        console.error("[contact-form] Contact API request failed.", {
+          status: response.status,
+          requestId: body.requestId,
+        });
         throw new Error(body.message || "Something went wrong.");
+      }
+      console.info("[contact-form] Contact API accepted the submission.", {
+        requestId: body.requestId,
+      });
       form.reset();
       setStatus("success");
       setMessage(
         "Thanks. Your message has been received and the team will be in touch.",
       );
     } catch (error) {
+      if (!(error instanceof Error && error.message === "Unable to submit your inquiry right now.")) {
+        console.error("[contact-form] Could not reach the contact API.", error);
+      }
       setStatus("error");
       setMessage(
         error instanceof Error
