@@ -56,7 +56,7 @@ const principles = [
   ],
   [
     "People ready to use it",
-    "Include users in decisions, testing and training—not only at go-live.",
+    "Include users in decisions, testing and training, not just at go-live.",
   ],
 ] as const;
 
@@ -76,7 +76,7 @@ export default function ErpImplementationPage() {
             <span className="text-brand-gold-light">in sync.</span>
           </>
         }
-        description="Plan an ERP system around the work your business needs to do—from finance and inventory to operations and reporting. Start with process fit, then choose the platform and rollout that make sense."
+        description="Plan an ERP system around the work your business needs to do, from finance and inventory to operations and reporting. Start with process fit, then choose the platform and rollout that make sense."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <ContactDialog
@@ -107,7 +107,7 @@ export default function ErpImplementationPage() {
           <SectionHeading
             eyebrow="What an ERP can connect"
             title="Make the handoffs inside your business easier to manage."
-            copy="The right scope depends on your operating model. These are common areas to assess together—not a checklist to implement all at once."
+            copy="Use these common areas to guide the discussion. Your operating model determines what belongs in scope."
           />
           <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {businessAreas.map(([title, copy], index) => (

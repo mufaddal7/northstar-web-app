@@ -79,7 +79,7 @@ export default function ErpVsCrmPage() {
             <span className="text-brand-gold-light">difference?</span>
           </>
         }
-        description="ERP connects the processes inside your business. CRM focuses on customer-facing relationships and activity. Here’s where each fits—and how they work better together."
+        description="ERP connects the processes inside your business. CRM focuses on customer-facing relationships and activity. Here’s where each fits, and how they work better together."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <ContactDialog
@@ -162,10 +162,10 @@ export default function ErpVsCrmPage() {
                     Area
                   </th>
                   <th className="w-[40%] px-5 py-4 font-bold" scope="col">
-                    ERP — internal operations
+                    ERP: internal operations
                   </th>
                   <th className="w-[40%] px-5 py-4 font-bold" scope="col">
-                    CRM — customer-facing work
+                    CRM: customer-facing work
                   </th>
                 </tr>
               </thead>
@@ -254,7 +254,7 @@ export default function ErpVsCrmPage() {
         <Shell className="grid gap-10 md:grid-cols-[0.7fr_1.3fr] lg:gap-16">
           <SectionHeading
             eyebrow="Common questions"
-            title="Choose around the work—not the acronym."
+            title="Choose based on the work, not the acronym."
           />
           <div className="divide-y divide-border border-y border-border">
             {questions.map(({ question, answer }) => (

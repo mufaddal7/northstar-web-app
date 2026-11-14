@@ -66,8 +66,8 @@ export function ContactDialog({
         </div>
         <div className="p-5 sm:p-8">
           <p className="mb-6 text-sm leading-6 text-muted" id={descriptionId}>
-            Share a little context. We’ll get back to you to discuss the right
-            next step—no obligation.
+            Share a little context. We’ll get back to you and discuss the right
+            next step. There’s no obligation.
           </p>
           <ContactForm initialInterest={initialInterest} key={formKey} />
         </div>

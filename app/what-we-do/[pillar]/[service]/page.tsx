@@ -94,7 +94,7 @@ export default async function ServicePage({ params }: Props) {
       <Section tone="muted">
         <Shell width="medium">
           <Eyebrow>Relevant technologies</Eyebrow>
-          <h2 className="font-display text-3xl leading-tight sm:text-4xl">Technology supports the story — it is not the story.</h2>
+          <h2 className="font-display text-3xl leading-tight sm:text-4xl">Technology supports the story. It is not the story.</h2>
           <div className="mt-6 flex flex-wrap gap-2">
             {service.technologies.map((technology) => (
               <span key={technology} className="rounded-full border border-border px-4 py-2 text-sm">{technology}</span>

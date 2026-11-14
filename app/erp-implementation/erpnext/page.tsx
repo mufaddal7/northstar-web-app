@@ -107,7 +107,7 @@ export default function ErpNextImplementationPage() {
             <span className="text-brand-gold-light">your business.</span>
           </>
         }
-        description="Connect the processes behind finance, sales, inventory and delivery in one practical system. Start with the way your business works—not a one-size-fits-all template."
+        description="Connect the processes behind finance, sales, inventory and delivery in one practical system. Start with the way your business works, not a one-size-fits-all template."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <ContactDialog
@@ -177,7 +177,7 @@ export default function ErpNextImplementationPage() {
         <Shell>
           <SectionHeading
             eyebrow="A clearer implementation path"
-            title="Know what happens next—and why."
+            title="Know what to expect at every stage."
             copy="The implementation should create confidence at every stage: from agreeing the right problem to preparing people for a reliable launch."
           />
           <div className="mt-12">

@@ -6,8 +6,8 @@ A modern web application built with **Next.js** and managed using **Yarn**.
 
 Before getting started, make sure you have the following installed:
 
-- **Node.js** — LTS version recommended
-- **Yarn** — package manager
+- **Node.js:** LTS version recommended
+- **Yarn:** package manager
 - **Git**
 
 Check your installed versions:
@@ -59,7 +59,7 @@ npm --version
 
 This project uses **Yarn** as its package manager.
 
-### Option A — Corepack (Recommended)
+### Option A: Corepack (Recommended)
 
 Modern Node.js versions include Corepack.
 
@@ -93,7 +93,7 @@ corepack prepare yarn@4.9.4 --activate
 
 Replace `4.9.4` with the version required by the project.
 
-### Option B — Install Yarn globally
+### Option B: Install Yarn globally
 
 If Corepack is not available:
 

@@ -232,7 +232,7 @@ export default function HomePage() {
             inverse
             eyebrow="A practical implementation"
             title="A clear path from today’s process to a better one."
-            copy="ERP projects work better when people understand the decisions, dependencies and next steps—not just the software screens."
+            copy="ERP projects run more smoothly when people understand the decisions, dependencies and next steps, not just how to use the software."
           />
           <div className="mt-12 rounded-sm bg-surface p-5 text-foreground sm:p-8 lg:p-10">
             <ImplementationJourney />
@@ -369,7 +369,7 @@ export default function HomePage() {
 
       <CtaBand
         title="Don’t start with a software demo. Start with the work."
-        copy="Tell us where your current process is getting stuck. We’ll help you identify a practical next step—whether that is ERP or a different solution."
+        copy="Tell us where your current process is getting stuck. We’ll help you find a practical next step, whether that means ERP or another solution."
       />
     </>
   );

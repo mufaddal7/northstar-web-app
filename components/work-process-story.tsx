@@ -10,7 +10,7 @@ export function WorkProcessStory() {
             Keep the outcome in view
           </p>
           <h3 className="mt-1 font-display text-2xl">
-            People, process and platform—moving together.
+            Better outcomes start when people, process and platform work together.
           </h3>
         </div>
         <div
