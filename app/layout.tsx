@@ -62,6 +62,18 @@ export default function RootLayout({
         <SiteFooter />
         <ServiceWorker />
         <script type="application/ld+json">{organizationSchema}</script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TY80VCFXKZ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TY80VCFXKZ');
+          `}
+        </Script>
       </body>
     </html>
   );
