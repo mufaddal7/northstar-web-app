@@ -33,8 +33,8 @@ export default function PrivacyPage() {
           follow up about your business needs. If you send feedback, we store
           the rating and comment with the scan and send them as a separate
           inquiry under Business modernization scan. Scan details are sent to
-          our contact management service and kept in the application&apos;s
-          private data storage. Do not submit confidential or sensitive
+          our contact management service and stored in a private Postgres
+          database hosted through Neon. Do not submit confidential or sensitive
           business information.
         </p>
         <h2 className="mt-10 font-display text-2xl">Website analytics</h2>
