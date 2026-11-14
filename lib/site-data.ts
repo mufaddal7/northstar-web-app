@@ -411,22 +411,195 @@ export const challenges = [
 ] as const;
 
 export const industries = [
-  [
-    "Financial Services",
-    "Modernize core platforms, automate operations and build intelligent financial experiences.",
-  ],
-  [
-    "Aviation",
-    "Digitize complex operational workflows and customer experiences.",
-  ],
-  [
-    "Retail & Commerce",
-    "Connect commerce, operations, customer data and digital experiences.",
-  ],
-  [
-    "Manufacturing",
-    "Modernize operational systems and create data-driven visibility.",
-  ],
+  {
+    slug: "manufacturing-engineering",
+    title: "Manufacturing & Engineering",
+    summary:
+      "Coordinate purchasing, production, inventory and delivery with a clearer view of work in progress.",
+    workflows: [
+      "Procurement, stock and material availability",
+      "Production, projects and operational handoffs",
+      "Cost, margin and delivery reporting",
+    ],
+    services: [
+      ["ERP implementation", "/erp-implementation"],
+      [
+        "Process & workflow optimization",
+        "/what-we-do/modernize/process-workflow-optimization",
+      ],
+      [
+        "Data analytics & reporting",
+        "/what-we-do/intelligence/data-analytics",
+      ],
+    ],
+  },
+  {
+    slug: "wholesale-distribution",
+    title: "Wholesale & Distribution",
+    summary:
+      "Connect purchasing, inventory, order fulfilment and customer operations across locations and channels.",
+    workflows: [
+      "Order-to-delivery and returns",
+      "Warehouse, replenishment and supplier coordination",
+      "Margin, stock and service-level visibility",
+    ],
+    services: [
+      ["ERP implementation", "/erp-implementation"],
+      [
+        "CRM & customer operations",
+        "/what-we-do/modernize/crm-customer-operations",
+      ],
+      [
+        "Business intelligence",
+        "/what-we-do/intelligence/business-intelligence",
+      ],
+    ],
+  },
+  {
+    slug: "retail-ecommerce",
+    title: "Retail & E-commerce",
+    summary:
+      "Make the experience more consistent across storefronts, digital channels, fulfilment and customer service.",
+    workflows: [
+      "Product, price and inventory information across channels",
+      "Order fulfilment, exchanges and customer support",
+      "Sales and customer behaviour reporting",
+    ],
+    services: [
+      ["ERP implementation", "/erp-implementation"],
+      [
+        "CRM & customer operations",
+        "/what-we-do/modernize/crm-customer-operations",
+      ],
+      ["Digital experience", "/what-we-do/build/digital-experience"],
+    ],
+  },
+  {
+    slug: "professional-project-services",
+    title: "Professional & Project-Based Services",
+    summary:
+      "Help teams connect the path from opportunity to delivery, resourcing, project performance and billing.",
+    workflows: [
+      "Lead handoff and client relationship management",
+      "Project planning, utilization and delivery status",
+      "Time, cost, margin and invoicing visibility",
+    ],
+    services: [
+      ["CRM & customer operations", "/what-we-do/modernize/crm-customer-operations"],
+      ["ERP implementation", "/erp-implementation"],
+      ["Technology strategy", "/what-we-do/build/technology-strategy"],
+    ],
+  },
+  {
+    slug: "logistics-field-services",
+    title: "Logistics & Field Services",
+    summary:
+      "Give office and field teams a more connected view of jobs, assets, schedules and customer updates.",
+    workflows: [
+      "Dispatch, job scheduling and field handoffs",
+      "Parts, assets and service history",
+      "Completion status, proof of delivery and customer communication",
+    ],
+    services: [
+      ["ERP implementation", "/erp-implementation"],
+      [
+        "Process & workflow optimization",
+        "/what-we-do/modernize/process-workflow-optimization",
+      ],
+      ["AI & automation", "/what-we-do/intelligence/ai-automation"],
+    ],
+  },
+  {
+    slug: "healthcare-operations",
+    title: "Healthcare Operations",
+    summary:
+      "Explore administrative workflows for providers and care organizations, from scheduling and supplies to service communication.",
+    workflows: [
+      "Appointment, referral and service coordination",
+      "Administrative records, billing and supply workflows",
+      "Communication between teams and service users",
+    ],
+    services: [
+      [
+        "Process & workflow optimization",
+        "/what-we-do/modernize/process-workflow-optimization",
+      ],
+      [
+        "Cloud & infrastructure",
+        "/what-we-do/modernize/cloud-infrastructure",
+      ],
+      ["Digital experience", "/what-we-do/build/digital-experience"],
+    ],
+    consideration:
+      "Clinical systems, sensitive data and regulatory obligations require a context-specific assessment with the right domain and compliance specialists.",
+  },
+  {
+    slug: "financial-services",
+    title: "Financial Services",
+    summary:
+      "Improve internal service workflows, customer operations and decision support around existing financial platforms.",
+    workflows: [
+      "Customer onboarding and service case handoffs",
+      "Operational review, approvals and information access",
+      "Management reporting and process automation",
+    ],
+    services: [
+      [
+        "CRM & customer operations",
+        "/what-we-do/modernize/crm-customer-operations",
+      ],
+      [
+        "Business intelligence",
+        "/what-we-do/intelligence/business-intelligence",
+      ],
+      ["Technology strategy", "/what-we-do/build/technology-strategy"],
+    ],
+    consideration:
+      "Core financial systems and regulated data need careful security, controls and jurisdiction-specific review. We start by understanding those constraints.",
+  },
+  {
+    slug: "education-training",
+    title: "Education & Training",
+    summary:
+      "Connect the administrative journey from first enquiry through enrolment, delivery, payment and ongoing communication.",
+    workflows: [
+      "Enquiry, admissions and learner communications",
+      "Course, instructor and resource scheduling",
+      "Fees, service requests and operational reporting",
+    ],
+    services: [
+      [
+        "CRM & customer operations",
+        "/what-we-do/modernize/crm-customer-operations",
+      ],
+      ["Digital experience", "/what-we-do/build/digital-experience"],
+      [
+        "Data analytics & reporting",
+        "/what-we-do/intelligence/data-analytics",
+      ],
+    ],
+  },
+  {
+    slug: "transportation-aviation",
+    title: "Transportation & Aviation",
+    summary:
+      "Support coordination across schedules, service teams, assets and customer-facing operations.",
+    workflows: [
+      "Operational scheduling and cross-team handoffs",
+      "Asset, maintenance or service information",
+      "Customer updates and operational performance reporting",
+    ],
+    services: [
+      ["Technology strategy", "/what-we-do/build/technology-strategy"],
+      [
+        "Process & workflow optimization",
+        "/what-we-do/modernize/process-workflow-optimization",
+      ],
+      ["Data analytics & reporting", "/what-we-do/intelligence/data-analytics"],
+    ],
+    consideration:
+      "Safety-critical operations and regulated systems require qualified sector specialists and controls specific to the operating environment.",
+  },
 ] as const;
 
 export const insights = [
