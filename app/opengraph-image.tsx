@@ -1,11 +1,19 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
+export const runtime = "nodejs";
 export const alt =
   "Northstar business transformation, ERP, data and AI, and digital solutions";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await readFile(
+    path.join(process.cwd(), "public", "Dark theme logo.svg"),
+  );
+  const logoSource = `data:image/svg+xml;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -23,17 +31,13 @@ export default function OpenGraphImage() {
           width: "100%",
         }}
       >
-        <div
-          style={{
-            color: "#d8be88",
-            display: "flex",
-            fontSize: 22,
-            fontWeight: 700,
-            letterSpacing: "0.18em",
-          }}
-        >
-          NORTHSTAR
-        </div>
+        <img
+          alt="Northstar"
+          height={75}
+          src={logoSource}
+          style={{ objectFit: "contain", objectPosition: "left center", width: 438 }}
+          width={438}
+        />
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <div
             style={{
