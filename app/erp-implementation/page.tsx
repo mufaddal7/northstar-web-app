@@ -14,9 +14,9 @@ import {
 import { pageMetadata } from "@/lib/metadata";
 import { SITE_URL, WHATSAPP_URL } from "@/lib/site-data";
 
-const pageTitle = "ERP Implementation for Growing Businesses";
+const pageTitle = "ERP Implementation Services for Growing Businesses";
 const pageDescription =
-  "Plan an ERP implementation around your real operations. Northstar helps connect finance, inventory, sales and delivery with practical process design, migration and adoption support.";
+  "Plan an ERP implementation that fits your workflows. Northstar supports process design, platform selection, data migration, integrations and user adoption.";
 
 export const metadata: Metadata = pageMetadata(
   pageTitle,

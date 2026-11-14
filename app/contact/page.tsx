@@ -7,8 +7,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { BOOKING_URL, WHATSAPP_URL } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMetadata(
-  "Contact",
-  "Tell Northstar what you are trying to achieve and start a conversation about where technology can make the greatest difference.",
+  "Discuss Your Business Challenge",
+  "Start a conversation about ERP, business processes, data, AI or digital products. Bring one workflow or decision your team wants to improve.",
   "/contact",
 );
 

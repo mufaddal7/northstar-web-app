@@ -6,9 +6,9 @@ import { CtaBand } from "@/components/cta-band";
 import { Eyebrow, PageHero, Section, SectionHeading, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
-const pageTitle = "ERP vs CRM: Differences, Uses and How They Work Together";
+const pageTitle = "ERP vs CRM: Differences and When to Use Each";
 const pageDescription =
-  "Understand ERP vs CRM: ERP connects internal business processes, while CRM focuses on customer-facing sales, service and relationships. Compare use cases and when to use both.";
+  "Compare ERP and CRM systems: see how ERP supports internal operations and CRM manages sales, service and customer relationships, plus when an integrated approach makes sense.";
 
 export const metadata: Metadata = pageMetadata(
   pageTitle,

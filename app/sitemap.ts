@@ -25,7 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPaths.map((path) => ({
       url: `${SITE_URL}${path}`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority:
         path === ""
@@ -38,19 +37,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...pillars.map(({ slug }) => ({
       url: `${SITE_URL}/what-we-do/${slug}`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
     ...allServices.map(({ pillar, slug }) => ({
       url: `${SITE_URL}/what-we-do/${pillar.slug}/${slug}`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
     ...insightArticles.map(({ slug }) => ({
       url: `${SITE_URL}/insights/${slug}`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

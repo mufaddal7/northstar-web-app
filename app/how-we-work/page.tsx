@@ -6,8 +6,8 @@ import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
-  "How we work",
-  "Northstar brings business-first thinking, practical strategy and strong engineering together from discovery through optimization.",
+  "Our Business Transformation Process",
+  "See how Northstar takes a business challenge from discovery and prioritization through solution design, delivery, adoption and ongoing improvement.",
   "/how-we-work",
 );
 

@@ -9,6 +9,7 @@ export type Service = {
   slug: string;
   title: string;
   description: string;
+  seoDescription: string;
   challenge: string;
   whatWeDo: string[];
   outcomes: string[];
@@ -22,6 +23,7 @@ export type Pillar = {
   title: string;
   statement: string;
   description: string;
+  seoDescription: string;
   cta: string;
   services: Service[];
 };
@@ -35,6 +37,8 @@ export const pillars: Pillar[] = [
     statement: "Modernize your business operations.",
     description:
       "Help organizations modernize the systems, processes and technology foundations that run their business.",
+    seoDescription:
+      "Modernize ERP, CRM, cloud and business processes with a practical plan designed around your workflows, data and teams.",
     cta: "Have a modernization challenge? Let’s talk.",
     services: [
       {
@@ -42,6 +46,8 @@ export const pillars: Pillar[] = [
         title: "ERP & Business Systems",
         description:
           "Plan and implement ERPNext and other core business systems around your processes to connect operations and support growth.",
+        seoDescription:
+          "Plan ERP and core business systems around your operations. Assess process fit, configure ERPNext, connect integrations, and support data migration and adoption.",
         challenge:
           "Core systems can become fragmented, rigid and difficult to change as a business grows.",
         whatWeDo: [
@@ -67,6 +73,8 @@ export const pillars: Pillar[] = [
         title: "CRM & Customer Operations",
         description:
           "Connect sales, customer engagement and service processes into one seamless customer journey.",
+        seoDescription:
+          "Connect CRM, sales, customer engagement and service workflows to improve handoffs, customer context and visibility across teams.",
         challenge:
           "Customer information and handoffs often sit across disconnected teams and systems.",
         whatWeDo: [
@@ -92,6 +100,8 @@ export const pillars: Pillar[] = [
         title: "Process & Workflow Optimization",
         description:
           "Digitize and automate processes to reduce manual work and improve operational efficiency.",
+        seoDescription:
+          "Improve business processes and workflow automation by removing unnecessary steps, clarifying ownership and digitizing repeatable work.",
         challenge:
           "Manual workarounds and disconnected workflows slow teams down and create avoidable risk.",
         whatWeDo: [
@@ -117,6 +127,8 @@ export const pillars: Pillar[] = [
         title: "Cloud & Infrastructure",
         description:
           "Modernize your technology foundation with scalable, secure and cost-effective cloud solutions.",
+        seoDescription:
+          "Modernize cloud and infrastructure for better scalability, resilience and cost visibility while keeping essential business operations in view.",
         challenge:
           "Technology foundations need to adapt without interrupting the operations that depend on them.",
         whatWeDo: [
@@ -147,6 +159,8 @@ export const pillars: Pillar[] = [
     statement: "Turn business data into intelligence.",
     description:
       "Help organizations connect data, understand performance and use AI to make better decisions.",
+    seoDescription:
+      "Connect operational data to decision-ready reporting, AI insights and workflow automation so teams can act with greater clarity.",
     cta: "Your data already contains answers. Let’s find them.",
     services: [
       {
@@ -154,6 +168,8 @@ export const pillars: Pillar[] = [
         title: "Data Analytics & Business Reporting",
         description:
           "Bring data together to uncover insights, trends and opportunities across your business.",
+        seoDescription:
+          "Connect data from business systems to improve reporting, uncover trends and give teams a more trusted basis for operational decisions.",
         challenge:
           "Useful business data is often scattered across systems, spreadsheets and teams.",
         whatWeDo: [
@@ -175,6 +191,8 @@ export const pillars: Pillar[] = [
         title: "Business Intelligence & Management Dashboards",
         description:
           "Transform business data into actionable dashboards, reports and performance insights.",
+        seoDescription:
+          "Design business intelligence dashboards and management reporting around the measures leaders need to track performance and act.",
         challenge:
           "Leaders need timely, understandable views of performance - not more isolated reports.",
         whatWeDo: [
@@ -200,6 +218,8 @@ export const pillars: Pillar[] = [
         title: "AI-Powered Insights",
         description:
           "Use AI to uncover patterns, answer questions and generate intelligent business insights.",
+        seoDescription:
+          "Apply AI to business data to identify patterns, answer questions and support decisions, with clear evaluation of usefulness and oversight.",
         challenge:
           "Teams need ways to explore growing volumes of information without adding complexity.",
         whatWeDo: [
@@ -225,6 +245,8 @@ export const pillars: Pillar[] = [
         title: "AI & Automation",
         description:
           "Apply AI and intelligent automation to simplify work, accelerate decisions and improve productivity.",
+        seoDescription:
+          "Identify and automate repeatable business workflows with AI, system integrations and human oversight to reduce manual effort and improve consistency.",
         challenge:
           "Repetitive work can keep skilled teams away from more valuable decisions and customer work.",
         whatWeDo: [
@@ -255,6 +277,8 @@ export const pillars: Pillar[] = [
     statement: "Build and scale your digital capabilities.",
     description:
       "Help organizations turn business ideas, technology strategies and transformation opportunities into scalable digital capabilities.",
+    seoDescription:
+      "Turn business priorities into digital products, technology roadmaps and platform improvements designed to scale without disrupting operations.",
     cta: "Have an idea worth building? Let’s talk.",
     services: [
       {
@@ -262,6 +286,8 @@ export const pillars: Pillar[] = [
         title: "Product Engineering",
         description:
           "Design, build and scale digital products tailored to your business and customers.",
+        seoDescription:
+          "Design, build and scale digital products through focused product strategy, engineering and iterative delivery shaped around users.",
         challenge:
           "A promising product needs the right path from business opportunity to a scalable, useful experience.",
         whatWeDo: [
@@ -287,6 +313,8 @@ export const pillars: Pillar[] = [
         title: "Technology Strategy",
         description:
           "Turn business goals into practical technology strategies, architectures and roadmaps.",
+        seoDescription:
+          "Create a technology strategy and roadmap that connects business goals to architecture choices, investment priorities and staged delivery.",
         challenge:
           "Technology investments need a clear connection to business priorities and a realistic sequence of action.",
         whatWeDo: [
@@ -312,6 +340,8 @@ export const pillars: Pillar[] = [
         title: "Product Modernization",
         description:
           "Transform legacy applications and platforms into modern, scalable digital solutions.",
+        seoDescription:
+          "Modernize legacy applications and digital products in manageable increments, improving scalability and user experience while protecting operational continuity.",
         challenge:
           "Legacy products can constrain delivery, experience and growth while remaining essential to the business.",
         whatWeDo: [
@@ -337,6 +367,8 @@ export const pillars: Pillar[] = [
         title: "Digital Experience",
         description:
           "Create engaging digital experiences across web, mobile and customer-facing channels.",
+        seoDescription:
+          "Design and develop web, mobile and customer-facing experiences that make important user journeys clearer and easier to complete.",
         challenge:
           "Digital experiences must make complicated tasks clearer for customers, teams and partners.",
         whatWeDo: [

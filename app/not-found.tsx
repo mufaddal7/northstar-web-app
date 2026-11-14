@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { ButtonLink, Eyebrow, Shell } from "@/components/ui";
+
+export const metadata: Metadata = {
+  title: { absolute: "Page Not Found | Northstar" },
+  description:
+    "This page could not be found. Return to Northstar to explore business transformation services and insights.",
+  robots: { index: false, follow: false },
+};
+
 export default function NotFound() {
   return (
     <section className="min-h-[65vh] py-20 sm:py-32">

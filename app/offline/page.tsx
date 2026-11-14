@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import { ButtonLink, Eyebrow, Shell } from "@/components/ui";
+
+export const metadata: Metadata = {
+  title: { absolute: "You’re Offline | Northstar" },
+  description: "Reconnect to the internet and return to Northstar.",
+  robots: { index: false, follow: false },
+};
+
 export default function OfflinePage() {
   return (
     <section className="min-h-[65vh] py-20 sm:py-32">

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Eyebrow, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata(
-  "Privacy",
-  "How Northstar uses enquiry information, modernization scan responses and Google Analytics on this website.",
+  "Privacy and Data Use",
+  "Learn how Northstar handles contact enquiries, business modernization scan responses, feedback and website analytics.",
   "/privacy",
 );
 export default function PrivacyPage() {

@@ -5,7 +5,12 @@ import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
-import { allServices, getService, processSteps } from "@/lib/site-data";
+import {
+  allServices,
+  getService,
+  processSteps,
+  SITE_URL,
+} from "@/lib/site-data";
 
 type Props = { params: Promise<{ pillar: string; service: string }> };
 
@@ -22,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return item
     ? pageMetadata(
         item.title,
-        item.description,
+        item.seoDescription,
         `/what-we-do/${item.pillar.slug}/${item.slug}`,
       )
     : {};
@@ -33,9 +38,22 @@ export default async function ServicePage({ params }: Props) {
   const item = getService(pillarSlug, serviceSlug);
   if (!item) notFound();
   const { pillar, ...service } = item;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    serviceType: service.title,
+    description: service.seoDescription,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    url: `${SITE_URL}/what-we-do/${pillar.slug}/${service.slug}`,
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <PageHero
         dark
         eyebrow={`${pillar.name} / ${pillar.title}`}

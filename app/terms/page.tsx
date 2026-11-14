@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Eyebrow, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata(
-  "Terms",
-  "Terms for using the Northstar website and its content.",
+  "Website Terms of Use",
+  "Read the terms that apply when you access and use the Northstar website and its content.",
   "/terms",
 );
 export default function TermsPage() {

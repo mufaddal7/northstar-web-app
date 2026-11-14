@@ -9,9 +9,9 @@ import { ButtonLink, Eyebrow, Section, SectionHeading, Shell } from "@/component
 import { pageMetadata } from "@/lib/metadata";
 import { WHATSAPP_URL } from "@/lib/site-data";
 
-const pageTitle = "Business Transformation and Technology Services";
+const pageTitle = "Business Transformation & Technology Services";
 const pageDescription =
-  "Northstar helps businesses improve operations with ERP, CRM, data and AI, strategy, and digital engineering. Practical technology built around the way you work.";
+  "Northstar helps businesses modernize ERP and CRM systems, connect operational data, apply AI and automation, and build digital products around how teams work.";
 
 export const metadata: Metadata = pageMetadata(
   pageTitle,

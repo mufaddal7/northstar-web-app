@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { pillars } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMetadata(
-  "What we do",
-  "Explore Northstar's connected capabilities across business modernization, data and intelligence, and digital solutions.",
+  "Business Transformation, ERP, Data & AI Services",
+  "Explore Northstar services for ERP and business modernization, CRM and customer operations, data analytics, AI and automation, technology strategy and digital products.",
   "/what-we-do",
 );
 

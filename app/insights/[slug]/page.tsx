@@ -34,9 +34,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: "article",
       siteName: "Northstar",
-      title: article.title,
+      title: `${article.title} | Northstar`,
       description: article.summary,
       url: `${SITE_URL}/insights/${article.slug}`,
+      images: [
+        {
+          url: `${SITE_URL}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${article.title} | Northstar`,
+        },
+      ],
     },
   };
 }
@@ -59,14 +67,13 @@ export default async function InsightArticlePage({ params }: Props) {
     description: article.summary,
     author: {
       "@type": "Organization",
-      name: "Northstar",
-      url: SITE_URL,
+      "@id": `${SITE_URL}/#organization`,
     },
     publisher: {
       "@type": "Organization",
-      name: "Northstar",
-      url: SITE_URL,
+      "@id": `${SITE_URL}/#organization`,
     },
+    image: `${SITE_URL}/opengraph-image`,
     mainEntityOfPage: `${SITE_URL}/insights/${article.slug}`,
   };
 

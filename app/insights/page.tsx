@@ -7,8 +7,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { insightArticles, insightTopics } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMetadata(
-  "Insights",
-  "Northstar perspectives on modernization, data, AI, digital engineering and technology strategy.",
+  "Business Technology Insights & Perspectives",
+  "Practical guidance on ERP and business modernization, AI automation, data analytics, digital product engineering and technology strategy.",
   "/insights",
 );
 

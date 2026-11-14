@@ -7,8 +7,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { industries } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMetadata(
-  "Solutions by Industry",
-  "Browse practical ERP, customer operations, data and digital solutions for manufacturing, distribution, retail, services and other complex operations.",
+  "Business Technology Solutions by Industry",
+  "Explore ERP, CRM, data and digital solutions for manufacturing, distribution, retail, healthcare, professional services and other complex operations.",
   "/industries",
 );
 

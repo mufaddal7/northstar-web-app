@@ -8,9 +8,9 @@ import { Eyebrow, PageHero, Section, SectionHeading, Shell } from "@/components/
 import { pageMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site-data";
 
-const pageTitle = "ERPNext Implementation for Growing Businesses";
+const pageTitle = "ERPNext Implementation & Consulting";
 const pageDescription =
-  "Plan an ERPNext implementation around your real operations. Northstar helps connect finance, inventory, sales and delivery with practical configuration, migration and adoption support.";
+  "Implement ERPNext around your finance, inventory, sales and operations workflows, with practical configuration, data migration, integrations and team adoption.";
 
 export const metadata: Metadata = pageMetadata(
   pageTitle,

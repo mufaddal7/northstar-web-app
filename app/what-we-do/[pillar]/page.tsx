@@ -17,7 +17,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar: slug } = await params;
   const pillar = getPillar(slug);
   return pillar
-    ? pageMetadata(pillar.name, pillar.description, `/what-we-do/${pillar.slug}`)
+    ? pageMetadata(
+        pillar.title,
+        pillar.seoDescription,
+        `/what-we-do/${pillar.slug}`,
+      )
     : {};
 }
 

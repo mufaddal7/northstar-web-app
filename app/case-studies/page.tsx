@@ -4,8 +4,8 @@ import { PageHero, Section, Shell, Eyebrow } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
-  "Case studies",
-  "An enterprise development modernization example, from business challenge to approach and outcome measures.",
+  "Enterprise Developer Platform Case Study",
+  "Explore an enterprise developer-platform modernization initiative involving repository migration, GitHub Enterprise, CI/CD and developer experience. Client identity and quantified results are not disclosed.",
   "/case-studies",
 );
 

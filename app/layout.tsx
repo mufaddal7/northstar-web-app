@@ -17,16 +17,52 @@ export const metadata: Metadata = {
     "Northstar helps businesses modernize operations, unlock intelligence from their data, and build digital solutions that create lasting business value.",
   icons: { icon: "/icon.svg", apple: "/apple-touch-icon.svg" },
   manifest: "/manifest.webmanifest",
+  openGraph: {
+    type: "website",
+    siteName: "Northstar",
+    title: "Northstar | Transform what matters. Build what’s next.",
+    description:
+      "Business modernization, ERP, data and AI, and digital solutions shaped around the way your teams work.",
+    url: SITE_URL,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Northstar business transformation and technology services",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Northstar | Transform what matters. Build what’s next.",
+    description:
+      "Business modernization, ERP, data and AI, and digital solutions shaped around the way your teams work.",
+    images: ["/opengraph-image"],
+  },
 };
 
-const organizationSchema = JSON.stringify({
+const structuredData = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Northstar",
-  url: SITE_URL,
-  email: "hello@northstar53.com",
-  telephone: "+916268535490",
-  slogan: "Transform what matters. Build what’s next.",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Northstar",
+      url: SITE_URL,
+      email: "hello@northstar53.com",
+      telephone: "+916268535490",
+      logo: `${SITE_URL}/icon.svg`,
+      slogan: "Transform what matters. Build what’s next.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Northstar",
+      url: SITE_URL,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 });
 
 export default function RootLayout({
@@ -48,7 +84,7 @@ export default function RootLayout({
         <SiteFooter />
         <MaturityScanPrompt />
         <ServiceWorker />
-        <script type="application/ld+json">{organizationSchema}</script>
+        <script type="application/ld+json">{structuredData}</script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-TY80VCFXKZ"
           strategy="afterInteractive"
