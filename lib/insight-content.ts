@@ -27,34 +27,41 @@ type InsightContent = {
 export const insightContent: Record<InsightSlug, InsightContent> = {
   "erp-business-constraint": {
     opening:
-      "An ERP can feel adequate for years, then become harder to work around as products, locations, reporting needs and customer expectations change. A few complaints do not prove the platform is wrong. The useful signal is a persistent pattern: people spend more effort maintaining the system’s workarounds than improving the work itself.",
+      "An ERP can feel adequate for years, then become harder to work around as products, locations, reporting needs and customer expectations change. Look for five recurring signs: workarounds, unreliable reporting, slow changes, people avoiding the system, and fragile customizations or integrations. None proves that you need a replacement; together, they are a reason to investigate the process, data and platform fit.",
     sections: [
       {
-        heading: "Look for patterns across the work",
+        heading: "Workarounds have become part of the process",
         paragraphs: [
-          "Start with the moments where information should move between teams. If a sale has to be re-entered for fulfilment, stock is reconciled in a separate file, or finance waits for manual updates before closing, trace the handoff. Repeated workarounds often point to a process, data or integration issue, not just an old screen.",
-          "Also notice how long ordinary changes take. New products, approval rules, reports or locations should not require a fragile chain of custom fixes. The concern is not that change takes effort; it is that the effort is unpredictable, risky or dependent on one person’s memory.",
+          "Teams may maintain spreadsheets beside the ERP, enter the same information more than once, or rely on manual handoffs to complete routine work. These workarounds can hide a process, data or integration issue and make it harder to know which record is current.",
         ],
         points: [
-          "Repeated entry, spreadsheet sidecars or parallel records",
-          "Reports that arrive late or cannot be reconciled to source transactions",
-          "Routine changes that create new exceptions or require specialist intervention",
-          "Users who avoid the system because it slows down a critical task",
-          "Customizations or integrations that become fragile as the business changes",
+          "Orders, customer details or stock movements are re-entered",
+          "Teams keep parallel records to reconcile later",
         ],
       },
       {
-        heading: "Separate the symptom from the cause",
+        heading: "Reports arrive late or cannot be trusted",
         paragraphs: [
-          "Before discussing replacement, map a representative workflow from start to finish. Talk to the people doing the work, review where data is created and corrected, and identify which controls must remain in place. Compare the documented process with what actually happens on a busy day.",
-          "Then test likely causes in order: unclear ownership, unnecessary process steps, poor data quality, underused configuration, weak integrations, or a genuine platform limitation. This keeps the discussion grounded in evidence and helps avoid carrying old process problems into a new system.",
+          "If teams wait for manual extracts, repeatedly reconcile totals, or cannot trace a report back to source transactions, the issue may be data quality, ownership or system integration. Slow reporting makes it harder to respond while a decision still matters.",
         ],
       },
       {
-        heading: "Choose the smallest change that removes the constraint",
+        heading: "Routine changes take disproportionate effort",
         paragraphs: [
-          "The answer may be process simplification, data cleanup, training, a better integration, targeted configuration or a phased platform change. Compare options against business outcomes, operating risk, total cost of ownership and the effort required from your teams. Include migration, support and future change in the comparison, not only licence and implementation costs.",
-          "A short fit review can turn a vague feeling that the ERP is ‘too old’ into a decision: improve what is there, connect it better, or plan a controlled move. That decision is more useful than starting with a software demonstration.",
+          "Adding a product, location, approval rule or useful report should not depend on a chain of risky fixes or one specialist’s memory. The warning sign is not that change takes effort; it is that the effort is unpredictable, expensive or creates new exceptions.",
+        ],
+      },
+      {
+        heading: "People avoid the system to get work done",
+        paragraphs: [
+          "When users delay updates, bypass a critical step or keep their own records because the system slows them down, the official process and the real process have drifted apart. Talk with the people doing the work to understand where the friction occurs before deciding whether it is a usability, training or workflow issue.",
+        ],
+      },
+      {
+        heading: "Customizations and integrations are becoming fragile",
+        paragraphs: [
+          "If routine updates break connected systems, custom code is difficult to support, or only a few people understand how key workflows fit together, the cost and risk of change are rising. Map the dependencies and identify whether the cause is an integration, data, configuration or platform limitation.",
+          "Before discussing replacement, trace one representative workflow from start to finish and compare the documented process with what happens in practice. The right next step may be process simplification, data cleanup, training, a better integration, targeted configuration or a phased platform change. Compare options by business outcome, operating risk and total cost, including migration and support.",
         ],
       },
     ],

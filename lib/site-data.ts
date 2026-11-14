@@ -639,7 +639,7 @@ export const insightArticles = [
     category: "Modernization",
     title: "5 Signs Your ERP Has Become a Business Constraint",
     summary:
-      "Watch for workarounds that have become routine, slow or unreliable reporting, duplicated data, and process changes that require disproportionate effort. These signals point to a fit and workflow review. They do not automatically mean a full replacement.",
+      "Look for routine workarounds, unreliable reporting, slow process changes, users avoiding the system, and fragile customizations or integrations. These signs call for a fit review, not an automatic replacement.",
   },
   {
     slug: "legacy-platform-modernization",
