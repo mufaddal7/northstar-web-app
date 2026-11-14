@@ -30,10 +30,12 @@ export default function PrivacyPage() {
         <p className="mt-3 leading-7 text-muted">
           If you complete the scan, we collect your name, company, work email,
           answers and calculated score to generate your personalized results and
-          follow up about your business needs. We also store scan feedback when
-          you choose to provide it. Scan details are sent to our contact
-          management service and kept in the application&apos;s private data
-          storage. Do not submit confidential or sensitive business information.
+          follow up about your business needs. If you send feedback, we store
+          the rating and comment with the scan and send them as a separate
+          inquiry under Business modernization scan. Scan details are sent to
+          our contact management service and kept in the application&apos;s
+          private data storage. Do not submit confidential or sensitive
+          business information.
         </p>
         <h2 className="mt-10 font-display text-2xl">Website analytics</h2>
         <p className="mt-3 leading-7 text-muted">

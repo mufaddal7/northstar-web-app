@@ -20,6 +20,15 @@ export const runtime = "nodejs";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const uuidPattern =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+type FeedbackRating = NonNullable<
+  MaturityScanRecord["feedback"]
+>["rating"];
+
+const feedbackLabels = {
+  accurate: "Accurate",
+  "partly-accurate": "Partly accurate",
+  "not-accurate": "Not accurate",
+} as const;
 
 export async function GET() {
   const questions = getPublicMaturityQuestions().map((question) => {
@@ -94,6 +103,8 @@ export async function POST(request: Request) {
       if (existing.contactStatus === "saved") {
         return NextResponse.json({
           scanId: existing.scanId,
+          company: existing.company,
+          completedAt: existing.createdAt,
           requestId,
           result: existing.result,
         });
@@ -148,6 +159,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       scanId: record.scanId,
+      company: record.company,
+      completedAt: record.createdAt,
       requestId,
       result: record.result,
     });
@@ -255,42 +268,115 @@ async function saveFeedback(
   if (
     typeof scanId !== "string" ||
     !uuidPattern.test(scanId) ||
-    (rating !== "accurate" &&
-      rating !== "partly-accurate" &&
-      rating !== "not-accurate") ||
+    !isFeedbackRating(rating) ||
     typeof comment !== "string" ||
     comment.trim().length > 1200
   ) {
     return NextResponse.json(
-    {
-      message:
-        "Please choose a rating and keep feedback under 1,200 characters.",
-      requestId,
-    },
+      {
+        message:
+          "Please choose a rating and keep feedback under 1,200 characters.",
+        requestId,
+      },
       { status: 400 },
     );
   }
 
   try {
-    const saved = await saveMaturityFeedback(scanId, {
-      rating,
-      comment: comment.trim(),
-      submittedAt: new Date().toISOString(),
-    });
-    if (!saved) {
+    const record = await getMaturityScan(scanId);
+    if (!record) {
       return NextResponse.json(
-        { message: "This scan could not be found. Please run it again.", requestId },
+        {
+          message: "This scan could not be found. Please run it again.",
+          requestId,
+        },
         { status: 404 },
       );
     }
-    return NextResponse.json({ message: "Thanks for your feedback.", requestId });
+
+    if (record.feedback?.contactStatus === "sent") {
+      return NextResponse.json({
+        message: "Your feedback has already been received.",
+        requestId,
+      });
+    }
+
+    const feedback: NonNullable<MaturityScanRecord["feedback"]> = {
+      rating,
+      comment: comment.trim(),
+      submittedAt: new Date().toISOString(),
+      contactStatus: "pending",
+    };
+    const feedbackStored = await saveMaturityFeedback(scanId, feedback);
+    if (!feedbackStored) {
+      return NextResponse.json(
+        { message: "Feedback could not be saved. Please try again.", requestId },
+        { status: 500 },
+      );
+    }
+
+    const contact = await forwardContactSubmission(
+      {
+        name: record.name,
+        email: record.email,
+        company: record.company,
+        interest: "Business modernization scan",
+        challenge: createFeedbackDescription(record, feedback),
+      },
+      requestId,
+    );
+    if (!contact.success) {
+      return NextResponse.json(
+        {
+          message:
+            "We couldn’t send your feedback right now. It has been saved, so please try again.",
+          requestId,
+        },
+        { status: contact.status },
+      );
+    }
+
+    const markedSent = await saveMaturityFeedback(scanId, {
+      ...feedback,
+      contactStatus: "sent",
+    });
+    if (!markedSent) {
+      throw new Error("The scan feedback could not be updated after submission.");
+    }
+
+    return NextResponse.json({
+      message: "Thanks. Your feedback was sent to our team.",
+      requestId,
+    });
   } catch (error) {
-    console.error(`[maturity-scan:${requestId}] Could not save feedback:`, error);
+    console.error(`[maturity-scan:${requestId}] Could not submit feedback:`, error);
     return NextResponse.json(
-      { message: "We couldn’t save your feedback right now.", requestId },
+      { message: "We couldn’t send your feedback right now.", requestId },
       { status: 500 },
     );
   }
+}
+
+function createFeedbackDescription(
+  record: MaturityScanRecord,
+  feedback: NonNullable<MaturityScanRecord["feedback"]>,
+) {
+  return [
+    "Northstar Business Modernization Maturity Scan Feedback",
+    `Scan ID: ${record.scanId}`,
+    `Modernization score: ${record.result.score}%`,
+    `Maturity level: ${record.result.level}`,
+    `Feedback rating: ${feedbackLabels[feedback.rating]}`,
+    `Feedback comment: ${feedback.comment || "No written comment provided."}`,
+  ].join("\n");
+}
+
+function isFeedbackRating(value: unknown): value is FeedbackRating {
+  return (
+    value === "accurate" ||
+    value === "partly-accurate" ||
+    value === "not-accurate"
+  );
 }
 
 function createContactDescription(record: MaturityScanRecord) {

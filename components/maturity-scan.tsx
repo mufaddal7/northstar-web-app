@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ButtonLink, Eyebrow, Shell } from "@/components/ui";
 import type { MaturityScanResult } from "@/lib/maturity-scan";
 
@@ -14,6 +14,8 @@ type PublicQuestion = {
 
 type ScanResponse = {
   scanId: string;
+  company: string;
+  completedAt: string;
   result: MaturityScanResult;
 };
 
@@ -33,6 +35,7 @@ const feedbackOptions: { value: FeedbackRating; label: string }[] = [
 ];
 
 export function MaturityScan() {
+  const scanStepRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<ScanPhase>("loading");
   const [questions, setQuestions] = useState<PublicQuestion[]>([]);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -42,6 +45,7 @@ export function MaturityScan() {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
+  const [completedAt, setCompletedAt] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [result, setResult] = useState<MaturityScanResult | null>(null);
   const [animatedScore, setAnimatedScore] = useState(0);
@@ -49,6 +53,7 @@ export function MaturityScan() {
     null,
   );
   const [feedbackComment, setFeedbackComment] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const [feedbackStatus, setFeedbackStatus] = useState<
     "idle" | "sending" | "sent" | "error"
   >("idle");
@@ -124,6 +129,21 @@ export function MaturityScan() {
     } else {
       setQuestionIndex((index) => index + 1);
     }
+    focusScanStep();
+  }
+
+  function focusScanStep() {
+    requestAnimationFrame(() => {
+      const step = scanStepRef.current;
+      if (!step) return;
+      const behavior = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches
+        ? "instant"
+        : "smooth";
+      step.scrollIntoView({ behavior, block: "start" });
+      step.focus({ preventScroll: true });
+    });
   }
 
   async function submitScan(event: FormEvent<HTMLFormElement>) {
@@ -155,6 +175,8 @@ export function MaturityScan() {
       }
 
       setScanId(body.scanId);
+      setCompany(body.company);
+      setCompletedAt(body.completedAt);
       setResult(body.result);
       setPhase("result");
       window.gtag?.("event", "generate_lead", {
@@ -176,6 +198,7 @@ export function MaturityScan() {
     event.preventDefault();
     if (!feedbackRating) return;
     setFeedbackStatus("sending");
+    setFeedbackMessage("");
 
     try {
       const response = await fetch("/api/maturity-scan", {
@@ -188,20 +211,50 @@ export function MaturityScan() {
           comment: feedbackComment,
         }),
       });
+      const body = (await response.json()) as {
+        message?: string;
+        requestId?: string;
+      };
       if (!response.ok) {
+        console.error("[maturity-scan] Feedback submission failed.", {
+          status: response.status,
+          requestId: body.requestId,
+        });
+        setFeedbackMessage(
+          body.message || "Feedback could not be sent. Please try again.",
+        );
         setFeedbackStatus("error");
         return;
       }
+      setFeedbackMessage(
+        body.message || "Thanks. Your feedback was sent to our team.",
+      );
       setFeedbackStatus("sent");
-    } catch {
+    } catch (error) {
+      console.error("[maturity-scan] Could not submit feedback.", error);
+      setFeedbackMessage(
+        "Feedback could not be sent. Please try again.",
+      );
       setFeedbackStatus("error");
     }
   }
 
+  function printReport() {
+    document.body.dataset.printReport = "true";
+    window.addEventListener(
+      "afterprint",
+      () => {
+        delete document.body.dataset.printReport;
+      },
+      { once: true },
+    );
+    window.print();
+  }
+
   return (
-    <section className="bg-surface-muted py-12 sm:py-16 lg:py-20">
-      <Shell width="medium">
-        <div className="mb-9 max-w-3xl sm:mb-12">
+    <section className="maturity-scan-page bg-surface-muted py-12 sm:py-16 lg:py-20">
+      <Shell className="maturity-scan-shell" width="medium">
+        <div className="maturity-scan-intro mb-9 max-w-3xl sm:mb-12">
           <Eyebrow>Business modernization scan</Eyebrow>
           <h1 className="font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-6xl">
             See what is working. Find what to improve next.
@@ -239,7 +292,13 @@ export function MaturityScan() {
         ) : null}
 
         {phase === "questions" && currentQuestion ? (
-          <div className="rounded-sm border border-border bg-surface p-5 sm:p-8">
+          <div
+            aria-labelledby="maturity-scan-question-title"
+            className="scroll-mt-24 rounded-sm border border-border bg-surface p-5 sm:p-8"
+            ref={scanStepRef}
+            role="region"
+            tabIndex={-1}
+          >
             <div className="mb-7">
               <div className="mb-3 flex items-center justify-between gap-4 text-xs font-bold uppercase tracking-[0.12em] text-muted">
                 <span>
@@ -265,7 +324,10 @@ export function MaturityScan() {
             </div>
 
             <fieldset>
-              <legend className="max-w-3xl font-display text-2xl leading-snug sm:text-3xl">
+              <legend
+                className="max-w-3xl font-display text-2xl leading-snug sm:text-3xl"
+                id="maturity-scan-question-title"
+              >
                 {currentQuestion.prompt}
               </legend>
               <div className="mt-6 grid gap-3">
@@ -311,7 +373,10 @@ export function MaturityScan() {
               <button
                 className="min-h-12 rounded-sm border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-surface-muted disabled:opacity-40"
                 disabled={questionIndex === 0}
-                onClick={() => setQuestionIndex((index) => index - 1)}
+                onClick={() => {
+                  setQuestionIndex((index) => index - 1);
+                  focusScanStep();
+                }}
                 type="button"
               >
                 Previous question
@@ -331,10 +396,19 @@ export function MaturityScan() {
         ) : null}
 
         {phase === "details" ? (
-          <div className="grid gap-8 rounded-sm border border-border bg-surface p-5 sm:p-8 lg:grid-cols-[1fr_0.8fr] lg:gap-12">
+          <div
+            aria-labelledby="maturity-scan-details-title"
+            className="scroll-mt-24 grid gap-8 rounded-sm border border-border bg-surface p-5 sm:p-8 lg:grid-cols-[1fr_0.8fr] lg:gap-12"
+            ref={scanStepRef}
+            role="region"
+            tabIndex={-1}
+          >
             <div>
               <Eyebrow>One last step</Eyebrow>
-              <h2 className="font-display text-3xl leading-tight sm:text-4xl">
+              <h2
+                className="font-display text-3xl leading-tight sm:text-4xl"
+                id="maturity-scan-details-title"
+              >
                 Your results are ready to build.
               </h2>
               <p className="mt-4 leading-7 text-muted">
@@ -404,7 +478,10 @@ export function MaturityScan() {
               </button>
               <button
                 className="min-h-10 text-sm font-semibold text-muted underline underline-offset-4"
-                onClick={() => setPhase("questions")}
+                onClick={() => {
+                  setPhase("questions");
+                  focusScanStep();
+                }}
                 type="button"
               >
                 Review my answers
@@ -414,152 +491,216 @@ export function MaturityScan() {
         ) : null}
 
         {phase === "result" && result ? (
-          <div className="space-y-8">
-            <section className="grid gap-7 overflow-hidden rounded-sm bg-brand-navy p-6 text-white sm:p-9 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-10">
-              <div
-                aria-label={`Modernization score: ${result.score} percent`}
-                className="relative mx-auto flex h-44 w-44 items-center justify-center"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full"
-                  viewBox="0 0 112 112"
-                >
-                  <circle
-                    className="stroke-white/15"
-                    cx="56"
-                    cy="56"
-                    fill="none"
-                    r="45"
-                    strokeWidth="8"
-                  />
-                  <circle
-                    className="stroke-brand-gold transition-[stroke-dashoffset] duration-1000 ease-out motion-reduce:transition-none"
-                    cx="56"
-                    cy="56"
-                    fill="none"
-                    r="45"
-                    strokeDasharray={Math.PI * 90}
-                    strokeDashoffset={
-                      Math.PI * 90 * (1 - animatedScore / 100)
-                    }
-                    strokeLinecap="round"
-                    strokeWidth="8"
-                    transform="rotate(-90 56 56)"
-                  />
-                </svg>
-                <div className="text-center">
-                  <div className="font-display text-5xl leading-none">
-                    {animatedScore}
-                    <span className="text-2xl">%</span>
-                  </div>
-                  <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/65">
-                    Modernization
+          <div className="maturity-scan-report-shell space-y-8">
+            <div className="maturity-scan-report space-y-8">
+              <div className="maturity-scan-meta grid gap-3 rounded-sm border border-border bg-surface p-4 sm:grid-cols-[minmax(0,1.4fr)_1fr_1fr] sm:items-center sm:gap-6">
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-gold">
+                    Northstar report
+                  </p>
+                  <h2 className="mt-1 font-display text-lg leading-tight sm:text-xl">
+                    Business modernization maturity scan
+                  </h2>
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
+                    Company
+                  </p>
+                  <p className="mt-1 break-words text-sm font-semibold">
+                    {company}
                   </p>
                 </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
+                    Completed
+                  </p>
+                  <time className="mt-1 block text-sm font-semibold" dateTime={completedAt}>
+                    {new Intl.DateTimeFormat(undefined, {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    }).format(new Date(completedAt))}
+                  </time>
+                </div>
               </div>
-              <div className="text-center lg:text-left">
-                <Eyebrow inverse>Your business snapshot</Eyebrow>
-                <h2 className="font-display text-3xl sm:text-4xl">
-                  {result.level}
-                </h2>
-                <p className="mx-auto mt-4 max-w-3xl leading-7 text-white/75 lg:mx-0">
-                  {result.summary}
-                </p>
-                <p className="mt-4 text-xs leading-5 text-white/55">
-                  This is a self-assessment based on your responses, not an
-                  audited benchmark, third-party ranking or Gartner assessment.
-                </p>
-              </div>
-            </section>
+              <section className="maturity-scan-score-card grid gap-7 overflow-hidden rounded-sm bg-brand-navy p-6 text-white sm:p-9 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-10">
+                <div
+                  aria-label={`Modernization score: ${result.score} percent`}
+                  className="relative mx-auto flex h-44 w-44 items-center justify-center"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="absolute inset-0 h-full w-full"
+                    viewBox="0 0 112 112"
+                  >
+                    <circle
+                      className="maturity-scan-score-track stroke-white/15"
+                      cx="56"
+                      cy="56"
+                      fill="none"
+                      r="45"
+                      strokeWidth="8"
+                    />
+                    <circle
+                      className="maturity-scan-score-progress stroke-brand-gold transition-[stroke-dashoffset] duration-1000 ease-out motion-reduce:transition-none print:hidden"
+                      cx="56"
+                      cy="56"
+                      fill="none"
+                      r="45"
+                      strokeDasharray={Math.PI * 90}
+                      strokeDashoffset={
+                        Math.PI * 90 * (1 - animatedScore / 100)
+                      }
+                      strokeLinecap="round"
+                      strokeWidth="8"
+                      transform="rotate(-90 56 56)"
+                    />
+                    <circle
+                      className="maturity-scan-score-progress hidden print:inline"
+                      cx="56"
+                      cy="56"
+                      fill="none"
+                      r="45"
+                      strokeDasharray={Math.PI * 90}
+                      strokeDashoffset={
+                        Math.PI * 90 * (1 - result.score / 100)
+                      }
+                      strokeLinecap="round"
+                      strokeWidth="8"
+                      transform="rotate(-90 56 56)"
+                    />
+                  </svg>
+                  <div className="text-center">
+                    <div className="font-display text-5xl leading-none">
+                      <span className="print:hidden">{animatedScore}</span>
+                      <span className="hidden print:inline">{result.score}</span>
+                      <span className="text-2xl">%</span>
+                    </div>
+                    <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white/65">
+                      Modernization
+                    </p>
+                  </div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <Eyebrow inverse>Your business snapshot</Eyebrow>
+                  <h2 className="font-display text-3xl sm:text-4xl">
+                    {result.level}
+                  </h2>
+                  <p className="mx-auto mt-4 max-w-3xl leading-7 text-white/75 lg:mx-0">
+                    {result.summary}
+                  </p>
+                  <p className="mt-4 text-xs leading-5 text-white/55">
+                    This is a self-assessment based on your responses, not an
+                    audited benchmark, third-party ranking or Gartner assessment.
+                  </p>
+                </div>
+              </section>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <ResultList
-                heading="What is working"
-                intro="Signals of capability already present in your answers."
-                items={result.strengths}
-              />
-              <ResultList
-                heading="Where to focus"
-                intro="Areas where a practical change may reduce friction or risk."
-                items={result.focusAreas}
-              />
+              <div className="grid gap-5 md:grid-cols-2">
+                <ResultList
+                  heading="What is working"
+                  intro="Signals of capability already present in your answers."
+                  items={result.strengths}
+                />
+                <ResultList
+                  heading="Where to focus"
+                  intro="Areas where a practical change may reduce friction or risk."
+                  items={result.focusAreas}
+                />
+              </div>
+
+              <section>
+                <div className="mb-5">
+                  <Eyebrow>Your next steps</Eyebrow>
+                  <h2 className="font-display text-3xl sm:text-4xl">
+                    A practical move for each area
+                  </h2>
+                </div>
+                <div className="grid gap-4">
+                  {result.dimensions.map((dimension, index) => (
+                    <article
+                      className="rounded-sm border border-border bg-surface p-5 sm:p-6"
+                      key={dimension.id}
+                    >
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-[0.13em] text-brand-gold">
+                            Area {String(index + 1).padStart(2, "0")}
+                          </p>
+                          <h3 className="mt-1 font-display text-xl sm:text-2xl">
+                            {dimension.dimension}
+                          </h3>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div
+                            aria-label={`${dimension.dimension} signal strength`}
+                            aria-valuemax={4}
+                            aria-valuemin={0}
+                            aria-valuenow={dimension.score}
+                            className="h-2 w-20 overflow-hidden rounded-full bg-surface-muted"
+                            role="meter"
+                          >
+                            <div
+                              className={`maturity-signal-fill h-full rounded-full transition-[width] duration-500 motion-reduce:transition-none ${signalColor(dimension.score)}`}
+                              style={{
+                                width: `${(dimension.score / 4) * 100}%`,
+                              }}
+                            />
+                          </div>
+                          <span className="text-xs font-bold">
+                            {dimension.score}/4
+                          </span>
+                        </div>
+                      </div>
+                      <p className="mt-4 text-sm leading-6 text-muted">
+                        <span className="font-semibold text-foreground">
+                          Your answer:{" "}
+                        </span>
+                        {dimension.answer}
+                      </p>
+                      <div className="mt-4 grid gap-4 border-t border-border pt-4 sm:grid-cols-2">
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-wider text-muted">
+                            What this suggests
+                          </p>
+                          <p className="mt-2 text-sm leading-6">
+                            {dimension.evidence}
+                          </p>
+                          <p className="mt-2 text-sm leading-6 text-muted">
+                            {dimension.exposure}
+                          </p>
+                        </div>
+                        <div className="rounded-sm bg-surface-muted p-4">
+                          <p className="text-xs font-bold uppercase tracking-wider text-muted">
+                            Suggested next step
+                          </p>
+                          <p className="mt-2 text-sm leading-6">
+                            {dimension.nextStep}
+                          </p>
+                          <Link
+                            className="mt-3 inline-flex text-sm font-bold text-brand-gold underline underline-offset-4"
+                            href={dimension.serviceHref}
+                          >
+                            Explore {dimension.serviceLabel}
+                          </Link>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
             </div>
 
-            <section>
-              <div className="mb-5">
-                <Eyebrow>Your next steps</Eyebrow>
-                <h2 className="font-display text-3xl sm:text-4xl">
-                  A practical move for each area
-                </h2>
-              </div>
-              <div className="grid gap-4">
-                {result.dimensions.map((dimension, index) => (
-                  <article
-                    className="rounded-sm border border-border bg-surface p-5 sm:p-6"
-                    key={dimension.id}
-                  >
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.13em] text-brand-gold">
-                          Area {String(index + 1).padStart(2, "0")}
-                        </p>
-                        <h3 className="mt-1 font-display text-xl sm:text-2xl">
-                          {dimension.dimension}
-                        </h3>
-                      </div>
-                      <span className="w-fit rounded-full border border-border px-3 py-1 text-xs font-semibold text-muted">
-                        {dimension.score}/4 signal
-                      </span>
-                    </div>
-                    <p className="mt-4 text-sm leading-6 text-muted">
-                      <span className="font-semibold text-foreground">
-                        Your answer:{" "}
-                      </span>
-                      {dimension.answer}
-                    </p>
-                    <div className="mt-4 grid gap-4 border-t border-border pt-4 sm:grid-cols-2">
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-muted">
-                          What this suggests
-                        </p>
-                        <p className="mt-2 text-sm leading-6">
-                          {dimension.evidence}
-                        </p>
-                        <p className="mt-2 text-sm leading-6 text-muted">
-                          {dimension.exposure}
-                        </p>
-                      </div>
-                      <div className="rounded-sm bg-surface-muted p-4">
-                        <p className="text-xs font-bold uppercase tracking-wider text-muted">
-                          Suggested next step
-                        </p>
-                        <p className="mt-2 text-sm leading-6">
-                          {dimension.nextStep}
-                        </p>
-                        <Link
-                          className="mt-3 inline-flex text-sm font-bold text-brand-gold underline underline-offset-4"
-                          href={dimension.serviceHref}
-                        >
-                          Explore {dimension.serviceLabel}
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section className="grid gap-6 rounded-sm border border-border bg-surface p-5 sm:p-8 lg:grid-cols-[0.8fr_1fr] lg:gap-10">
+            <section className="maturity-scan-feedback grid gap-6 rounded-sm border border-border bg-surface p-5 sm:p-8 lg:grid-cols-[0.8fr_1fr] lg:gap-10">
               <div>
                 <Eyebrow>Help us improve</Eyebrow>
                 <h2 className="font-display text-2xl sm:text-3xl">
                   How accurate is this snapshot?
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-muted">
-                  Your feedback helps us make the scan more useful for
-                  businesses like yours.
+                  We record your rating with this scan and send it to our team
+                  as a new Business modernization scan inquiry, along with your
+                  score and any comment.
                 </p>
               </div>
               {feedbackStatus === "sent" ? (
@@ -567,7 +708,7 @@ export function MaturityScan() {
                   className="self-center text-sm font-semibold text-status-success"
                   role="status"
                 >
-                  Thank you. Your feedback has been recorded.
+                  {feedbackMessage}
                 </p>
               ) : (
                 <form className="grid gap-4" onSubmit={submitFeedback}>
@@ -601,7 +742,7 @@ export function MaturityScan() {
                   </label>
                   {feedbackStatus === "error" ? (
                     <p className="text-sm text-status-error" role="alert">
-                      Feedback could not be saved. Please try again.
+                      {feedbackMessage}
                     </p>
                   ) : null}
                   <button
@@ -617,7 +758,7 @@ export function MaturityScan() {
               )}
             </section>
 
-            <div className="flex flex-col items-start gap-4 rounded-sm border border-brand-gold/30 bg-brand-gold/10 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="maturity-scan-actions flex flex-col items-start gap-4 rounded-sm border border-brand-gold/30 bg-brand-gold/10 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
               <div>
                 <p className="font-display text-2xl">
                   Want to turn a finding into a plan?
@@ -627,9 +768,18 @@ export function MaturityScan() {
                   next step for your business.
                 </p>
               </div>
-              <ButtonLink className="shrink-0" href="/contact">
-                Discuss your results
-              </ButtonLink>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  className="min-h-12 rounded-sm border border-border px-5 py-3 text-sm font-bold text-foreground transition-colors hover:bg-surface"
+                  onClick={printReport}
+                  type="button"
+                >
+                  Print or save as PDF
+                </button>
+                <ButtonLink className="shrink-0" href="/contact">
+                  Discuss your results
+                </ButtonLink>
+              </div>
             </div>
           </div>
         ) : null}
@@ -661,4 +811,11 @@ function ResultList({
       </ul>
     </section>
   );
+}
+
+function signalColor(score: number) {
+  if (score <= 1) return "bg-rose-500";
+  if (score === 2) return "bg-amber-500";
+  if (score === 3) return "bg-sky-500";
+  return "bg-emerald-500";
 }

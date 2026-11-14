@@ -121,3 +121,87 @@
     outline-offset: 3px;
   }
 }
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  body[data-print-report="true"] {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  body[data-print-report="true"] > :not(#main-content) {
+    display: none !important;
+  }
+
+  body[data-print-report="true"] #main-content {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-page {
+    display: block !important;
+    background: #fff !important;
+    padding: 0 !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-shell {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  body[data-print-report="true"]
+    .maturity-scan-shell
+    > :not(.maturity-scan-report-shell),
+  body[data-print-report="true"]
+    .maturity-scan-report-shell
+    > :not(.maturity-scan-report) {
+    display: none !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-report {
+    display: block !important;
+    color: #111 !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-report * {
+    border-color: #d1d5db !important;
+    box-shadow: none !important;
+    color: #111 !important;
+  }
+
+  body[data-print-report="true"]
+    .maturity-scan-report
+    [class*="bg-"]:not(.maturity-signal-fill) {
+    background-color: #fff !important;
+  }
+
+  body[data-print-report="true"] .maturity-signal-fill {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body[data-print-report="true"] .maturity-scan-score-card {
+    border: 1px solid #d1d5db;
+    background: #fff !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-score-track {
+    stroke: #d1d5db !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-score-progress {
+    stroke: #b89146 !important;
+  }
+
+  body[data-print-report="true"] .maturity-scan-report article,
+  body[data-print-report="true"] .maturity-scan-score-card,
+  body[data-print-report="true"] .maturity-scan-report h2,
+  body[data-print-report="true"] .maturity-scan-report h3 {
+    break-inside: avoid-page;
+    break-after: avoid-page;
+  }
+}

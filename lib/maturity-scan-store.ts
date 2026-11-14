@@ -16,6 +16,7 @@ export type MaturityScanRecord = {
     rating: "accurate" | "partly-accurate" | "not-accurate";
     comment: string;
     submittedAt: string;
+    contactStatus: "pending" | "sent";
   };
 };
 
