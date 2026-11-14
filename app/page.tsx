@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
+import { AgenticAiSection } from "@/components/agentic-ai-section";
 import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
@@ -329,6 +330,8 @@ export default function HomePage() {
           </div>
         </Shell>
       </Section>
+
+      <AgenticAiSection />
 
       <Section tone="muted">
         <Shell className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] lg:gap-16">
