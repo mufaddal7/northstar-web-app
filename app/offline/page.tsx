@@ -1,15 +1,15 @@
-import Link from "next/link";
+import { ButtonLink, Eyebrow, Shell } from "@/components/ui";
 export default function OfflinePage() {
   return (
-    <section className="not-found">
-      <div className="shell">
-        <p className="eyebrow">Offline</p>
-        <h1>You&apos;re not connected right now.</h1>
-        <p>Please check your connection and try again.</p>
-        <Link className="button button--gold" href="/">
+    <section className="min-h-[65vh] py-20 sm:py-32">
+      <Shell width="narrow">
+        <Eyebrow>Offline</Eyebrow>
+        <h1 className="font-display text-4xl sm:text-6xl">You&apos;re not connected right now.</h1>
+        <p className="mt-5 leading-7 text-muted">Please check your connection and try again.</p>
+        <ButtonLink className="mt-7" href="/">
           Try again
-        </Link>
-      </div>
+        </ButtonLink>
+      </Shell>
     </section>
   );
 }

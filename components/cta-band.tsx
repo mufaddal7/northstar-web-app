@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
+import { ButtonLink, Eyebrow, Shell } from "@/components/ui";
 import { BOOKING_URL } from "@/lib/site-data";
 
 export function CtaBand({
@@ -10,27 +10,22 @@ export function CtaBand({
   copy?: string;
 }) {
   return (
-    <section className="cta-band">
-      <div className="shell cta-band__inner">
+    <section className="bg-brand-navy py-16 text-white sm:py-20 lg:py-24">
+      <Shell className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end lg:gap-20">
         <div>
-          <p className="eyebrow">Start a conversation</p>
-          <h2>{title}</h2>
-          <p>{copy}</p>
+          <Eyebrow inverse>Start a conversation</Eyebrow>
+          <h2 className="max-w-3xl font-display text-4xl leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">{title}</h2>
+          <p className="mt-5 max-w-2xl leading-7 text-white/70">{copy}</p>
         </div>
-        <div className="cta-band__actions">
-          <Link className="button button--gold" href="/contact">
+        <div className="flex flex-col items-start gap-3">
+          <ButtonLink href="/contact">
             Start a conversation <ArrowUpRight />
-          </Link>
-          <a
-            className="button button--outline-on-dark"
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          </ButtonLink>
+          <ButtonLink href={BOOKING_URL} secondary external>
             Book a 30-minute conversation <ArrowUpRight />
-          </a>
+          </ButtonLink>
         </div>
-      </div>
+      </Shell>
     </section>
   );
 }

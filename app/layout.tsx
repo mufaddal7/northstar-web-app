@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -47,8 +48,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`try { const saved = localStorage.getItem("northstar-theme"); const theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); document.documentElement.dataset.theme = theme; } catch {}`}
+        </Script>
+      </head>
       <body>
-        <a className="skip-link" href="#main-content">
+        <a className="sr-only fixed left-4 top-[-100px] z-[100] bg-brand-gold px-4 py-3 text-brand-navy focus:top-4 focus:not-sr-only" href="#main-content">
           Skip to content
         </a>
         <SiteHeader />

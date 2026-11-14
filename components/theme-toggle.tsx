@@ -17,11 +17,15 @@ export function ThemeToggle() {
   function toggle() {
     const nextDark = !dark;
     setOverride(nextDark);
-    window.localStorage.setItem("northstar-theme", nextDark ? "dark" : "light");
+    try {
+      window.localStorage.setItem("northstar-theme", nextDark ? "dark" : "light");
+    } catch {
+      document.documentElement.dataset.theme = nextDark ? "dark" : "light";
+    }
   }
   return (
     <button
-      className="theme-toggle"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-surface-muted"
       type="button"
       onClick={toggle}
       aria-label={`Switch to ${dark ? "light" : "dark"} theme`}
@@ -32,10 +36,14 @@ export function ThemeToggle() {
 }
 
 function readTheme() {
-  const stored = window.localStorage.getItem("northstar-theme");
-  return stored
-    ? stored === "dark"
-    : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  try {
+    const stored = window.localStorage.getItem("northstar-theme");
+    return stored
+      ? stored === "dark"
+      : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  } catch {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
 }
 
 function subscribeToTheme(callback: () => void) {

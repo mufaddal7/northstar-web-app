@@ -1,62 +1,58 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
+import { PageHero, Section, Shell, Eyebrow } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Case studies",
   description:
     "An enterprise development modernization example, from business challenge to approach and outcome measures.",
 };
+
 export default function CaseStudiesPage() {
   return (
     <>
-      <section className="page-hero page-hero--ink">
-        <div className="shell">
-          <p className="eyebrow">Case studies</p>
-          <h1>
-            Transformation
-            <br />
-            <em>in practice.</em>
-          </h1>
-          <p>
-            See how a complex platform challenge can be framed around the
-            business need, the work and the outcomes that matter.
-          </p>
-        </div>
-      </section>
-      <section className="section">
-        <div className="shell case-placeholder case-placeholder--large">
-          <p className="eyebrow">Enterprise development</p>
-          <h2>Modernizing enterprise development at scale</h2>
-          <p>
+      <PageHero
+        dark
+        eyebrow="Case studies"
+        title={<>Transformation <span className="text-brand-gold-light">in practice.</span></>}
+        description="See how a complex platform challenge can be framed around the business need, the work and the outcomes that matter."
+      />
+      <Section>
+        <Shell width="medium">
+          <Eyebrow>Enterprise development</Eyebrow>
+          <h2 className="max-w-4xl font-display text-3xl leading-tight sm:text-5xl">
+            Modernizing enterprise development at scale
+          </h2>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-muted">
             A large enterprise needed to modernize its developer platform and
             migrate thousands of repositories to a new enterprise development
             environment.
           </p>
-          <div className="case-detail-grid">
-            <div>
-              <h3>The transformation</h3>
-              <p>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <article className="rounded-sm bg-surface-muted p-6 sm:p-8">
+              <h3 className="font-display text-2xl">The transformation</h3>
+              <p className="mt-3 leading-7 text-muted">
                 The work brings platform engineering and developer experience
                 together with GitHub Enterprise, CI/CD modernization and
                 automation.
               </p>
-            </div>
-            <div>
-              <h3>How success is measured</h3>
-              <p>
+            </article>
+            <article className="rounded-sm bg-surface-muted p-6 sm:p-8">
+              <h3 className="font-display text-2xl">How success is measured</h3>
+              <p className="mt-3 leading-7 text-muted">
                 Relevant measures include repository migration coverage and
                 velocity, manual effort, developer experience and operational
                 efficiency.
               </p>
-            </div>
+            </article>
           </div>
-          <p className="case-note">
+          <p className="mt-6 text-sm leading-6 text-muted">
             Client identity and quantified results are not included in the
             approved material, so no client details or performance claims are
             presented here.
           </p>
-        </div>
-      </section>
+        </Shell>
+      </Section>
       <CtaBand title="Have a transformation challenge of your own?" />
     </>
   );

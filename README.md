@@ -352,3 +352,14 @@ start the production server:
 ```bash
 yarn start
 ```
+
+## Styling and theme
+
+The app uses Tailwind CSS v4. Shared layout primitives are in
+`components/ui.tsx`; page-specific responsive styling is written with Tailwind
+utilities in each route. `app/globals.css` is intentionally limited to the
+Tailwind entry point, design tokens and browser-level defaults.
+
+The Northstar palette and font tokens are defined in `app/globals.css`. Light
+and dark surface tokens respond to the system preference and can be overridden
+with the theme control in the header; the preference is stored in the browser.

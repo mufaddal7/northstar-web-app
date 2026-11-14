@@ -30,7 +30,7 @@ export function CompassMark({ className = "" }: { className?: string }) {
 
 export function ThemeIcon({ dark }: { dark: boolean }) {
   return dark ? (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
       <path
         fill="currentColor"
         d="M12 3a9 9 0 1 0 9 9c0-.55-.05-1.08-.14-1.6A7.2 7.2 0 0 1 13.6 3.14 8.2 8.2 0 0 0 12 3Z"
@@ -38,6 +38,7 @@ export function ThemeIcon({ dark }: { dark: boolean }) {
     </svg>
   ) : (
     <svg
+      className="h-5 w-5"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

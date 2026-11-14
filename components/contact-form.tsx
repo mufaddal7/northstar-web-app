@@ -37,12 +37,12 @@ export function ContactForm() {
     }
   }
   return (
-    <form className="contact-form" onSubmit={submit}>
-      <div className="field field--honeypot" aria-hidden="true">
+    <form className="space-y-5" onSubmit={submit}>
+      <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
-      <div className="form-grid">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" name="name" autoComplete="name" required />
         <Field
           label="Work email"
@@ -58,9 +58,9 @@ export function ContactForm() {
           required
         />
       </div>
-      <div className="field">
-        <label htmlFor="interest">What are you looking for?</label>
-        <select id="interest" name="interest" required defaultValue="">
+      <div className="grid gap-2">
+        <label className="text-sm font-semibold" htmlFor="interest">What are you looking for?</label>
+        <select className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20" id="interest" name="interest" required defaultValue="">
           <option value="" disabled>
             Select an option
           </option>
@@ -72,9 +72,10 @@ export function ContactForm() {
           <option>Something else</option>
         </select>
       </div>
-      <div className="field">
-        <label htmlFor="challenge">Tell us about your challenge</label>
+      <div className="grid gap-2">
+        <label className="text-sm font-semibold" htmlFor="challenge">Tell us about your challenge</label>
         <textarea
+          className="w-full rounded-sm border border-border bg-surface px-3 py-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
           id="challenge"
           name="challenge"
           rows={6}
@@ -83,14 +84,14 @@ export function ContactForm() {
         />
       </div>
       <button
-        className="button button--gold"
+        className="inline-flex min-h-12 items-center justify-center rounded-sm bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-gold-light disabled:cursor-wait disabled:opacity-70"
         type="submit"
         disabled={status === "loading"}
       >
         {status === "loading" ? "Sending…" : "Start the conversation"}
       </button>
       {message ? (
-        <p className={`form-message form-message--${status}`} role="status">
+        <p className={`text-sm ${status === "error" ? "text-status-error" : "text-status-success"}`} role="status">
           {message}
         </p>
       ) : null}
@@ -112,9 +113,10 @@ function Field({
   required?: boolean;
 }) {
   return (
-    <div className="field">
-      <label htmlFor={name}>{label}</label>
+    <div className="grid gap-2">
+      <label className="text-sm font-semibold" htmlFor={name}>{label}</label>
       <input
+        className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
         id={name}
         name={name}
         type={type}

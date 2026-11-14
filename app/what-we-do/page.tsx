@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ModelDiagram } from "@/components/model-diagram";
-import { SectionHeading } from "@/components/section-heading";
+import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
 import { pillars } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -15,61 +15,48 @@ export const metadata: Metadata = {
 export default function WhatWeDoPage() {
   return (
     <>
-      <section className="page-hero page-hero--ink">
-        <div className="shell">
-          <p className="eyebrow">What we do</p>
-          <h1>
-            Transform the business.
-            <br />
-            <em>Build what comes next.</em>
-          </h1>
-          <p>
-            From modernizing the systems that run your business to building the
-            digital products that differentiate it, Northstar brings strategy,
-            technology and execution together.
-          </p>
-        </div>
-      </section>
-      <section className="section section--paper">
-        <div className="shell">
+      <PageHero
+        dark
+        eyebrow="What we do"
+        title={<>Transform the business. <span className="text-brand-gold-light">Build what comes next.</span></>}
+        description="From modernizing the systems that run your business to building digital products that differentiate it, Northstar brings strategy, technology and execution together."
+      />
+      <Section tone="muted">
+        <Shell>
           <ModelDiagram compact />
-        </div>
-      </section>
-      <section className="section">
-        <div className="shell">
-          <SectionHeading
-            eyebrow="The three capabilities"
-            title="A connected transformation model."
-          />
-          <div className="pillar-detail-list">
+        </Shell>
+      </Section>
+      <Section>
+        <Shell>
+          <SectionHeading eyebrow="The three capabilities" title="A connected transformation model." />
+          <div className="mt-8 divide-y divide-border border-y border-border">
             {pillars.map((pillar) => (
-              <article key={pillar.slug}>
+              <article key={pillar.slug} className="grid gap-5 py-7 md:grid-cols-[0.7fr_1.3fr_1fr_auto] md:items-start md:gap-8">
                 <div>
-                  <span>{pillar.number}</span>
-                  <p>{pillar.name}</p>
+                  <span className="text-xs font-bold tracking-widest text-brand-gold">{pillar.number}</span>
+                  <p className="mt-2 font-display text-2xl">{pillar.name}</p>
                 </div>
                 <div>
-                  <h2>{pillar.title}</h2>
-                  <p>{pillar.description}</p>
+                  <h2 className="font-display text-2xl">{pillar.title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-muted">{pillar.description}</p>
                 </div>
-                <ul>
+                <ul className="space-y-2 text-sm text-muted">
                   {pillar.services.map((service) => (
                     <li key={service.slug}>
-                      <Link href={`/what-we-do/${pillar.slug}/${service.slug}`}>
-                        {service.title}
-                        <ArrowUpRight />
+                      <Link className="inline-flex items-center gap-1 hover:text-brand-gold" href={`/what-we-do/${pillar.slug}/${service.slug}`}>
+                        {service.title}<ArrowUpRight className="h-4 w-4" />
                       </Link>
                     </li>
                   ))}
                 </ul>
-                <Link className="text-link" href={`/what-we-do/${pillar.slug}`}>
-                  Explore {pillar.name} <ArrowUpRight />
+                <Link className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline" href={`/what-we-do/${pillar.slug}`}>
+                  Explore <ArrowUpRight />
                 </Link>
               </article>
             ))}
           </div>
-        </div>
-      </section>
+        </Shell>
+      </Section>
       <CtaBand />
     </>
   );

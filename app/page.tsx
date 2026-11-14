@@ -2,253 +2,140 @@ import Link from "next/link";
 import { ArrowUpRight, CompassMark } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ModelDiagram } from "@/components/model-diagram";
-import { SectionHeading } from "@/components/section-heading";
-import {
-  challenges,
-  industries,
-  insights,
-  pillars,
-  processSteps,
-} from "@/lib/site-data";
+import { ButtonLink, Eyebrow, Section, SectionHeading, Shell } from "@/components/ui";
+import { challenges, industries, insights, pillars, processSteps } from "@/lib/site-data";
 
 export default function HomePage() {
   return (
     <>
-      <section className="hero">
-        <div className="shell hero__grid">
-          <div className="hero__content">
-            <p className="eyebrow">Technology transformation partner</p>
-            <h1>
+      <section className="relative isolate overflow-hidden bg-brand-navy py-20 text-white sm:py-28 lg:py-32">
+        <div className="absolute -right-36 top-8 -z-10 h-[34rem] w-[34rem] rounded-full border border-white/10 sm:right-[-5rem]">
+          <div className="absolute inset-12 rounded-full border border-brand-gold/30" />
+          <div className="absolute inset-28 rounded-full border border-brand-gold/40" />
+          <CompassMark className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 text-brand-gold" />
+        </div>
+        <Shell>
+          <div className="max-w-3xl">
+            <Eyebrow inverse>Technology transformation partner</Eyebrow>
+            <h1 className="font-display text-5xl leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
               Transform what matters.
-              <br />
-              <em>Build what&apos;s next.</em>
+              <span className="mt-2 block text-brand-gold-light">Build what&apos;s next.</span>
             </h1>
-            <p>
-              Northstar helps businesses modernize operations, unlock
-              intelligence from their data, and build digital solutions that
-              create lasting business value.
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">
+              Northstar helps businesses modernize operations, unlock intelligence from their data, and build digital solutions that create lasting business value.
             </p>
-            <div className="hero__actions">
-              <Link className="button button--gold" href="/contact">
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <ButtonLink href="/contact">
                 Start a conversation <ArrowUpRight />
-              </Link>
-              <Link className="text-link" href="/what-we-do">
+              </ButtonLink>
+              <ButtonLink href="/what-we-do" secondary>
                 Explore our capabilities <ArrowUpRight />
-              </Link>
+              </ButtonLink>
             </div>
           </div>
-          <div className="hero__orbital" aria-hidden="true">
-            <div className="hero__gridlines" />
-            <div className="hero__circle hero__circle--outer" />
-            <div className="hero__circle hero__circle--middle" />
-            <div className="hero__circle hero__circle--inner" />
-            <CompassMark className="hero__mark" />
-            <span className="hero__point hero__point--one" />
-            <span className="hero__point hero__point--two" />
-            <span className="hero__point hero__point--three" />
-            <p>
-              Direction
-              <br />
-              meets execution
-            </p>
+          <div className="mt-16 hidden items-center gap-5 text-xs font-semibold uppercase tracking-[0.16em] text-white/55 sm:flex">
+            <span>Business challenge</span><i className="h-px w-10 bg-brand-gold" /><span>Strategy + engineering</span><i className="h-px w-10 bg-brand-gold" /><span>Measurable outcome</span>
           </div>
-        </div>
-        <div className="hero__strap">
-          <span>Business challenge</span>
-          <i />
-          <span>Strategy + engineering</span>
-          <i />
-          <span>Measurable outcome</span>
-        </div>
+        </Shell>
       </section>
-      <section className="section section--paper">
-        <div className="shell model-section">
-          <SectionHeading
-            eyebrow="The Northstar model"
-            title="Three capabilities. One transformation journey."
-            copy="A connected model that moves from the systems you rely on, to the intelligence you need, to what you are ready to build."
-          />
-          <ModelDiagram />
-        </div>
-      </section>
-      <section className="section">
-        <div className="shell">
-          <SectionHeading
-            eyebrow="Business challenges"
-            title="What are you trying to achieve?"
-            copy="Start with the business problem. We’ll help define the right transformation path."
-          />
-          <div className="challenge-list">
+
+      <Section tone="muted">
+        <Shell>
+          <SectionHeading eyebrow="The Northstar model" title="Three capabilities. One transformation journey." copy="Move from the systems you rely on, to the intelligence you need, to what you are ready to build." />
+          <div className="mt-10"><ModelDiagram /></div>
+        </Shell>
+      </Section>
+
+      <Section>
+        <Shell>
+          <SectionHeading eyebrow="Business challenges" title="What are you trying to achieve?" copy="Start with the business problem. We’ll help define the right transformation path." />
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {challenges.map(([title, copy, pillar], index) => (
-              <Link
-                href={`/what-we-do/${pillar}`}
-                className="challenge"
-                key={title}
-              >
-                <span>0{index + 1}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
-                <ArrowUpRight />
+              <Link key={title} href={`/what-we-do/${pillar}`} className="group rounded-sm border border-border p-6 transition-colors hover:border-brand-gold hover:bg-surface-muted sm:p-7">
+                <span className="text-xs font-bold tracking-widest text-brand-gold">0{index + 1}</span>
+                <h3 className="mt-7 font-display text-2xl leading-tight">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{copy}</p>
+                <ArrowUpRight className="mt-5 h-5 w-5 text-brand-gold transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-      <section className="section section--ink">
-        <div className="shell">
-          <SectionHeading
-            inverse
-            eyebrow="Capabilities"
-            title="Modernize. Intelligence. Build."
-            copy="Business capabilities that bring strategy, technology and execution together."
-          />
-          <div className="capability-grid">
+        </Shell>
+      </Section>
+
+      <Section tone="navy">
+        <Shell>
+          <SectionHeading inverse eyebrow="Capabilities" title="Modernize. Intelligence. Build." copy="Business capabilities that bring strategy, technology and execution together." />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
             {pillars.map((pillar) => (
-              <Link
-                className="capability"
-                href={`/what-we-do/${pillar.slug}`}
-                key={pillar.slug}
-              >
-                <span>{pillar.number}</span>
-                <h3>{pillar.name}</h3>
-                <p>{pillar.title}</p>
-                <ul>
-                  {pillar.services.map((service) => (
-                    <li key={service.slug}>{service.title}</li>
-                  ))}
+              <Link key={pillar.slug} href={`/what-we-do/${pillar.slug}`} className="group rounded-sm border border-white/15 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-brand-gold/70 hover:bg-white/[0.07] sm:p-8">
+                <span className="text-xs font-bold tracking-widest text-brand-gold-light">{pillar.number}</span>
+                <h3 className="mt-8 font-display text-3xl">{pillar.name}</h3>
+                <p className="mt-1 text-sm text-white/65">{pillar.title}</p>
+                <ul className="mt-7 space-y-3 border-t border-white/15 pt-5 text-sm text-white/75">
+                  {pillar.services.map((service) => <li key={service.slug}>{service.title}</li>)}
                 </ul>
-                <b>
-                  Explore {pillar.name} <ArrowUpRight />
-                </b>
+                <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-brand-gold-light">Explore {pillar.name}<ArrowUpRight /></span>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="shell process-layout">
-          <SectionHeading
-            eyebrow="How we work"
-            title="From business challenge to measurable outcome."
-            copy="Strategy without execution doesn’t transform a business. Northstar brings strategy and engineering together to move from ideas to working capabilities."
-          />
-          <ol className="process-list">
+        </Shell>
+      </Section>
+
+      <Section>
+        <Shell>
+          <SectionHeading eyebrow="How we work" title="From business challenge to measurable outcome." copy="Strategy without execution doesn’t transform a business. We bring strategy and engineering together to move from ideas to working capabilities." />
+          <ol className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {processSteps.map(([number, title, copy]) => (
-              <li key={number}>
-                <span>{number}</span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
+              <li key={number} className="border-t border-border py-5">
+                <span className="text-xs font-bold tracking-widest text-brand-gold">{number}</span>
+                <h3 className="mt-4 font-display text-2xl">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{copy}</p>
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-      <section className="section section--paper">
-        <div className="shell two-column-statement">
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
-            <p className="eyebrow">Transformation in practice</p>
-            <h2>Complex work needs a clear story.</h2>
+            <Eyebrow>Transformation in practice</Eyebrow>
+            <h2 className="max-w-xl font-display text-4xl leading-tight tracking-[-0.035em] sm:text-5xl">Complex work needs a clear story.</h2>
           </div>
           <div>
-            <p>
-              Explore an enterprise development modernization example, from the
-              platform challenge to the capabilities involved and the measures
-              used to assess progress.
-            </p>
-            <Link className="text-link" href="/case-studies">
-              View case study <ArrowUpRight />
-            </Link>
+            <p className="leading-7 text-muted">Explore an enterprise development modernization example, from the platform challenge to the capabilities involved and the measures used to assess progress.</p>
+            <Link className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline" href="/case-studies">View case study <ArrowUpRight /></Link>
           </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="shell">
-          <SectionHeading
-            eyebrow="Why Northstar"
-            title="Technology with business purpose."
-          />
-          <div className="principles">
-            <article>
-              <span>01</span>
-              <h3>Business-first technology</h3>
-              <p>We start with the business problem, not the technology.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Strategy + engineering</h3>
-              <p>We turn strategy into working systems and capabilities.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Modernization without disruption</h3>
-              <p>
-                We help evolve critical operations while keeping the business
-                moving.
-              </p>
-            </article>
-            <article>
-              <span>04</span>
-              <h3>Practical AI</h3>
-              <p>
-                We focus on AI and automation where it can create meaningful
-                business value.
-              </p>
-            </article>
-            <article>
-              <span>05</span>
-              <h3>Outcome-oriented delivery</h3>
-              <p>
-                We focus on the difference the work makes, not simply completing
-                an implementation.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section className="section section--slate">
-        <div className="shell">
-          <SectionHeading
-            inverse
-            eyebrow="Industries"
-            title="Technology built around your business."
-            copy="Different industries have different customers, processes, regulations and operational realities."
-          />
-          <div className="industry-grid">
+        </Shell>
+      </Section>
+
+      <Section>
+        <Shell>
+          <SectionHeading eyebrow="Industries" title="Technology built around your business." copy="Different industries have different customers, processes, regulations and operational realities." />
+          <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {industries.map(([name, copy], index) => (
-              <article key={name}>
-                <span>0{index + 1}</span>
-                <h3>{name}</h3>
-                <p>{copy}</p>
+              <article key={name} className="rounded-sm border border-border p-5 sm:p-6">
+                <span className="text-xs font-bold tracking-widest text-brand-gold">0{index + 1}</span>
+                <h3 className="mt-6 font-display text-2xl">{name}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{copy}</p>
               </article>
             ))}
           </div>
-          <Link className="text-link text-link--light" href="/industries">
-            Explore industries <ArrowUpRight />
-          </Link>
-        </div>
-      </section>
-      <section className="section">
-        <div className="shell insights-preview">
-          <SectionHeading
-            eyebrow="Northstar insights"
-            title="Perspectives with practical value."
-            copy="Explore practical guidance on modernization, data, AI and digital engineering—from platform decisions to automation opportunities."
-          />
-          <div className="insight-tags">
+          <Link className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline" href="/industries">Explore industries <ArrowUpRight /></Link>
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell className="grid gap-8 md:grid-cols-2 md:items-center">
+          <SectionHeading eyebrow="Northstar insights" title="Perspectives with practical value." copy="Explore practical guidance on modernization, data, AI and digital engineering—from platform decisions to automation opportunities." />
+          <div className="divide-y divide-border border-y border-border">
             {insights.map((insight, index) => (
-              <span key={insight}>
-                <b>0{index + 1}</b>
-                {insight}
-              </span>
+              <p key={insight} className="flex items-center gap-4 py-4 font-display text-xl"><b className="text-xs font-bold text-brand-gold">0{index + 1}</b>{insight}</p>
             ))}
           </div>
-          <Link className="text-link" href="/insights">
-            Explore insights <ArrowUpRight />
-          </Link>
-        </div>
-      </section>
+          <Link className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline md:col-start-2" href="/insights">Explore insights <ArrowUpRight /></Link>
+        </Shell>
+      </Section>
       <CtaBand />
     </>
   );

@@ -1,3 +1,5 @@
+import { SectionHeading as Heading } from "@/components/ui";
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -10,12 +12,6 @@ export function SectionHeading({
   inverse?: boolean;
 }) {
   return (
-    <div
-      className={`section-heading ${inverse ? "section-heading--inverse" : ""}`}
-    >
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {copy ? <p>{copy}</p> : null}
-    </div>
+    <Heading eyebrow={eyebrow} title={title} copy={copy} inverse={inverse} />
   );
 }
