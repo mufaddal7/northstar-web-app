@@ -197,6 +197,52 @@ export const industries = [
 
 export const insights = ["Modernization", "AI & Automation", "Data & Intelligence", "Digital Engineering", "Technology Strategy"] as const;
 
+export const insightTopics = [
+  ["Modernization", "Make core systems easier to change by addressing process fit, integration and adoption alongside the technology."],
+  ["AI & Automation", "Focus on repeatable work and clear decisions, with appropriate human oversight and measurable business value."],
+  ["Data & Intelligence", "Connect trusted data to the decisions people need to make, rather than adding reports without a purpose."],
+  ["Digital Engineering", "Build and evolve digital products in focused increments, balancing user needs with a scalable foundation."],
+  ["Technology Strategy", "Turn business priorities into practical technology choices, investment decisions and a sequenced roadmap."]
+] as const;
+
+export const insightArticles = [
+  {
+    category: "Modernization",
+    title: "5 Signs Your ERP Has Become a Business Constraint",
+    summary: "Watch for workarounds that have become routine, slow or unreliable reporting, duplicated data, and process changes that require disproportionate effort. These signals point to a fit and workflow review—not automatically a full replacement."
+  },
+  {
+    category: "Modernization",
+    title: "What Actually Happens During a Legacy Platform Modernization",
+    summary: "Modernization starts with understanding dependencies, operational risk and user needs. Teams can then prioritize the changes, choose an incremental path, and validate each release while keeping essential services running."
+  },
+  {
+    category: "AI & Automation",
+    title: "Where AI Automation Can Create Measurable Enterprise Value",
+    summary: "Look for repeatable work with clear inputs, predictable decisions and a meaningful cost to delay. Establish a baseline, define where people stay in control, and measure quality and cycle time as well as effort saved."
+  },
+  {
+    category: "Data & Intelligence",
+    title: "From Dashboards to Decision Intelligence",
+    summary: "A useful dashboard begins with a decision, its owner and the signal that should prompt action. Agree on definitions and data quality first, then present only the measures that help teams respond."
+  },
+  {
+    category: "Modernization",
+    title: "The Hidden Cost of Fragmented Business Systems",
+    summary: "Disconnected systems create costs beyond licensing: reconciliation, repeated data entry, delayed decisions and fragile handoffs. Map how information moves across a process before deciding whether integration, workflow redesign or platform change is needed."
+  },
+  {
+    category: "Digital Engineering",
+    title: "Building Digital Capabilities Without Rebuilding Everything",
+    summary: "A new digital experience does not always require replacing every underlying system. Identify the capabilities that differentiate the business, connect to existing systems where practical, and modernize foundations in stages."
+  },
+  {
+    category: "Technology Strategy",
+    title: "Turning a Technology Strategy Into a Practical Roadmap",
+    summary: "A useful roadmap connects business priorities to specific decisions, dependencies and investment choices. Sequence the work around value and delivery constraints, then revisit the plan as assumptions and business needs change."
+  }
+] as const;
+
 export function getPillar(slug: string) {
   return pillars.find((pillar) => pillar.slug === slug);
 }

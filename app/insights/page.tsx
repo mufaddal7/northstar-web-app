@@ -1,6 +1,40 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
-import { insights } from "@/lib/site-data";
+import { insightArticles, insightTopics } from "@/lib/site-data";
 
 export const metadata: Metadata = { title: "Insights", description: "Northstar perspectives on modernization, data, AI, digital engineering and technology strategy." };
-export default function InsightsPage() { return <><section className="page-hero"><div className="shell"><p className="eyebrow">Northstar insights</p><h1>Perspectives with<br/><em>practical value.</em></h1><p>Ideas and questions that help leaders make sense of modernization, data, AI and digital engineering.</p></div></section><section className="section section--paper"><div className="shell"><div className="category-grid">{insights.map((category, index) => <article key={category}><span>0{index + 1}</span><h2>{category}</h2><p>Future articles in this category will focus on real business questions, not generic technology commentary.</p></article>)}</div></div></section><section className="section"><div className="shell case-placeholder"><p className="eyebrow">Editorial programme</p><h2>New insights are being prepared.</h2><p>We will publish only when there is something useful to say. In the meantime, start a conversation about the challenge that matters to you.</p></div></section><CtaBand/></> }
+export default function InsightsPage() {
+  return <>
+    <section className="page-hero">
+      <div className="shell">
+        <p className="eyebrow">Northstar insights</p>
+        <h1>Perspectives with<br/><em>practical value.</em></h1>
+        <p>Practical guidance to help leaders make better decisions about modernization, data, AI and digital engineering.</p>
+      </div>
+    </section>
+    <section className="section section--paper">
+      <div className="shell">
+        <div className="category-grid">
+          {insightTopics.map(([category, description], index) => <article key={category}>
+            <span>0{index + 1}</span>
+            <h2>{category}</h2>
+            <p>{description}</p>
+          </article>)}
+        </div>
+      </div>
+    </section>
+    <section className="section">
+      <div className="shell">
+        <p className="eyebrow">Ideas to put to work</p>
+        <div className="insight-article-grid">
+          {insightArticles.map(({ category, title, summary }, index) => <article key={title}>
+            <span>0{index + 1} · {category}</span>
+            <h2>{title}</h2>
+            <p>{summary}</p>
+          </article>)}
+        </div>
+      </div>
+    </section>
+    <CtaBand/>
+  </>;
+}
