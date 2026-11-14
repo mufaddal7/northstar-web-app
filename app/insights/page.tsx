@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
 import { Card, PageHero, Section, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 import { insightArticles, insightTopics } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "Insights",
-  description:
-    "Northstar perspectives on modernization, data, AI, digital engineering and technology strategy.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Insights",
+  "Northstar perspectives on modernization, data, AI, digital engineering and technology strategy.",
+  "/insights",
+);
 
 export default function InsightsPage() {
   return (

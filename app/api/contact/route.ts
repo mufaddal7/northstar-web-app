@@ -5,6 +5,8 @@ const fields = ["name", "email", "company", "interest", "challenge"] as const;
 
 const allowedInterests = [
   "Modernize existing systems",
+  "ERPNext implementation",
+  "ERP & Business Systems",
   "Data & Analytics",
   "AI & Automation",
   "Build a digital product",

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { PageHero, Section, SectionHeading, Shell } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 import { getPillar, pillars } from "@/lib/site-data";
 
 type Props = { params: Promise<{ pillar: string }> };
@@ -15,7 +16,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar: slug } = await params;
   const pillar = getPillar(slug);
-  return pillar ? { title: pillar.name, description: pillar.description } : {};
+  return pillar
+    ? pageMetadata(pillar.name, pillar.description, `/what-we-do/${pillar.slug}`)
+    : {};
 }
 
 export default async function PillarPage({ params }: Props) {

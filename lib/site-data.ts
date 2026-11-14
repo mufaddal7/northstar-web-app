@@ -41,14 +41,14 @@ export const pillars: Pillar[] = [
         slug: "erp-business-systems",
         title: "ERP & Business Systems",
         description:
-          "Implement and modernize core business systems to streamline operations and enable growth.",
+          "Plan and implement ERPNext and other core business systems around your processes to connect operations and support growth.",
         challenge:
           "Core systems can become fragmented, rigid and difficult to change as a business grows.",
         whatWeDo: [
-          "Assess existing processes and system fit",
+          "Assess process fit for ERPNext and core business systems",
           "Define a practical modernization path",
           "Design operating workflows around the business",
-          "Implement and improve core business systems",
+          "Configure, integrate and improve core business systems",
         ],
         outcomes: [
           "Reduced operational complexity",
@@ -57,8 +57,8 @@ export const pillars: Pillar[] = [
           "A foundation that can scale",
         ],
         technologies: [
-          "Business systems",
-          "Integration architecture",
+          "ERPNext",
+          "Business system integrations",
           "Workflow design",
         ],
       },

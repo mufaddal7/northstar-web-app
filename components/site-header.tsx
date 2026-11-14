@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { Brand } from "@/components/brand";
+import { ContactDialog } from "@/components/contact-dialog";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
-  ["What we do", "/what-we-do"],
+  ["ERPNext", "/erpnext-implementation"],
+  ["Services", "/what-we-do"],
   ["How we work", "/how-we-work"],
-  ["Industries", "/industries"],
-  ["Insights", "/insights"],
   ["About", "/about"],
 ] as const;
 
@@ -61,9 +61,10 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Link className="hidden min-h-10 items-center rounded-sm bg-brand-gold px-4 text-xs font-bold text-brand-navy transition-colors hover:bg-brand-gold-light sm:inline-flex" href="/contact">
-            Start a conversation
-          </Link>
+          <ContactDialog
+            className="hidden min-h-10 px-4 py-2 text-xs sm:inline-flex"
+            label="Plan a project"
+          />
           <button
             className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-sm border border-border text-foreground md:hidden"
             type="button"

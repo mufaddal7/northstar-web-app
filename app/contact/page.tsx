@@ -3,13 +3,14 @@ import { ArrowUpRight } from "@/components/icons";
 import { ContactForm } from "@/components/contact-form";
 import { CtaBand } from "@/components/cta-band";
 import { PageHero, Section, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 import { BOOKING_URL, WHATSAPP_URL } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Tell Northstar what you are trying to achieve and start a conversation about where technology can make the greatest difference.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Contact",
+  "Tell Northstar what you are trying to achieve and start a conversation about where technology can make the greatest difference.",
+  "/contact",
+);
 
 const contactLinks = [
   ["Email", "hello@northstar53.com", "mailto:hello@northstar53.com"],

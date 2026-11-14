@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
 import { Card, PageHero, Section, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 import { industries } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "Industries",
-  description:
-    "Northstar applies modern technology with an understanding of the business context in which it operates.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Industries",
+  "Northstar applies modern technology with an understanding of the business context in which it operates.",
+  "/industries",
+);
 
 export default function IndustriesPage() {
   return (

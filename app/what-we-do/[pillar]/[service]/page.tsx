@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 import { allServices, getService, processSteps } from "@/lib/site-data";
 
 type Props = { params: Promise<{ pillar: string; service: string }> };
@@ -18,7 +19,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pillar, service } = await params;
   const item = getService(pillar, service);
-  return item ? { title: item.title, description: item.description } : {};
+  return item
+    ? pageMetadata(
+        item.title,
+        item.description,
+        `/what-we-do/${item.pillar.slug}/${item.slug}`,
+      )
+    : {};
 }
 
 export default async function ServicePage({ params }: Props) {
@@ -93,6 +100,14 @@ export default async function ServicePage({ params }: Props) {
               <span key={technology} className="rounded-full border border-border px-4 py-2 text-sm">{technology}</span>
             ))}
           </div>
+          {service.slug === "erp-business-systems" ? (
+            <Link
+              className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+              href="/erpnext-implementation"
+            >
+              Explore ERPNext implementation <ArrowUpRight />
+            </Link>
+          ) : null}
           <p className="mt-5 max-w-2xl text-sm leading-6 text-muted">Specific platforms are selected only when they create useful value for the business context.</p>
         </Shell>
       </Section>

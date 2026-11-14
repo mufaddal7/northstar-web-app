@@ -1,0 +1,57 @@
+.journey {
+  position: relative;
+}
+
+.connection {
+  position: absolute;
+  top: 1.25rem;
+  left: 9%;
+  width: 82%;
+  height: 1px;
+  overflow: visible;
+}
+
+.track {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.flow {
+  fill: none;
+  stroke: var(--gold);
+  stroke-dasharray: 12 18;
+  stroke-width: 3;
+  animation: journey-flow 2.4s linear infinite;
+}
+
+.node {
+  animation: journey-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes journey-flow {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+
+@keyframes journey-pulse {
+  50% {
+    box-shadow:
+      0 0 0 6px var(--surface),
+      0 0 0 10px rgb(197 160 89 / 28%);
+  }
+}
+
+@media (max-width: 767px) {
+  .connection {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow,
+  .node {
+    animation: none;
+  }
+}

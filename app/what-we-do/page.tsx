@@ -4,13 +4,14 @@ import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ModelDiagram } from "@/components/model-diagram";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 import { pillars } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "What we do",
-  description:
-    "Explore Northstar's connected capabilities across business modernization, data and intelligence, and digital solutions.",
-};
+export const metadata: Metadata = pageMetadata(
+  "What we do",
+  "Explore Northstar's connected capabilities across business modernization, data and intelligence, and digital solutions.",
+  "/what-we-do",
+);
 
 export default function WhatWeDoPage() {
   return (

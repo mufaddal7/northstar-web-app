@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
+import { ImplementationJourney } from "@/components/implementation-journey";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
-import { processSteps } from "@/lib/site-data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "How we work",
-  description:
-    "Northstar brings business-first thinking, practical strategy and strong engineering together from discovery through optimization.",
-};
+export const metadata: Metadata = pageMetadata(
+  "How we work",
+  "Northstar brings business-first thinking, practical strategy and strong engineering together from discovery through optimization.",
+  "/how-we-work",
+);
 
 export default function HowWeWorkPage() {
   return (
@@ -17,22 +18,16 @@ export default function HowWeWorkPage() {
         title={<>From strategy <span className="text-brand-gold">to execution.</span></>}
         description="Transformation happens when strategy, technology and execution move together."
       />
-      <Section tone="navy">
+      <Section tone="muted">
         <Shell>
           <SectionHeading
-            inverse
             eyebrow="The approach"
-            title="A considered path from ambition to working capability."
+            title="A clear path from business challenge to working capability."
+            copy="See the decisions, handoffs and checkpoints that turn a complex initiative into manageable work."
           />
-          <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {processSteps.map(([number, title, copy]) => (
-              <li key={number} className="border-t border-white/20 py-5">
-                <span className="text-xs font-bold tracking-widest text-brand-gold-light">{number}</span>
-                <h2 className="mt-5 font-display text-2xl">{title}</h2>
-                <p className="mt-3 text-sm leading-6 text-white/70">{copy}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-12 rounded-sm bg-surface p-5 sm:p-8 lg:p-10">
+            <ImplementationJourney />
+          </div>
         </Shell>
       </Section>
       <Section>

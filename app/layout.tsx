@@ -14,21 +14,6 @@ export const metadata: Metadata = {
   },
   description:
     "Northstar helps businesses modernize operations, unlock intelligence from their data, and build digital solutions that create lasting business value.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    siteName: "Northstar",
-    title: "Northstar | Transform what matters. Build what’s next.",
-    description:
-      "Business transformation, technology strategy and engineering together.",
-    url: SITE_URL,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Northstar | Transform what matters. Build what’s next.",
-    description:
-      "Business transformation, technology strategy and engineering together.",
-  },
   icons: { icon: "/icon.svg", apple: "/apple-touch-icon.svg" },
   manifest: "/manifest.webmanifest",
 };

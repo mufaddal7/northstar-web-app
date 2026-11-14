@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Northstar helps organizations navigate the space between business ambition and technology execution.",
-};
+export const metadata: Metadata = pageMetadata(
+  "About",
+  "Northstar helps organizations navigate the space between business ambition and technology execution.",
+  "/about",
+);
 
 export default function AboutPage() {
   return (

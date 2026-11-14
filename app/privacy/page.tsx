@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Eyebrow, Shell } from "@/components/ui";
-export const metadata: Metadata = { title: "Privacy" };
+import { pageMetadata } from "@/lib/metadata";
+export const metadata: Metadata = pageMetadata(
+  "Privacy",
+  "How Northstar uses enquiry information and Google Analytics on this website.",
+  "/privacy",
+);
 export default function PrivacyPage() {
   return (
     <section className="py-16 sm:py-24">
@@ -8,15 +13,32 @@ export default function PrivacyPage() {
         <Eyebrow>Privacy</Eyebrow>
         <h1 className="font-display text-4xl sm:text-5xl">Privacy statement</h1>
         <p className="mt-5 leading-7 text-muted">
-          Northstar collects only the information needed to respond to an
-          enquiry submitted through this website. We do not sell personal
-          information or use it for unrelated marketing.
+          Northstar uses information submitted through this website to respond
+          to enquiries and uses Google Analytics to understand site usage. We do
+          not sell personal information or use enquiry details for unrelated
+          marketing.
         </p>
         <h2 className="mt-10 font-display text-2xl">Contact form information</h2>
         <p className="mt-3 leading-7 text-muted">
           When you contact us, we use the details you provide to respond to your
           request and discuss the relevant business need. Do not include
           sensitive information in the form.
+        </p>
+        <h2 className="mt-10 font-display text-2xl">Website analytics</h2>
+        <p className="mt-3 leading-7 text-muted">
+          This website uses Google Analytics 4 to measure visits and
+          interactions. Google may process information such as pages viewed,
+          browser and device details, referring pages and online identifiers
+          using cookies or similar technologies. For more information, see{" "}
+          <a
+            className="text-brand-gold underline"
+            href="https://policies.google.com/privacy"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Google&apos;s Privacy Policy
+          </a>
+          . You can manage cookies through your browser settings.
         </p>
         <h2 className="mt-10 font-display text-2xl">Contact</h2>
         <p className="mt-3 leading-7 text-muted">

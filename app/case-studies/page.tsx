@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/cta-band";
 import { PageHero, Section, Shell, Eyebrow } from "@/components/ui";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Case studies",
-  description:
-    "An enterprise development modernization example, from business challenge to approach and outcome measures.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Case studies",
+  "An enterprise development modernization example, from business challenge to approach and outcome measures.",
+  "/case-studies",
+);
 
 export default function CaseStudiesPage() {
   return (

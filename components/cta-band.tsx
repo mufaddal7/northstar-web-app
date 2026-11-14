@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "@/components/icons";
+import { ContactDialog } from "@/components/contact-dialog";
 import { ButtonLink, Eyebrow, Shell } from "@/components/ui";
 import { BOOKING_URL } from "@/lib/site-data";
 
@@ -18,9 +19,7 @@ export function CtaBand({
           <p className="mt-5 max-w-2xl leading-7 text-white/70">{copy}</p>
         </div>
         <div className="flex flex-col items-start gap-3">
-          <ButtonLink href="/contact">
-            Start a conversation <ArrowUpRight />
-          </ButtonLink>
+          <ContactDialog label="Tell us what you need" />
           <ButtonLink href={BOOKING_URL} secondary external>
             Book a 30-minute conversation <ArrowUpRight />
           </ButtonLink>

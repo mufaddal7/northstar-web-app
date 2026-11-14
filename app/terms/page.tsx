@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Eyebrow, Shell } from "@/components/ui";
-export const metadata: Metadata = { title: "Terms" };
+import { pageMetadata } from "@/lib/metadata";
+export const metadata: Metadata = pageMetadata(
+  "Terms",
+  "Terms for using the Northstar website and its content.",
+  "/terms",
+);
 export default function TermsPage() {
   return (
     <section className="py-16 sm:py-24">

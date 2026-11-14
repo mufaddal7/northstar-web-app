@@ -1,10 +1,17 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useId, useState } from "react";
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm() {
+  const formId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -33,6 +40,7 @@ export function ContactForm() {
       console.info("[contact-form] Contact API accepted the submission.", {
         requestId: body.requestId,
       });
+      window.gtag?.("event", "generate_lead", { method: "contact_form" });
       form.reset();
       setStatus("success");
       setMessage(
@@ -53,12 +61,24 @@ export function ContactForm() {
   return (
     <form className="space-y-5" onSubmit={submit}>
       <div className="absolute -left-[9999px]" aria-hidden="true">
-        <label htmlFor="website">Website</label>
-        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+        <label htmlFor={`${formId}-website`}>Website</label>
+        <input
+          id={`${formId}-website`}
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Name" name="name" autoComplete="name" required />
         <Field
+          id={`${formId}-name`}
+          label="Name"
+          name="name"
+          autoComplete="name"
+          required
+        />
+        <Field
+          id={`${formId}-email`}
           label="Work email"
           name="email"
           type="email"
@@ -66,6 +86,7 @@ export function ContactForm() {
           required
         />
         <Field
+          id={`${formId}-company`}
           label="Company"
           name="company"
           autoComplete="organization"
@@ -73,11 +94,13 @@ export function ContactForm() {
         />
       </div>
       <div className="grid gap-2">
-        <label className="text-sm font-semibold" htmlFor="interest">What are you looking for?</label>
-        <select className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20" id="interest" name="interest" required defaultValue="">
+        <label className="text-sm font-semibold" htmlFor={`${formId}-interest`}>What are you looking for?</label>
+        <select className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20" id={`${formId}-interest`} name="interest" required defaultValue="">
           <option value="" disabled>
             Select an option
           </option>
+          <option>ERPNext implementation</option>
+          <option>ERP & Business Systems</option>
           <option>Modernize existing systems</option>
           <option>Data & Analytics</option>
           <option>AI & Automation</option>
@@ -87,10 +110,10 @@ export function ContactForm() {
         </select>
       </div>
       <div className="grid gap-2">
-        <label className="text-sm font-semibold" htmlFor="challenge">Tell us about your challenge</label>
+        <label className="text-sm font-semibold" htmlFor={`${formId}-challenge`}>Tell us about your challenge</label>
         <textarea
           className="w-full rounded-sm border border-border bg-surface px-3 py-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
-          id="challenge"
+          id={`${formId}-challenge`}
           name="challenge"
           rows={6}
           maxLength={2000}
@@ -100,9 +123,13 @@ export function ContactForm() {
       <button
         className="inline-flex min-h-12 items-center justify-center rounded-sm bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-gold-light disabled:cursor-wait disabled:opacity-70"
         type="submit"
-        disabled={status === "loading"}
+        disabled={status === "loading" || status === "success"}
       >
-        {status === "loading" ? "Sending…" : "Start the conversation"}
+        {status === "loading"
+          ? "Sending…"
+          : status === "success"
+            ? "Message sent"
+            : "Start the conversation"}
       </button>
       {message ? (
         <p className={`text-sm ${status === "error" ? "text-status-error" : "text-status-success"}`} role="status">
@@ -114,12 +141,14 @@ export function ContactForm() {
 }
 
 function Field({
+  id,
   label,
   name,
   type = "text",
   autoComplete,
   required,
 }: {
+  id: string;
   label: string;
   name: string;
   type?: string;
@@ -128,10 +157,10 @@ function Field({
 }) {
   return (
     <div className="grid gap-2">
-      <label className="text-sm font-semibold" htmlFor={name}>{label}</label>
+      <label className="text-sm font-semibold" htmlFor={id}>{label}</label>
       <input
         className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
-        id={name}
+        id={id}
         name={name}
         type={type}
         autoComplete={autoComplete}
