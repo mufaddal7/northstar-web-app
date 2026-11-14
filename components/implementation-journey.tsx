@@ -17,7 +17,7 @@ const steps = [
     number: "03",
     title: "Configure",
     description:
-      "Shape ERPNext around your workflows, data and connected tools.",
+      "Shape the ERP system around your workflows, information and connected tools.",
   },
   {
     number: "04",

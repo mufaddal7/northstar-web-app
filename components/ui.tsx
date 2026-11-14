@@ -45,7 +45,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`py-16 sm:py-20 lg:py-24 ${sectionTones[tone]} ${className}`}>
+    <section id={id} className={`py-14 sm:py-16 lg:py-20 ${sectionTones[tone]} ${className}`}>
       {children}
     </section>
   );
@@ -79,7 +79,7 @@ export function PageHero({
   dark?: boolean;
 }) {
   return (
-    <section className={`relative overflow-hidden py-20 sm:py-24 lg:py-32 ${dark ? "bg-brand-navy text-white" : "bg-surface-muted text-foreground"}`}>
+    <section className={`relative overflow-hidden py-16 sm:py-20 lg:py-24 ${dark ? "bg-brand-navy text-white" : "bg-surface-muted text-foreground"}`}>
       <Shell className="relative z-10" width="medium">
         <Eyebrow inverse={dark}>{eyebrow}</Eyebrow>
         <h1 className="max-w-5xl font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-6xl lg:text-7xl">

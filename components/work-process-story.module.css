@@ -1,0 +1,130 @@
+.scene {
+  position: relative;
+  isolation: isolate;
+  min-height: 19rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.125rem;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(197 160 89 / 12%), transparent 58%),
+    var(--surface);
+}
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(197 160 89 / 30%);
+  border-radius: 9999px;
+}
+
+.orbitOuter {
+  width: 78%;
+}
+
+.orbitInner {
+  width: 57%;
+  border-color: var(--border);
+}
+
+.core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: min(52%, 14rem);
+  min-height: 7rem;
+  place-content: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(197 160 89 / 55%);
+  border-radius: 0.125rem;
+  background: var(--surface);
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1rem 3rem rgb(12 19 42 / 12%);
+}
+
+.tag {
+  position: absolute;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--surface);
+  padding: 0.45rem 0.75rem;
+  color: var(--foreground);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 0.5rem 1.5rem rgb(12 19 42 / 10%);
+}
+
+.people {
+  top: 16%;
+  left: 11%;
+}
+
+.process {
+  right: 9%;
+  bottom: 17%;
+}
+
+.platform {
+  top: 18%;
+  right: 10%;
+}
+
+.parallaxSlow,
+.parallaxFast {
+  animation: none;
+}
+
+@keyframes drift-slow {
+  from {
+    transform: translate(-50%, calc(-50% - 20px));
+  }
+  to {
+    transform: translate(-50%, calc(-50% + 20px));
+  }
+}
+
+@keyframes drift-fast {
+  from {
+    transform: translate(-50%, calc(-50% + 16px));
+  }
+  to {
+    transform: translate(-50%, calc(-50% - 16px));
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .parallaxSlow {
+    animation: drift-slow linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  .parallaxFast {
+    animation: drift-fast linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .scene {
+    min-height: 16rem;
+  }
+
+  .parallaxSlow,
+  .parallaxFast {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallaxSlow,
+  .parallaxFast {
+    animation: none;
+  }
+}

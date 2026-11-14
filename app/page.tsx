@@ -8,9 +8,9 @@ import { ButtonLink, Eyebrow, Section, SectionHeading, Shell } from "@/component
 import { pageMetadata } from "@/lib/metadata";
 import { WHATSAPP_URL } from "@/lib/site-data";
 
-const pageTitle = "ERPNext Implementation & Business Systems";
+const pageTitle = "ERP Implementation & Business Systems";
 const pageDescription =
-  "Northstar helps businesses implement ERPNext around the way they work, connect core operations and build the digital capabilities they need next.";
+  "Northstar helps businesses implement ERP systems around the way they work, connect core operations and build the digital capabilities they need next.";
 
 export const metadata: Metadata = pageMetadata(
   pageTitle,
@@ -44,11 +44,11 @@ const challenges = [
 
 const capabilities = [
   {
-    eyebrow: "ERPNext",
+    eyebrow: "ERP",
     title: "Bring core operations together.",
-    copy: "Plan an ERPNext implementation around your workflows, data, integrations and the people who will use it.",
-    href: "/erpnext-implementation",
-    link: "Explore ERPNext implementation",
+    copy: "Plan an ERP implementation around your workflows, information, integrations and the people who will use it.",
+    href: "/erp-implementation",
+    link: "Explore ERP implementation",
   },
   {
     eyebrow: "Data & AI",
@@ -68,14 +68,14 @@ const capabilities = [
 
 const faqs = [
   {
-    question: "Can Northstar help us decide if ERPNext is the right fit?",
+    question: "Can Northstar help us choose an ERP?",
     answer:
-      "Yes. Start with the processes, reporting needs, integrations and constraints your team has today. We can help assess fit and identify the questions to resolve before committing to a rollout.",
+      "Yes. Start with the processes, reporting needs, integrations and constraints your team has today. We can help assess what the business needs and identify the questions to resolve before choosing a platform.",
   },
   {
-    question: "Do you only work on ERPNext?",
+    question: "Do you only implement ERP systems?",
     answer:
-      "No. ERPNext is one way we help modernize operations. We also work across data and analytics, AI and automation, technology strategy and digital engineering.",
+      "No. We also work across CRM and customer operations, data and analytics, AI and automation, technology strategy and digital engineering.",
   },
   {
     question: "What should we prepare before an initial conversation?",
@@ -98,9 +98,9 @@ export default function HomePage() {
         </div>
         <Shell className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="max-w-3xl">
-            <Eyebrow inverse>ERPNext implementation · Business transformation</Eyebrow>
+            <Eyebrow inverse>ERP implementation · Business transformation</Eyebrow>
             <h1 className="font-display text-4xl leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
-              ERPNext that helps your business{" "}
+              ERP implementation that helps your business{" "}
               <span className="text-brand-gold-light">run as one.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:mt-7 sm:text-lg sm:leading-8">
@@ -110,7 +110,8 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ContactDialog
-                label="Plan an ERPNext conversation"
+                initialInterest="ERP implementation"
+                label="Plan an ERP conversation"
                 className="min-h-14 px-6"
               />
               <ButtonLink
@@ -152,7 +153,7 @@ export default function HomePage() {
                 </p>
               </div>
               <span className="rounded-full border border-brand-gold/40 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-gold-light">
-                ERPNext
+                ERP
               </span>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3">
@@ -276,6 +277,17 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          <div className="mt-7 flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted">
+              Not sure whether you need ERP or CRM?
+            </p>
+            <Link
+              className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+              href="/erp-vs-crm"
+            >
+              Compare ERP and CRM <ArrowUpRight />
+            </Link>
+          </div>
         </Shell>
       </Section>
 
@@ -357,7 +369,7 @@ export default function HomePage() {
 
       <CtaBand
         title="Don’t start with a software demo. Start with the work."
-        copy="Tell us where your current process is getting stuck. We’ll help you identify a practical next step—whether that is ERPNext or a different solution."
+        copy="Tell us where your current process is getting stuck. We’ll help you identify a practical next step—whether that is ERP or a different solution."
       />
     </>
   );

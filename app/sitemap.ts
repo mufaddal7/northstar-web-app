@@ -3,7 +3,9 @@ import { allServices, pillars, SITE_URL } from "@/lib/site-data";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "",
-    "/erpnext-implementation",
+    "/erp-implementation",
+    "/erp-implementation/erpnext",
+    "/erp-vs-crm",
     "/what-we-do",
     "/how-we-work",
     "/industries",
@@ -19,7 +21,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}${path}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
-      priority: path === "" ? 1 : path === "/erpnext-implementation" ? 0.9 : 0.7,
+      priority:
+        path === ""
+          ? 1
+          : path === "/erp-implementation"
+            ? 0.9
+            : path === "/erp-vs-crm"
+              ? 0.8
+              : 0.7,
     })),
     ...pillars.map(({ slug }) => ({
       url: `${SITE_URL}/what-we-do/${slug}`,

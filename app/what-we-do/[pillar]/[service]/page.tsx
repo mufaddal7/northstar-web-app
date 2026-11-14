@@ -103,7 +103,7 @@ export default async function ServicePage({ params }: Props) {
           {service.slug === "erp-business-systems" ? (
             <Link
               className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
-              href="/erpnext-implementation"
+              href="/erp-implementation/erpnext"
             >
               Explore ERPNext implementation <ArrowUpRight />
             </Link>

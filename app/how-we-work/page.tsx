@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
-import { ImplementationJourney } from "@/components/implementation-journey";
+import { WorkProcessStory } from "@/components/work-process-story";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -17,16 +18,21 @@ export default function HowWeWorkPage() {
         eyebrow="How we work"
         title={<>From strategy <span className="text-brand-gold">to execution.</span></>}
         description="Transformation happens when strategy, technology and execution move together."
-      />
-      <Section tone="muted">
+      >
+        <ContactDialog
+          initialInterest="ERP implementation"
+          label="Talk through your project"
+        />
+      </PageHero>
+      <Section tone="muted" className="py-12 sm:py-14 lg:py-16">
         <Shell>
           <SectionHeading
             eyebrow="The approach"
             title="A clear path from business challenge to working capability."
-            copy="See the decisions, handoffs and checkpoints that turn a complex initiative into manageable work."
+            copy="Follow each stage while keeping the outcome, people and operating process in view."
           />
-          <div className="mt-12 rounded-sm bg-surface p-5 sm:p-8 lg:p-10">
-            <ImplementationJourney />
+          <div className="mt-8">
+            <WorkProcessStory />
           </div>
         </Shell>
       </Section>

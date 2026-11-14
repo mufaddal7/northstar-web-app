@@ -7,7 +7,7 @@ import { ContactDialog } from "@/components/contact-dialog";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
-  ["ERPNext", "/erpnext-implementation"],
+  ["ERP", "/erp-implementation"],
   ["Services", "/what-we-do"],
   ["How we work", "/how-we-work"],
   ["About", "/about"],

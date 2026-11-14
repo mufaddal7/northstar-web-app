@@ -10,7 +10,11 @@ declare global {
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export function ContactForm() {
+export function ContactForm({
+  initialInterest = "",
+}: {
+  initialInterest?: string;
+}) {
   const formId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -95,10 +99,12 @@ export function ContactForm() {
       </div>
       <div className="grid gap-2">
         <label className="text-sm font-semibold" htmlFor={`${formId}-interest`}>What are you looking for?</label>
-        <select className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20" id={`${formId}-interest`} name="interest" required defaultValue="">
+        <select className="min-h-12 w-full rounded-sm border border-border bg-surface px-3 text-foreground outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20" id={`${formId}-interest`} name="interest" required defaultValue={initialInterest}>
           <option value="" disabled>
             Select an option
           </option>
+          <option>ERP implementation</option>
+          <option>CRM implementation</option>
           <option>ERPNext implementation</option>
           <option>ERP & Business Systems</option>
           <option>Modernize existing systems</option>

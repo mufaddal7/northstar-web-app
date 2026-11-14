@@ -15,7 +15,7 @@ const pageDescription =
 export const metadata: Metadata = pageMetadata(
   pageTitle,
   pageDescription,
-  "/erpnext-implementation",
+  "/erp-implementation/erpnext",
 );
 
 const serviceSchema = {
@@ -29,7 +29,7 @@ const serviceSchema = {
     name: "Northstar",
     url: SITE_URL,
   },
-  url: `${SITE_URL}/erpnext-implementation`,
+  url: `${SITE_URL}/erp-implementation/erpnext`,
 };
 
 const businessAreas = [
@@ -110,7 +110,10 @@ export default function ErpNextImplementationPage() {
         description="Connect the processes behind finance, sales, inventory and delivery in one practical system. Start with the way your business works—not a one-size-fits-all template."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ContactDialog label="Plan your ERPNext project" />
+          <ContactDialog
+            initialInterest="ERPNext implementation"
+            label="Plan your ERPNext project"
+          />
           <Link
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-white/35 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10"
             href="#implementation-process"

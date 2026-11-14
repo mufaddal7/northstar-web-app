@@ -4,6 +4,8 @@ import { randomUUID } from "node:crypto";
 const fields = ["name", "email", "company", "interest", "challenge"] as const;
 
 const allowedInterests = [
+  "ERP implementation",
+  "CRM implementation",
   "Modernize existing systems",
   "ERPNext implementation",
   "ERP & Business Systems",

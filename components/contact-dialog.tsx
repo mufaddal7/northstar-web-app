@@ -6,9 +6,13 @@ import { ContactForm } from "@/components/contact-form";
 export function ContactDialog({
   label = "Start an inquiry",
   className = "",
+  initialInterest = "",
+  secondary = false,
 }: {
   label?: string;
   className?: string;
+  initialInterest?: string;
+  secondary?: boolean;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
@@ -24,7 +28,7 @@ export function ContactDialog({
   return (
     <>
       <button
-        className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-gold-light focus-visible:outline-offset-4 ${className}`}
+        className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-bold transition-colors focus-visible:outline-offset-4 ${secondary ? "border border-current text-current hover:bg-white/10" : "bg-brand-gold text-brand-navy hover:bg-brand-gold-light"} ${className}`}
         aria-controls={dialogId}
         aria-haspopup="dialog"
         type="button"
@@ -65,7 +69,7 @@ export function ContactDialog({
             Share a little context. We’ll get back to you to discuss the right
             next step—no obligation.
           </p>
-          <ContactForm key={formKey} />
+          <ContactForm initialInterest={initialInterest} key={formKey} />
         </div>
       </dialog>
     </>
