@@ -60,6 +60,30 @@
   color-scheme: light;
 }
 
+.brand-logo-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .brand-logo-light,
+.brand-logo-inverse .brand-logo-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .brand-logo-dark,
+.brand-logo-inverse .brand-logo-dark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .brand-logo-light {
+    display: none;
+  }
+
+  :root:not([data-theme]) .brand-logo-dark {
+    display: block;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

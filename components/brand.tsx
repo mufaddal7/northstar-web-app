@@ -1,16 +1,29 @@
 import Link from "next/link";
-import { CompassMark } from "@/components/icons";
+import Image from "next/image";
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
   return (
     <Link
-      className={`inline-flex shrink-0 items-center gap-1 font-display text-xl font-bold tracking-[0.08em] sm:text-2xl ${inverse ? "text-white" : "text-foreground"}`}
+      className={`inline-flex shrink-0 items-center ${inverse ? "brand-logo-inverse" : ""}`}
       href="/"
       aria-label="Northstar home"
     >
-      <span>NORTHST</span>
-      <CompassMark className="h-6 w-6 text-brand-gold sm:h-7 sm:w-7" />
-      <span>R</span>
+      <Image
+        alt=""
+        aria-hidden="true"
+        className="brand-logo-light h-8 w-auto sm:h-9"
+        height={75}
+        src="/Light%20Theme%20Logo.svg"
+        width={435}
+      />
+      <Image
+        alt=""
+        aria-hidden="true"
+        className="brand-logo-dark h-8 w-auto sm:h-9"
+        height={75}
+        src="/Dark%20theme%20logo.svg"
+        width={438}
+      />
     </Link>
   );
 }

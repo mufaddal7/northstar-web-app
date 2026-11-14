@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, CompassMark } from "@/components/icons";
+import { ArrowUpRight } from "@/components/icons";
 import { pillars } from "@/lib/site-data";
 
 export function ModelDiagram({ compact = false }: { compact?: boolean }) {
