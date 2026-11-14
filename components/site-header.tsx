@@ -33,6 +33,10 @@ const menuGroups: MenuGroup[] = [
     overview: { label: "Explore all services", href: "/what-we-do" },
     featured: [
       {
+        label: "Business maturity scan",
+        href: "/maturity-scan",
+      },
+      {
         label: "ERPNext implementation",
         href: "/erp-implementation/erpnext",
       },
@@ -68,6 +72,7 @@ const menuGroups: MenuGroup[] = [
 
 const mobileLinks = [
   { label: "ERP", href: "/erp-implementation" },
+  { label: "Business maturity scan", href: "/maturity-scan" },
   { label: "How we work", href: "/how-we-work" },
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },

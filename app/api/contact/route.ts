@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
+import { forwardContactSubmission } from "@/lib/contact-submission";
 
 const fields = ["name", "email", "company", "interest", "challenge"] as const;
 
@@ -13,6 +14,7 @@ const allowedInterests = [
   "AI & Automation",
   "Build a digital product",
   "Technology Strategy",
+  "Business modernization scan",
   "Something else",
 ];
 
@@ -89,65 +91,14 @@ export async function POST(request: Request) {
       );
     }
 
-    // Read secrets exclusively on the server.
-    const scriptUrl = process.env.GOOGLE_SCRIPT_URL;
-    const apiSecret = process.env.GOOGLE_SCRIPT_SECRET;
-
-    if (!scriptUrl || !apiSecret) {
-      console.error(`[contact:${requestId}] Google Sheets integration is not configured.`);
-
+    const submission = await forwardContactSubmission(values, requestId);
+    if (!submission.success) {
       return NextResponse.json(
         { message: "Unable to submit your inquiry right now.", requestId },
-        { status: 500 },
+        { status: submission.status },
       );
     }
 
-    // Forward the validated data to Google Apps Script.
-    const googleResponse = await fetch(scriptUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        secret: apiSecret,
-        name: values.name,
-        workEmail: values.email,
-        company: values.company,
-        interest: values.interest,
-        challenge: values.challenge,
-      }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(15000),
-    });
-
-    const responseText = await googleResponse.text();
-    let result: { success?: unknown; error?: unknown } | null = null;
-
-    try {
-      const parsed: unknown = JSON.parse(responseText);
-      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-        result = parsed as { success?: unknown; error?: unknown };
-      }
-    } catch {
-      // The response body is logged below as a parse failure, without logging contact data.
-    }
-
-    if (!googleResponse.ok || result?.success !== true) {
-      const upstreamError =
-        typeof result?.error === "string" ? result.error : "Invalid Apps Script response.";
-      console.error(
-        `[contact:${requestId}] Apps Script rejected submission (HTTP ${googleResponse.status}): ${upstreamError}`,
-      );
-
-      return NextResponse.json(
-        { message: "Unable to submit your inquiry right now.", requestId },
-        { status: 502 },
-      );
-    }
-
-    console.info(
-      `[contact:${requestId}] Apps Script confirmed the contact submission (HTTP ${googleResponse.status}).`,
-    );
     return NextResponse.json(
       { message: "Thanks. Your message has been received.", requestId },
       { status: 200 },

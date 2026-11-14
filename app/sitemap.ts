@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/erp-vs-crm",
     "/what-we-do",
     "/how-we-work",
+    "/maturity-scan",
     "/industries",
     "/case-studies",
     "/insights",

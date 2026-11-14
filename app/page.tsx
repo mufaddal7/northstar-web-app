@@ -242,6 +242,26 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          <div className="mt-6 flex flex-col gap-4 rounded-sm border border-brand-gold/35 bg-surface-muted p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-gold">
+                Not sure where to start?
+              </p>
+              <p className="mt-2 font-display text-2xl">
+                Take our six-question modernization scan.
+              </p>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                Get a score, a clear view of your strengths and priorities, and
+                practical next steps shaped around your answers.
+              </p>
+            </div>
+            <Link
+              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-sm bg-brand-gold px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-gold-light"
+              href="/maturity-scan"
+            >
+              Run the scan <ArrowUpRight />
+            </Link>
+          </div>
         </Shell>
       </Section>
 
