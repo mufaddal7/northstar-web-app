@@ -7,6 +7,7 @@ type InsightContent = {
   infographics?: {
     loop?: { heading: string; description: string };
     adoption?: { heading: string; description: string };
+    sapPortfolio?: { heading: string; description: string };
   };
   sections: {
     heading: string;
@@ -25,6 +26,8 @@ type InsightContent = {
     copy: string;
     contactLabel: string;
   };
+  faqs?: { question: string; answer: string }[];
+  sources?: { label: string; href: string }[];
   related: InsightSlug[];
 };
 
@@ -485,6 +488,153 @@ export const insightContent: Record<InsightSlug, InsightContent> = {
     related: [
       "digital-capabilities-without-rebuild",
       "dashboards-to-decision-intelligence",
+    ],
+  },
+  "sap-erp-options-explained": {
+    opening:
+      "Choosing SAP ERP can feel like comparing unrelated products under one familiar name. SAP Business One, SAP Business ByDesign and SAP S/4HANA serve different operating needs, and S/4HANA itself has multiple deployment options. Company size is a useful clue, but process complexity, existing systems, controls, integration needs and appetite for standardization are usually better decision guides.",
+    infographics: {
+      sapPortfolio: {
+        heading: "Start with the business model and deployment choice",
+        description:
+          "This map is a first filter, not a strict size chart. Confirm the exact product, edition, commercial availability and support commitments for your region and requirements.",
+      },
+    },
+    sections: [
+      {
+        heading: "Separate the ERP product from the way it is delivered",
+        paragraphs: [
+          "A common source of confusion is mixing product names with deployment choices and commercial programs. SAP Business One and Business ByDesign are distinct ERP products. SAP S/4HANA is another product family, with public cloud, private cloud and on-premise deployment paths. The operating model and level of standardization can differ substantially between those paths.",
+          "GROW with SAP and RISE with SAP are adoption and commercial programs associated with SAP Cloud ERP journeys. They are not separate ERP products in the same sense as Business One or S/4HANA. Ask which underlying ERP edition is included, what services and infrastructure are covered, and which responsibilities remain with your organization or delivery partner.",
+        ],
+        points: [
+          "Product: which ERP capabilities and business processes are in scope?",
+          "Deployment: who hosts, operates and updates the system?",
+          "Commercial program: what services, tools and contractual commitments are included?",
+        ],
+      },
+      {
+        heading: "SAP Business One: core ERP for smaller operations",
+        paragraphs: [
+          "Business One is designed for small and midsize businesses that need a connected foundation for areas such as finance, purchasing, inventory, sales and reporting. It can suit a company moving beyond entry-level accounting tools or a subsidiary that needs core operating processes in one system.",
+          "Deployment options include on-premise and cloud-hosted arrangements. Do not assume every cloud offer is the same kind of SaaS: clarify who operates the hosting, how upgrades are managed, what is included in support, and how partner extensions affect the system. If the business has complex global controls, a large application landscape or demanding industry requirements, test those needs directly rather than assuming the product will stretch to fit.",
+        ],
+      },
+      {
+        heading: "SAP Business ByDesign: a broad cloud suite with a roadmap check",
+        paragraphs: [
+          "Business ByDesign is a cloud ERP built around a broad set of connected processes for midsize organizations and subsidiaries. Its integrated-suite approach may be relevant when a business wants finance, procurement, projects and operational workflows in a cloud service without managing its own ERP infrastructure.",
+          "Before choosing it for a new deployment, confirm current commercial availability in your market, the release and support commitments, localization coverage, partner capacity and the product roadmap directly with SAP. Public information about its role in the current portfolio is not always consistent. Existing customers should make roadmap decisions from their actual support agreement, business fit and cost of change, not from a blanket assumption that they must migrate immediately.",
+          "For a new cloud-first evaluation, compare the proposed ByDesign scope with SAP S/4HANA Cloud Public Edition. Validate both against the same end-to-end workflows and include the future transition path in the decision.",
+        ],
+      },
+      {
+        heading: "SAP S/4HANA: choose the deployment model as well",
+        paragraphs: [
+          "SAP S/4HANA is intended for broader and more complex enterprise requirements, but the name alone does not tell you how much flexibility, infrastructure ownership or change responsibility you are accepting. The edition and deployment route matter.",
+        ],
+        points: [
+          "Public cloud: a standardized SaaS route for organizations willing to use SAP’s supported processes and release model. Ask how requirements that differ from standard will be handled.",
+          "Private cloud: a managed cloud route that can support a different transition and extension profile. Define the degree of customization, upgrade responsibilities and infrastructure services in the contract.",
+          "On-premise: the organization or its provider operates the environment. Assess the business reason for that control alongside infrastructure, security, upgrade and support responsibilities.",
+        ],
+      },
+      {
+        heading: "If you run SAP ECC, treat migration as its own decision",
+        paragraphs: [
+          "SAP ECC and older SAP Business Suite systems are important parts of many existing landscapes, but they are not the same product as S/4HANA and should not be treated as an interchangeable new-buy option. Start with the exact release, custom code, integrations, data, support status and business processes you have today.",
+          "A move to S/4HANA can be a technical conversion, a process redesign or a more substantial transformation, depending on the starting point and target. Compare those paths with the cost and risk of staying on the current system, and confirm lifecycle dates and options against SAP’s current maintenance information for your release.",
+        ],
+      },
+      {
+        heading: "Compare the real work, not only feature lists",
+        paragraphs: [
+          "Build a shortlist around representative workflows. For example, test a financial close across entities, a purchase approval, order fulfilment, inventory planning or project-cost reporting. Ask each vendor or partner to show what works in the standard product, what needs configuration, and what depends on an extension or another application.",
+          "Then compare licensing and total cost over the same period. Include implementation services, data migration, integrations, testing, training, internal capacity, support and the effort to maintain custom work. Public price estimates are rarely comparable across editions, regions and project scopes, so ask for a quote tied to your requirements and document its assumptions.",
+        ],
+        points: [
+          "Countries, legal entities, currencies and regulatory controls",
+          "Standard process fit and the exceptions that matter",
+          "Data quality, reporting, integrations and retained systems",
+          "Implementation capacity, change impact and ongoing ownership",
+          "Three-to-five-year total cost and likely transition needs",
+        ],
+      },
+      {
+        heading: "How Northstar approaches an SAP decision",
+        paragraphs: [
+          "Northstar starts with the business process and the outcome to improve, not a presumption that every company needs the same ERP. We help teams map requirements, existing investments, data and integration dependencies, then compare the operational trade-offs of improving, extending or replacing the current system.",
+          "The result should be a decision your finance, operations and technology stakeholders can explain: why a product and deployment model fit, what assumptions still need validation, and how to move forward in manageable stages. SAP should be considered alongside other viable options when that is what the requirements call for.",
+        ],
+      },
+    ],
+    decisionPrompt:
+      "Which business process or constraint makes you consider changing ERP, and what evidence would show the new system fits?",
+    service: {
+      heading: "Choose ERP around the business you need to run",
+      copy:
+        "Northstar helps clarify process fit, integration and data needs, deployment trade-offs and the practical path from evaluation to implementation.",
+      label: "Explore ERP and business systems",
+      href: "/what-we-do/modernize/erp-business-systems",
+    },
+    cta: {
+      title: "Make the SAP shortlist fit your operating reality.",
+      copy:
+        "Bring the products you are comparing and the workflows you need to support. We can help turn a crowded product portfolio into a clearer decision.",
+      contactLabel: "Discuss your ERP options",
+    },
+    faqs: [
+      {
+        question: "What are the main SAP ERP options?",
+        answer:
+          "Common options include SAP Business One, SAP Business ByDesign, and SAP S/4HANA. S/4HANA can be deployed in public cloud, private cloud or on-premise environments. Existing SAP ECC customers should assess their current release and migration path separately.",
+      },
+      {
+        question: "What is the difference between SAP S/4HANA Public and Private Cloud?",
+        answer:
+          "They are different deployment and operating models within the S/4HANA portfolio. Public cloud is oriented around a standardized SaaS release model. Private cloud offers a different managed-cloud profile. Compare process flexibility, extensions, upgrades, infrastructure responsibilities and contract scope with SAP and your implementation partner.",
+      },
+      {
+        question: "Is SAP Business ByDesign still available for new customers?",
+        answer:
+          "Availability and commercial positioning can vary and public descriptions are not always consistent. Confirm new-customer availability, support commitments, localization, partner capacity and roadmap directly with SAP for your market before making it part of a shortlist.",
+      },
+      {
+        question: "Are GROW with SAP and RISE with SAP ERP products?",
+        answer:
+          "They are commercial and adoption programs associated with SAP cloud ERP journeys, not separate ERP products like Business One or S/4HANA. Confirm the underlying ERP edition, included services and contractual responsibilities in the current proposal.",
+      },
+      {
+        question: "How much does SAP ERP cost?",
+        answer:
+          "There is no useful single price across SAP ERP products and deployment models. Licensing, users, modules, region, partner services, migration, integrations and operating responsibilities all affect the total. Compare scoped proposals over the same time horizon.",
+      },
+    ],
+    sources: [
+      {
+        label: "SAP Business One product overview",
+        href: "https://www.sap.com/products/erp/business-one.html",
+      },
+      {
+        label: "SAP Business ByDesign documentation",
+        href: "https://help.sap.com/docs/SAP_BUSINESS_BYDESIGN",
+      },
+      {
+        label: "SAP S/4HANA overview",
+        href: "https://www.sap.com/products/erp/s4hana.html",
+      },
+      {
+        label: "ERP Research: SAP cloud ERP guide",
+        href: "https://erpresearch.com/en-us/blog/sap-cloud-erp-ultimate-guide",
+      },
+      {
+        label: "LeverX: comparing SAP S/4HANA, ByDesign and Business One",
+        href: "https://leverx.com/blog/sap-s4hana-vs-sap-business-bydesign-vs-sap-business-one",
+      },
+    ],
+    related: [
+      "erp-business-constraint",
+      "technology-strategy-practical-roadmap",
     ],
   },
 };

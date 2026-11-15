@@ -722,6 +722,13 @@ export const insightArticles = [
     summary:
       "A useful roadmap connects business priorities to specific decisions, dependencies and investment choices. Sequence the work around value and delivery constraints, then revisit the plan as assumptions and business needs change.",
   },
+  {
+    slug: "sap-erp-options-explained",
+    category: "ERP Selection",
+    title: "SAP ERP Systems Explained: Business One, ByDesign & S/4HANA",
+    summary:
+      "Understand SAP Business One, Business ByDesign and S/4HANA deployment options. Compare business fit, implementation factors and what to validate before choosing.",
+  },
 ] as const;
 
 export function getPillar(slug: string) {

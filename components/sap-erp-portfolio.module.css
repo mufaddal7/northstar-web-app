@@ -1,0 +1,161 @@
+.figure {
+  min-width: 0;
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface-muted);
+  padding: 1.25rem;
+}
+
+.caption {
+  max-width: 44rem;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heading {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.description {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.8rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-top: 2px solid rgb(197 160 89 / 70%);
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.number {
+  display: inline-flex;
+  width: 1.8rem;
+  height: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(197 160 89 / 55%);
+  border-radius: 50%;
+  background: rgb(197 160 89 / 12%);
+  color: var(--foreground);
+  font-size: 0.63rem;
+  font-weight: 700;
+  animation: portfolio-pulse 4s ease-in-out infinite;
+}
+
+.card:nth-child(2) .number {
+  animation-delay: 0.5s;
+}
+
+.card:nth-child(3) .number {
+  animation-delay: 1s;
+}
+
+.card:nth-child(4) .number {
+  animation-delay: 1.5s;
+}
+
+.card:nth-child(5) .number {
+  animation-delay: 2s;
+}
+
+.segment {
+  margin-top: 0.85rem;
+  color: var(--gold);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.details {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+}
+
+.details dt {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.details dd {
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.note {
+  margin-top: 1rem;
+  border-left: 2px solid var(--gold);
+  padding-left: 0.8rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+@keyframes portfolio-pulse {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0 0 0 4px rgb(197 160 89 / 13%);
+  }
+}
+
+@media (min-width: 640px) {
+  .figure {
+    padding: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .number {
+    animation: none;
+  }
+}

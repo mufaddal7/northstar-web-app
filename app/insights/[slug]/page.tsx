@@ -6,6 +6,7 @@ import {
   ErpAiAdoptionRoadmap,
   ErpAiLoop,
 } from "@/components/erp-ai-infographics";
+import { SapErpPortfolio } from "@/components/sap-erp-portfolio";
 import { ContactDialog } from "@/components/contact-dialog";
 import {
   Eyebrow,
@@ -72,7 +73,6 @@ export default async function InsightArticlePage({ params }: Props) {
     )
     .filter((item) => item !== undefined);
   const articleSchema = {
-    "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
     description: article.summary,
@@ -87,12 +87,26 @@ export default async function InsightArticlePage({ params }: Props) {
     image: `${SITE_URL}/insights/${article.slug}/opengraph-image`,
     mainEntityOfPage: `${SITE_URL}/insights/${article.slug}`,
   };
+  const faqSchema = content.faqs?.length
+    ? {
+        "@type": "FAQPage",
+        mainEntity: content.faqs.map(({ question, answer }) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+      }
+    : null;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": faqSchema ? [articleSchema, faqSchema] : [articleSchema],
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <PageHero
         dark
@@ -114,6 +128,12 @@ export default async function InsightArticlePage({ params }: Props) {
             <p className="text-lg leading-8 text-foreground sm:text-xl sm:leading-9">
               {content.opening}
             </p>
+            {content.infographics?.sapPortfolio ? (
+              <SapErpPortfolio
+                description={content.infographics.sapPortfolio.description}
+                heading={content.infographics.sapPortfolio.heading}
+              />
+            ) : null}
             {content.infographics?.loop ? (
               <ErpAiLoop
                 description={content.infographics.loop.description}
@@ -156,6 +176,57 @@ export default async function InsightArticlePage({ params }: Props) {
                 description={content.infographics.adoption.description}
                 heading={content.infographics.adoption.heading}
               />
+            ) : null}
+            {content.faqs?.length ? (
+              <section className="mt-10 border-t border-border pt-8">
+                <Eyebrow>Common questions</Eyebrow>
+                <h2 className="font-display text-2xl leading-tight sm:text-3xl">
+                  Frequently asked questions
+                </h2>
+                <div className="mt-5 divide-y divide-border border-y border-border">
+                  {content.faqs.map(({ question, answer }) => (
+                    <details className="group py-4" key={question}>
+                      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-semibold marker:hidden">
+                        <span>{question}</span>
+                        <span
+                          aria-hidden="true"
+                          className="shrink-0 text-brand-gold transition-transform group-open:rotate-45"
+                        >
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-3 pr-7 text-sm leading-7 text-muted">
+                        {answer}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+            {content.sources?.length ? (
+              <section className="mt-10 border-t border-border pt-6">
+                <Eyebrow>Sources and further reading</Eyebrow>
+                <ul className="mt-4 space-y-3">
+                  {content.sources.map((source) => (
+                    <li key={source.href}>
+                      <a
+                        className="inline-flex items-start gap-2 text-sm font-semibold text-brand-gold hover:underline"
+                        href={source.href}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <span>{source.label}</span>
+                        <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-xs leading-5 text-muted">
+                  Product names, availability and support roadmaps can change.
+                  Confirm current details with SAP and your implementation
+                  partner.
+                </p>
+              </section>
             ) : null}
           </article>
 
