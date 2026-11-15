@@ -222,7 +222,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <ContactDialog
             className="hidden min-h-10 px-4 py-2 text-xs xl:inline-flex"
-            label="Plan a project"
+            label="Let's talk"
           />
           <button
             aria-controls={mobilePanelId}
