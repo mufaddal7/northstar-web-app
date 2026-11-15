@@ -40,6 +40,7 @@ const menuGroups: MenuGroup[] = [
         label: "ERPNext implementation",
         href: "/erp-implementation/erpnext",
       },
+      { label: "ERP comparisons", href: "/compare" },
       { label: "ERP vs CRM", href: "/erp-vs-crm" },
     ],
     columns: pillars.map((pillar) => ({
@@ -72,6 +73,7 @@ const menuGroups: MenuGroup[] = [
 
 const mobileLinks = [
   { label: "ERP", href: "/erp-implementation" },
+  { label: "ERP comparisons", href: "/compare" },
   { label: "Business maturity scan", href: "/maturity-scan" },
   { label: "How we work", href: "/how-we-work" },
   { label: "Industries", href: "/industries" },

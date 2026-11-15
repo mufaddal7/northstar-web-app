@@ -15,6 +15,7 @@ export function SiteFooter() {
           <div className="flex flex-col items-start gap-3 text-sm">
             <p className="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-brand-gold-light">What we do</p>
             <Link href="/erp-implementation">ERP implementation</Link>
+            <Link href="/compare">ERP comparisons</Link>
             <Link href="/erp-vs-crm">ERP vs CRM</Link>
             <Link href="/what-we-do/modernize">Modernize</Link>
             <Link href="/what-we-do/intelligence">Intelligence</Link>
