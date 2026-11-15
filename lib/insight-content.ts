@@ -623,14 +623,6 @@ export const insightContent: Record<InsightSlug, InsightContent> = {
         label: "SAP S/4HANA overview",
         href: "https://www.sap.com/products/erp/s4hana.html",
       },
-      {
-        label: "ERP Research: SAP cloud ERP guide",
-        href: "https://erpresearch.com/en-us/blog/sap-cloud-erp-ultimate-guide",
-      },
-      {
-        label: "LeverX: comparing SAP S/4HANA, ByDesign and Business One",
-        href: "https://leverx.com/blog/sap-s4hana-vs-sap-business-bydesign-vs-sap-business-one",
-      },
     ],
     related: [
       "erp-business-constraint",

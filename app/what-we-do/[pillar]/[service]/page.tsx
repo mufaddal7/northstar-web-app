@@ -118,14 +118,6 @@ export default async function ServicePage({ params }: Props) {
               <span key={technology} className="rounded-full border border-border px-4 py-2 text-sm">{technology}</span>
             ))}
           </div>
-          {service.slug === "erp-business-systems" ? (
-            <Link
-              className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
-              href="/erp-implementation/erpnext"
-            >
-              Explore ERPNext implementation <ArrowUpRight />
-            </Link>
-          ) : null}
           <p className="mt-5 max-w-2xl text-sm leading-6 text-muted">Specific platforms are selected only when they create useful value for the business context.</p>
         </Shell>
       </Section>
