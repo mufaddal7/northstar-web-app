@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/erp-implementation",
     "/erp-implementation/erpnext",
     "/erp-vs-crm",
+    "/what-is-erp",
     "/compare",
     "/compare/netsuite-vs-oracle-fusion-erp",
     "/what-we-do",

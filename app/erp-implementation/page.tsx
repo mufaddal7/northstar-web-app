@@ -286,6 +286,12 @@ export default function ErpImplementationPage() {
               customer-facing relationships and activity. Many businesses
               benefit from both.
             </p>
+            <Link
+              className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+              href="/what-is-erp"
+            >
+              New to ERP? Read the plain-language guide <ArrowUpRight />
+            </Link>
           </div>
           <Link
             className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
