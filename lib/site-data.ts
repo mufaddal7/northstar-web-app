@@ -1,4 +1,4 @@
-export const SITE_URL = "https://northstar53.com";
+export const SITE_URL = "https://www.northstar53.com";
 export const BOOKING_URL = "https://calendar.app.google/C9jPgpEBdUk36dfw7";
 export const WHATSAPP_URL =
   "https://wa.me/916268535490?text=Hello%20Northstar%2C%20I%27d%20like%20to%20discuss%20a%20potential%20business%20transformation%20initiative.";
