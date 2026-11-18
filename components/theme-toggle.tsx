@@ -37,24 +37,16 @@ export function ThemeToggle() {
 
 function readTheme() {
   try {
-    const stored = window.localStorage.getItem("northstar-theme");
-    return stored
-      ? stored === "dark"
-      : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return window.localStorage.getItem("northstar-theme") === "dark";
   } catch {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return false;
   }
 }
 
 function subscribeToTheme(callback: () => void) {
-  const media = window.matchMedia("(prefers-color-scheme: dark)");
   const storage = (event: StorageEvent) => {
     if (event.key === "northstar-theme") callback();
   };
-  media.addEventListener("change", callback);
   window.addEventListener("storage", storage);
-  return () => {
-    media.removeEventListener("change", callback);
-    window.removeEventListener("storage", storage);
-  };
+  return () => window.removeEventListener("storage", storage);
 }

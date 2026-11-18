@@ -72,7 +72,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
-          {`try { const saved = localStorage.getItem("northstar-theme"); const theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); document.documentElement.dataset.theme = theme; } catch {}`}
+          {`try { document.documentElement.dataset.theme = localStorage.getItem("northstar-theme") || "light"; } catch { document.documentElement.dataset.theme = "light"; }`}
         </Script>
       </head>
       <body>
