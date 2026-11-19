@@ -14,6 +14,7 @@ const pageLabels: Record<string, string> = {
   "/erp-architecture-data-security": "ERP Architecture & Data Security",
   "/erp-implementation": "ERP Implementation",
   "/erp-implementation/erpnext": "ERPNext Implementation",
+  "/erp-modules": "ERP Modules",
   "/erp-vs-crm": "ERP vs CRM",
   "/how-we-work": "How We Work",
   "/industries": "Industries",

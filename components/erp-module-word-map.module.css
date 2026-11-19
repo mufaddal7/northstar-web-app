@@ -1,0 +1,101 @@
+.wordMap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.term {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--surface);
+  padding: 0.42rem 0.8rem;
+  color: var(--foreground);
+  font-size: clamp(0.76rem, 1.4vw, 0.98rem);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  animation: word-jiggle 4.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.term[data-size="medium"] {
+  font-size: clamp(0.9rem, 1.7vw, 1.14rem);
+  font-weight: 600;
+}
+
+.term[data-size="large"] {
+  font-size: clamp(1rem, 2.2vw, 1.38rem);
+  font-weight: 700;
+}
+
+.term[data-tone="finance"] {
+  border-color: rgb(197 160 89 / 70%);
+}
+
+.term[data-tone="supply-chain"] {
+  border-color: var(--foreground);
+}
+
+.term[data-tone="manufacturing"] {
+  border-style: double;
+  border-color: var(--gold);
+  background: var(--surface-muted);
+}
+
+.term[data-tone="customer"] {
+  border-color: var(--border);
+}
+
+.term[data-tone="people-projects"] {
+  border-style: dashed;
+  border-color: var(--foreground);
+}
+
+.term[data-tone="emerging"] {
+  border-style: dashed;
+  background: var(--surface-muted);
+}
+
+.term:nth-child(5n + 1) {
+  animation-delay: -0.5s;
+}
+
+.term:nth-child(5n + 2) {
+  animation-delay: -1.3s;
+}
+
+.term:nth-child(5n + 3) {
+  animation-delay: -2.1s;
+}
+
+.term:nth-child(5n + 4) {
+  animation-delay: -3.2s;
+}
+
+.term:nth-child(5n) {
+  animation-delay: -4s;
+}
+
+@keyframes word-jiggle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.7deg);
+  }
+
+  50% {
+    transform: translateY(-2px) rotate(0.7deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term {
+    animation: none;
+  }
+}

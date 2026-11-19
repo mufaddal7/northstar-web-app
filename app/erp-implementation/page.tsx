@@ -207,6 +207,13 @@ export default function ErpImplementationPage() {
               </article>
             ))}
           </div>
+          <Link
+            className="mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+            href="/erp-modules"
+          >
+            Explore the full ERP module guide
+            <ArrowUpRight />
+          </Link>
         </Shell>
       </Section>
 

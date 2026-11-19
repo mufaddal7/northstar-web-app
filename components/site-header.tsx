@@ -41,6 +41,10 @@ const menuGroups: MenuGroup[] = [
         href: "/erp-implementation/erpnext",
       },
       {
+        label: "ERP modules",
+        href: "/erp-modules",
+      },
+      {
         label: "ERP architecture & security",
         href: "/erp-architecture-data-security",
       },
@@ -78,6 +82,7 @@ const menuGroups: MenuGroup[] = [
 
 const mobileLinks = [
   { label: "ERP", href: "/erp-implementation" },
+  { label: "ERP modules", href: "/erp-modules" },
   { label: "ERP architecture & security", href: "/erp-architecture-data-security" },
   { label: "ERP comparisons", href: "/compare" },
   { label: "Business maturity scan", href: "/maturity-scan" },

@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/erp-implementation",
     "/erp-architecture-data-security",
+    "/erp-modules",
     "/erp-implementation/erpnext",
     "/erp-vs-crm",
     "/what-is-erp",
