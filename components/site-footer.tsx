@@ -28,6 +28,7 @@ export function SiteFooter() {
             <Link href="/industries">Industries</Link>
             <Link href="/case-studies">Case studies</Link>
             <Link href="/insights">Insights</Link>
+            <Link href="/news">News</Link>
             <Link href="/about">About</Link>
           </div>
           <div className="flex flex-col items-start gap-3 text-sm">

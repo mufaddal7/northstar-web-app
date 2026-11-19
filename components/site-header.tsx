@@ -61,6 +61,7 @@ const menuGroups: MenuGroup[] = [
         links: [
           { label: "About", href: "/about" },
           { label: "Case studies", href: "/case-studies" },
+          { label: "News", href: "/news" },
         ],
       },
       {
@@ -78,6 +79,7 @@ const mobileLinks = [
   { label: "How we work", href: "/how-we-work" },
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },
+  { label: "News", href: "/news" },
 ];
 
 export function SiteHeader() {

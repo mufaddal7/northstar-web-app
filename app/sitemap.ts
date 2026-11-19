@@ -5,6 +5,7 @@ import {
   pillars,
   SITE_URL,
 } from "@/lib/site-data";
+import { newsStories } from "@/lib/news-content";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "",
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries",
     "/case-studies",
     "/insights",
+    "/news",
     "/about",
     "/contact",
     "/privacy",
@@ -52,6 +54,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/insights/${slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...newsStories.map(({ slug }) => ({
+      url: `${SITE_URL}/news/${slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }
