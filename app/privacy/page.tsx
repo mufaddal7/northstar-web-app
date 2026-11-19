@@ -3,7 +3,7 @@ import { Eyebrow, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata(
   "Privacy and Data Use",
-  "Learn how Northstar handles contact enquiries, business modernization scan responses, feedback and website analytics.",
+  "Learn how Northstar handles contact enquiries, newsletter subscriptions, modernization scan responses, feedback and website analytics.",
   "/privacy",
 );
 export default function PrivacyPage() {
@@ -14,15 +14,32 @@ export default function PrivacyPage() {
         <h1 className="font-display text-4xl sm:text-5xl">Privacy statement</h1>
         <p className="mt-5 leading-7 text-muted">
           Northstar uses information submitted through this website to respond
-          to enquiries and uses Google Analytics to understand site usage. We do
-          not sell personal information or use enquiry details for unrelated
-          marketing.
+          to enquiries, send updates when you explicitly subscribe, and uses
+          Google Analytics to understand site usage. We do not sell personal
+          information or use enquiry details for unrelated marketing.
         </p>
         <h2 className="mt-10 font-display text-2xl">Contact form information</h2>
         <p className="mt-3 leading-7 text-muted">
           When you contact us, we use the details you provide to respond to your
           request and discuss the relevant business need. Do not include
           sensitive information in the form.
+        </p>
+        <h2 className="mt-10 font-display text-2xl">Newsletter subscriptions</h2>
+        <p className="mt-3 leading-7 text-muted">
+          If you subscribe, we collect your email address, your consent and the
+          signup source so we can send occasional Northstar news and insights.
+          Newsletter addresses are stored in a private Postgres database hosted
+          through Neon and recorded in our Google Sheets contact-management
+          system. We do not use contact enquiry details for newsletters unless
+          you separately opt in. You can ask us to remove your address at any
+          time by emailing{" "}
+          <a
+            className="text-brand-gold underline"
+            href="mailto:hello@northstar53.com?subject=Newsletter%20unsubscribe"
+          >
+            hello@northstar53.com
+          </a>
+          .
         </p>
         <h2 className="mt-10 font-display text-2xl">
           Business modernization scan

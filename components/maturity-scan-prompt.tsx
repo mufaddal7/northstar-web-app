@@ -4,8 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight } from "@/components/icons";
+import {
+  maturityScanPromptDismissedEvent,
+  maturityScanPromptDismissedKey,
+  maturityScanPromptSeenKey,
+} from "@/lib/newsletter-ui-state";
 
-const promptSeenKey = "northstar-maturity-scan-prompt-seen";
 const promptDelay = 30_000;
 
 export function MaturityScanPrompt() {
@@ -30,8 +34,14 @@ export function MaturityScanPrompt() {
     if (seenRef.current || open) return;
 
     try {
-      if (window.sessionStorage.getItem(promptSeenKey)) {
+      if (window.sessionStorage.getItem(maturityScanPromptSeenKey)) {
         seenRef.current = true;
+        try {
+          window.sessionStorage.setItem(maturityScanPromptDismissedKey, "true");
+        } catch {
+          // The event still coordinates the prompts if storage is unavailable.
+        }
+        window.dispatchEvent(new Event(maturityScanPromptDismissedEvent));
         return;
       }
     } catch {
@@ -54,7 +64,7 @@ export function MaturityScanPrompt() {
     function markSeen() {
       seenRef.current = true;
       try {
-        window.sessionStorage.setItem(promptSeenKey, "true");
+        window.sessionStorage.setItem(maturityScanPromptSeenKey, "true");
       } catch {
         // The in-memory guard still limits this prompt to one display per page session.
       }
@@ -122,10 +132,12 @@ export function MaturityScanPrompt() {
   function dismissPrompt() {
     seenRef.current = true;
     try {
-      window.sessionStorage.setItem(promptSeenKey, "true");
+      window.sessionStorage.setItem(maturityScanPromptSeenKey, "true");
+      window.sessionStorage.setItem(maturityScanPromptDismissedKey, "true");
     } catch {
       // The in-memory guard still limits this prompt to one display per page session.
     }
+    window.dispatchEvent(new Event(maturityScanPromptDismissedEvent));
     setOpen(false);
   }
 

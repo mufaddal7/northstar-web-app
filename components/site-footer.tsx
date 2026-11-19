@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Brand } from "@/components/brand";
+import { NewsletterForm } from "@/components/newsletter-form";
 import { Shell } from "@/components/ui";
 import { BOOKING_URL, WHATSAPP_URL } from "@/lib/site-data";
 
@@ -7,6 +8,24 @@ export function SiteFooter() {
   return (
     <footer className="bg-brand-slate py-14 text-white/75 sm:py-16">
       <Shell>
+        <div
+          className="mb-12 grid scroll-mt-24 gap-5 rounded-sm border border-white/15 bg-white/[0.04] p-5 sm:grid-cols-[0.85fr_1.15fr] sm:items-center sm:p-6"
+          id="newsletter"
+        >
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-gold-light">
+              Northstar bulletin
+            </p>
+            <h2 className="mt-2 font-display text-2xl text-white">
+              News and insights, in your inbox.
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-white/65">
+              Occasional perspectives on business systems, data and
+              technology.
+            </p>
+          </div>
+          <NewsletterForm source="footer" variant="footer" />
+        </div>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Brand inverse />

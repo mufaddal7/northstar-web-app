@@ -80,6 +80,7 @@ const mobileLinks = [
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },
   { label: "News", href: "/news" },
+  { label: "Newsletter", href: "/#newsletter" },
 ];
 
 export function SiteHeader() {
