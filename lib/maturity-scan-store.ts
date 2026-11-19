@@ -10,6 +10,7 @@ export type MaturityScanRecord = {
   answers: Record<string, string>;
   result: MaturityScanResult;
   contactStatus: "pending" | "saved";
+  reportEmailStatus?: "pending" | "sent";
   feedback?: {
     rating: "accurate" | "partly-accurate" | "not-accurate";
     comment: string;
@@ -78,6 +79,22 @@ export async function setMaturityContactSaved(scanId: string) {
   const rows = await getSql()`
     UPDATE maturity_scan_records
     SET record = jsonb_set(record, '{contactStatus}', '"saved"'::jsonb, true)
+    WHERE scan_id = ${scanId}::uuid
+    RETURNING scan_id
+  `;
+  return rows.length > 0;
+}
+
+export async function setMaturityReportEmailSent(scanId: string) {
+  await ensureTable();
+  const rows = await getSql()`
+    UPDATE maturity_scan_records
+    SET record = jsonb_set(
+      record,
+      '{reportEmailStatus}',
+      '"sent"'::jsonb,
+      true
+    )
     WHERE scan_id = ${scanId}::uuid
     RETURNING scan_id
   `;

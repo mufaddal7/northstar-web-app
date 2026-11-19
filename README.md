@@ -180,15 +180,17 @@ DATABASE_URL=replace-with-database-url
 GOOGLE_OAUTH_CLIENT_ID=replace-with-google-oauth-client-id
 GOOGLE_OAUTH_CLIENT_SECRET=replace-with-google-oauth-client-secret
 GOOGLE_OAUTH_REFRESH_TOKEN=replace-with-hello-mailbox-refresh-token
-EMAIL_FROM="Northstar <hello@northstar53.com>"
+EMAIL_FROM=hello@northstar53.com
 EMAIL_REPLY_TO=hello@northstar53.com
+CONTACT_NOTIFICATION_EMAIL=burhanuddin@northstar53.com
 ```
 
 The Gmail API credentials must belong to a Google Cloud OAuth client with the
 Gmail API enabled. Authorize the `hello@northstar53.com` mailbox with the
 `https://www.googleapis.com/auth/gmail.send` scope and retain its refresh token.
-The sender address must be the authorized mailbox or a configured Gmail
-send-as alias.
+`EMAIL_FROM` must be that mailbox or a configured Gmail send-as alias. The app
+uses distinct display names for newsletter, scan-report and contact emails.
+`CONTACT_NOTIFICATION_EMAIL` receives internal contact and scan notifications.
 
 Set these values in `.env.local` for development and in your hosting
 provider’s server-side environment for deployment. Never use a `NEXT_PUBLIC_`

@@ -17,10 +17,12 @@ type ScanResponse = {
   company: string;
   completedAt: string;
   result: MaturityScanResult;
+  emailSent?: boolean;
 };
 
 type ScanPhase = "loading" | "questions" | "details" | "result" | "error";
 type FeedbackRating = "accurate" | "partly-accurate" | "not-accurate";
+type ReportEmailStatus = "sent" | "failed" | "sending";
 
 declare global {
   interface Window {
@@ -48,6 +50,8 @@ export function MaturityScan() {
   const [completedAt, setCompletedAt] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [result, setResult] = useState<MaturityScanResult | null>(null);
+  const [reportEmailStatus, setReportEmailStatus] =
+    useState<ReportEmailStatus>("sending");
   const [animatedScore, setAnimatedScore] = useState(0);
   const [feedbackRating, setFeedbackRating] = useState<FeedbackRating | null>(
     null,
@@ -178,6 +182,7 @@ export function MaturityScan() {
       setCompany(body.company);
       setCompletedAt(body.completedAt);
       setResult(body.result);
+      setReportEmailStatus(body.emailSent === false ? "failed" : "sent");
       setPhase("result");
       window.gtag?.("event", "generate_lead", {
         method: "business_maturity_scan",
@@ -191,6 +196,34 @@ export function MaturityScan() {
       );
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function retryReportEmail() {
+    setReportEmailStatus("sending");
+    try {
+      const response = await fetch("/api/maturity-scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "retry-report-email", scanId }),
+      });
+      const body = (await response.json()) as {
+        emailSent?: boolean;
+        message?: string;
+        requestId?: string;
+      };
+      if (!response.ok || body.emailSent !== true) {
+        console.error("[maturity-scan] Report email retry failed.", {
+          status: response.status,
+          requestId: body.requestId,
+        });
+        setReportEmailStatus("failed");
+        return;
+      }
+      setReportEmailStatus("sent");
+    } catch (error) {
+      console.error("[maturity-scan] Could not retry report email.", error);
+      setReportEmailStatus("failed");
     }
   }
 
@@ -417,6 +450,10 @@ export function MaturityScan() {
                 information to provide your results and follow up about your
                 business needs.
               </p>
+              <p className="mt-3 text-sm leading-6 text-muted">
+                We’ll also email a copy of your report to the work email you
+                provide.
+              </p>
               <p className="mt-4 text-sm leading-6 text-muted">
                 Please do not include sensitive or confidential information.
                 Read our{" "}
@@ -452,18 +489,24 @@ export function MaturityScan() {
                   value={company}
                 />
               </label>
-              <label className="grid gap-2 text-sm font-semibold">
-                Work email
+              <div className="grid gap-2">
+                <label
+                  className="text-sm font-semibold"
+                  htmlFor="maturity-scan-email"
+                >
+                  Work email
+                </label>
                 <input
                   autoComplete="email"
                   className="min-h-12 rounded-sm border border-border bg-surface px-3 text-foreground outline-none focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20"
+                  id="maturity-scan-email"
                   maxLength={254}
                   onChange={(event) => setEmail(event.target.value)}
                   required
                   type="email"
                   value={email}
                 />
-              </label>
+              </div>
               {errorMessage ? (
                 <p className="text-sm leading-6 text-status-error" role="alert">
                   {errorMessage}
@@ -521,6 +564,31 @@ export function MaturityScan() {
                     }).format(new Date(completedAt))}
                   </time>
                 </div>
+              </div>
+              <div className="flex flex-col gap-3 rounded-sm border border-border bg-surface p-4 sm:flex-row sm:items-center sm:justify-between">
+                <p
+                  className={`text-sm leading-6 ${
+                    reportEmailStatus === "failed"
+                      ? "text-status-error"
+                      : "text-muted"
+                  }`}
+                  role="status"
+                >
+                  {reportEmailStatus === "sent"
+                    ? `A copy of this report was emailed to ${email}.`
+                    : reportEmailStatus === "sending"
+                      ? "Emailing a copy of your report…"
+                      : "Your report is ready on screen, but the email could not be sent."}
+                </p>
+                {reportEmailStatus === "failed" ? (
+                  <button
+                    className="min-h-11 shrink-0 rounded-sm border border-border px-4 py-2 text-sm font-bold text-foreground transition-colors hover:border-brand-gold hover:bg-surface-muted"
+                    onClick={retryReportEmail}
+                    type="button"
+                  >
+                    Try email again
+                  </button>
+                ) : null}
               </div>
               <section className="maturity-scan-score-card grid gap-7 overflow-hidden rounded-sm bg-brand-navy p-6 text-white sm:p-9 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-10">
                 <div

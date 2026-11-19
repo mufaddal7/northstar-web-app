@@ -1,3 +1,6 @@
+import { sendEmail } from "@/lib/email-service";
+import { createContactNotificationEmail } from "@/lib/emails/contact-notification";
+
 export type ContactSubmission = {
   name: string;
   email: string;
@@ -65,9 +68,56 @@ export async function forwardContactSubmission(
     console.info(
       `[contact:${requestId}] Apps Script confirmed the contact submission (HTTP ${response.status}).`,
     );
+
+    if (!isNewsletterSubscription(values)) {
+      try {
+        await sendEmail({
+          to:
+            process.env.CONTACT_NOTIFICATION_EMAIL?.trim() ||
+            "burhanuddin@northstar53.com",
+          ...createContactNotificationEmail(values),
+        });
+      } catch (error) {
+        console.error(
+          `[contact:${requestId}] Internal contact notification failed:`,
+          error,
+        );
+      }
+    }
+
+    if (!isNewsletterSubscription(values)) {
+      try {
+        await sendEmail({
+          to:
+            process.env.CONTACT_NOTIFICATION_EMAIL?.trim() ||
+            "burhanuddin@northstar53.com",
+          ...createContactNotificationEmail(values),
+        });
+      } catch (error) {
+        console.error(
+          `[contact:${requestId}] Internal contact notification failed:`,
+          error,
+        );
+      }
+    }
+
+    function isNewsletterSubscription(values: ContactSubmission) {
+      return values.challenge
+        .split(/\r?\n/, 1)[0]
+        .trim()
+        .startsWith("News Letter Subscription");
+    }
+
     return { success: true };
   } catch (error) {
     console.error(`[contact:${requestId}] Contact submission failed:`, error);
     return { success: false, status: 502 };
   }
+}
+
+function isNewsletterSubscription(values: ContactSubmission) {
+  return values.challenge
+    .split(/\r?\n/, 1)[0]
+    .trim()
+    .startsWith("News Letter Subscription");
 }

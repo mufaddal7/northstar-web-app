@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 
 type EmailMessage = {
   to: string;
+  fromName: string;
   subject: string;
   text: string;
   html: string;
@@ -11,12 +12,20 @@ type OAuthTokenResponse = {
   access_token?: unknown;
 };
 
-export async function sendEmail({ to, subject, text, html }: EmailMessage) {
+export async function sendEmail({
+  to,
+  fromName,
+  subject,
+  text,
+  html,
+}: EmailMessage) {
   const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID?.trim();
   const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET?.trim();
   const refreshToken = process.env.GOOGLE_OAUTH_REFRESH_TOKEN?.trim();
-  const from =
-    process.env.EMAIL_FROM?.trim() || "Northstar <hello@northstar53.com>";
+  const configuredFrom =
+    process.env.EMAIL_FROM?.trim() || "hello@northstar53.com";
+  const fromAddress =
+    configuredFrom.match(/<([^<>]+)>/)?.[1]?.trim() ?? configuredFrom;
   const replyTo =
     process.env.EMAIL_REPLY_TO?.trim() || "hello@northstar53.com";
 
@@ -27,11 +36,18 @@ export async function sendEmail({ to, subject, text, html }: EmailMessage) {
   }
 
   validateHeader(to, "recipient");
+  validateHeader(fromName, "sender name");
   validateHeader(subject, "subject");
-  validateHeader(from, "sender");
+  validateHeader(fromAddress, "sender");
   validateHeader(replyTo, "reply-to");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
     throw new Error("The email recipient is invalid.");
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fromAddress)) {
+    throw new Error("The configured sender address is invalid.");
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo)) {
+    throw new Error("The configured reply-to address is invalid.");
   }
 
   const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
@@ -59,7 +75,7 @@ export async function sendEmail({ to, subject, text, html }: EmailMessage) {
 
   const boundary = `northstar_${randomUUID().replace(/-/g, "")}`;
   const mimeMessage = [
-    `From: ${from}`,
+    `From: =?UTF-8?B?${Buffer.from(fromName, "utf8").toString("base64")}?= <${fromAddress}>`,
     `To: ${to}`,
     `Reply-To: ${replyTo}`,
     `Subject: =?UTF-8?B?${Buffer.from(subject, "utf8").toString("base64")}?=`,

@@ -46,8 +46,9 @@ export default function PrivacyPage() {
         </h2>
         <p className="mt-3 leading-7 text-muted">
           If you complete the scan, we collect your name, company, work email,
-          answers and calculated score to generate your personalized results and
-          follow up about your business needs. If you send feedback, we store
+          answers and calculated score to generate your personalized results,
+          email you a copy of the report, and follow up about your business
+          needs. If you send feedback, we store
           the rating and comment with the scan and send them as a separate
           inquiry under Business modernization scan. Scan details are sent to
           our contact management service and stored in a private Postgres

@@ -11,9 +11,12 @@ import {
   saveMaturityFeedback,
   saveMaturityScan,
   setMaturityContactSaved,
+  setMaturityReportEmailSent,
   type MaturityScanRecord,
 } from "@/lib/maturity-scan-store";
 import { SITE_URL } from "@/lib/site-data";
+import { sendEmail } from "@/lib/email-service";
+import { createMaturityReportEmail } from "@/lib/emails/maturity-report";
 
 export const runtime = "nodejs";
 
@@ -72,6 +75,9 @@ export async function POST(request: Request) {
   if (payload.action === "feedback") {
     return saveFeedback(payload, requestId);
   }
+  if (payload.action === "retry-report-email") {
+    return retryReportEmail(payload, requestId);
+  }
 
   const parsed = parseScanSubmission(payload);
   if (!parsed.success) {
@@ -100,15 +106,6 @@ export async function POST(request: Request) {
           { status: 409 },
         );
       }
-      if (existing.contactStatus === "saved") {
-        return NextResponse.json({
-          scanId: existing.scanId,
-          company: existing.company,
-          completedAt: existing.createdAt,
-          requestId,
-          result: existing.result,
-        });
-      }
       record = existing;
     } else {
       const result = buildMaturityResult(parsed.value.answers);
@@ -125,44 +122,48 @@ export async function POST(request: Request) {
       await saveMaturityScan(record);
     }
 
-    const challenge = createContactDescription(record);
-    if (challenge.length > 5000) {
-      throw new Error("The scan summary exceeds the contact message limit.");
-    }
+    if (record.contactStatus !== "saved") {
+      const challenge = createContactDescription(record);
+      if (challenge.length > 5000) {
+        throw new Error("The scan summary exceeds the contact message limit.");
+      }
 
-    const contact = await forwardContactSubmission(
-      {
-        name: record.name,
-        email: record.email,
-        company: record.company,
-        interest: "Business modernization scan",
-        challenge,
-      },
-      requestId,
-    );
-
-    if (!contact.success) {
-      return NextResponse.json(
+      const contact = await forwardContactSubmission(
         {
-          message:
-            "We couldn’t save your scan details just now. Your answers are safe; please try again.",
-          requestId,
+          name: record.name,
+          email: record.email,
+          company: record.company,
+          interest: "Business modernization scan",
+          challenge,
         },
-        { status: contact.status },
+        requestId,
       );
+      if (!contact.success) {
+        return NextResponse.json(
+          {
+            message:
+              "We couldn’t save your scan details just now. Your answers are safe; please try again.",
+            requestId,
+          },
+          { status: contact.status },
+        );
+      }
+
+      const markedSaved = await setMaturityContactSaved(record.scanId);
+      if (!markedSaved) {
+        throw new Error("The scan record could not be updated after contact submission.");
+      }
+      record = { ...record, contactStatus: "saved" };
     }
 
-    const markedSaved = await setMaturityContactSaved(record.scanId);
-    if (!markedSaved) {
-      throw new Error("The scan record could not be updated after contact submission.");
-    }
-
+    const emailSent = await sendMaturityReport(record, requestId);
     return NextResponse.json({
       scanId: record.scanId,
       company: record.company,
       completedAt: record.createdAt,
       requestId,
       result: record.result,
+      emailSent,
     });
   } catch (error) {
     console.error(`[maturity-scan:${requestId}] Could not complete scan:`, error);
@@ -174,6 +175,75 @@ export async function POST(request: Request) {
       },
       { status: 500 },
     );
+  }
+}
+
+async function retryReportEmail(
+  payload: Record<string, unknown>,
+  requestId: string,
+) {
+  if (typeof payload.scanId !== "string" || !uuidPattern.test(payload.scanId)) {
+    return NextResponse.json(
+      { message: "This report could not be verified.", requestId },
+      { status: 400 },
+    );
+  }
+
+  try {
+    const record = await getMaturityScan(payload.scanId);
+    if (!record || record.contactStatus !== "saved") {
+      return NextResponse.json(
+        { message: "This report could not be found. Please run the scan again.", requestId },
+        { status: 404 },
+      );
+    }
+
+    const emailSent = await sendMaturityReport(record, requestId);
+    if (!emailSent) {
+      return NextResponse.json(
+        {
+          message: "The report is still available on screen, but its email could not be sent. Please try again.",
+          requestId,
+        },
+        { status: 502 },
+      );
+    }
+    return NextResponse.json({ emailSent: true, requestId });
+  } catch (error) {
+    console.error(`[maturity-scan:${requestId}] Report email retry failed:`, error);
+    return NextResponse.json(
+      { message: "The report email could not be sent. Please try again.", requestId },
+      { status: 500 },
+    );
+  }
+}
+
+async function sendMaturityReport(
+  record: MaturityScanRecord,
+  requestId: string,
+) {
+  if (record.reportEmailStatus === "sent") return true;
+
+  try {
+    await sendEmail({
+      to: record.email,
+      ...createMaturityReportEmail({
+        company: record.company,
+        completedAt: record.createdAt,
+        result: record.result,
+      }),
+    });
+    const markedSent = await setMaturityReportEmailSent(record.scanId);
+    if (!markedSent) {
+      throw new Error("The report email status could not be recorded.");
+    }
+    return true;
+  } catch (error) {
+    console.error(
+      `[maturity-scan:${requestId}] Report email delivery failed:`,
+      error,
+    );
+    return false;
   }
 }
 

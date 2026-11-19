@@ -29,6 +29,7 @@ export function createNewsletterWelcomeEmail(
     .join("");
 
   return {
+    fromName: "Northstar News",
     subject: "Thanks for subscribing to Northstar",
     text: [
       "Hello,",
