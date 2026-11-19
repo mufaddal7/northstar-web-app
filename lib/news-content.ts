@@ -30,6 +30,7 @@ export type NewsStory = {
   summary: string;
   description: string;
   publishedAt: string;
+  updatedAt?: string;
   takeaway: string;
   showTakeaway?: boolean;
   sections: NewsSection[];
@@ -48,6 +49,7 @@ export const newsStories: NewsStory[] = [
     description:
       "Five recent critical CVEs in CISA KEV affect GitLab, Puppet, Arista VeloCloud, FreeSWITCH and Collabora. See the risks, timelines and vendor fixes.",
     publishedAt: "2026-11-18",
+    updatedAt: "2026-11-19",
     showTakeaway: false,
     takeaway:
       "All five vulnerabilities have CVSS v3.1 scores from 9.8 to 10.0 and appear in CISA’s Known Exploited Vulnerabilities catalog. That signals urgency, not proof that your organization is compromised. Check exact products, versions and configurations against the linked CISA and CVE records.",

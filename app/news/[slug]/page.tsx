@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: story.description,
       url: `${SITE_URL}${path}`,
       publishedTime: story.publishedAt,
+      ...(story.updatedAt ? { modifiedTime: story.updatedAt } : {}),
       images: [
         {
           url: imageUrl,
@@ -63,7 +64,7 @@ export default async function NewsArticlePage({ params }: Props) {
     headline: story.title,
     description: story.description,
     datePublished: story.publishedAt,
-    dateModified: story.publishedAt,
+    ...(story.updatedAt ? { dateModified: story.updatedAt } : {}),
     author: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
@@ -148,6 +149,23 @@ export default async function NewsArticlePage({ params }: Props) {
                   { year: "numeric", month: "long", day: "numeric" },
                 )}
               </time>
+              {story.updatedAt ? (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>
+                    Updated{" "}
+                    <time dateTime={story.updatedAt}>
+                      {new Date(
+                        `${story.updatedAt}T12:00:00`,
+                      ).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>
+                  </span>
+                </>
+              ) : null}
             </div>
             <ul
               aria-label="Article topics"

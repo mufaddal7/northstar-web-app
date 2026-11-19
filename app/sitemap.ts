@@ -55,8 +55,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    ...newsStories.map(({ slug }) => ({
+    ...newsStories.map(({ slug, publishedAt, updatedAt }) => ({
       url: `${SITE_URL}/news/${slug}`,
+      lastModified: updatedAt ?? publishedAt,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
