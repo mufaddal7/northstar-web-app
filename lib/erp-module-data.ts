@@ -5,14 +5,14 @@ export type ModulePackaging =
   | "Often adjacent"
   | "Emerging capability";
 
-type ErpModule = {
+export type ErpModule = {
   name: string;
   description: string;
   packaging: ModulePackaging;
   keywords: string[];
 };
 
-type ErpModuleGroup = {
+export type ErpModuleGroup = {
   id: string;
   name: string;
   description: string;

@@ -1,5 +1,5 @@
 import {
-  erpModuleGroups,
+  type ErpModuleGroup,
   type ModulePackaging,
 } from "@/lib/erp-module-data";
 
@@ -22,7 +22,20 @@ function PackagingBadge({ value }: { value: ModulePackaging }) {
   );
 }
 
-export function ErpModuleReference() {
+export function ErpModuleReference({
+  groups,
+}: {
+  groups: ErpModuleGroup[];
+}) {
+  if (groups.length === 0) {
+    return (
+      <p className="border border-border bg-surface-muted p-6 text-sm leading-6 text-muted">
+        No modules match these filters. Try a broader search or clear the
+        filters.
+      </p>
+    );
+  }
+
   return (
     <>
       <div className="hidden overflow-hidden rounded-sm border border-border md:block">
@@ -49,7 +62,7 @@ export function ErpModuleReference() {
               </th>
             </tr>
           </thead>
-          {erpModuleGroups.map((group) => (
+          {groups.map((group) => (
             <tbody className="divide-y divide-border" key={group.id}>
               <tr className="bg-surface-muted">
                 <th
@@ -69,7 +82,10 @@ export function ErpModuleReference() {
                 </td>
               </tr>
               {group.modules.map((module) => (
-                <tr className="align-top" key={module.name}>
+                <tr
+                  className="align-top odd:bg-surface hover:bg-surface-muted"
+                  key={module.name}
+                >
                   <th className="p-4 font-semibold" scope="row">
                     {module.name}
                   </th>
@@ -87,7 +103,7 @@ export function ErpModuleReference() {
       </div>
 
       <div className="space-y-8 md:hidden">
-        {erpModuleGroups.map((group) => (
+        {groups.map((group) => (
           <section aria-labelledby={`module-group-${group.id}`} key={group.id}>
             <div className="mb-4">
               <h3

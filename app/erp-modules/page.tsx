@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
-import { ErpModuleReference } from "@/components/erp-module-reference";
-import { ErpModuleWordMap } from "@/components/erp-module-word-map";
+import { ErpModuleExplorer } from "@/components/erp-module-explorer";
 import {
   Eyebrow,
   PageHero,
@@ -157,26 +156,7 @@ export default function ErpModulesPage() {
               you are evaluating.
             </p>
           </div>
-          <ErpModuleWordMap />
-        </Shell>
-      </Section>
-
-      <Section id="module-reference" className="scroll-mt-24">
-        <Shell>
-          <SectionHeading
-            eyebrow="Grouped module reference"
-            title="What the modules do, and how they are commonly packaged."
-            copy="“Core,” “extension,” “adjacent” and “emerging” describe common packaging patterns, not a promise that every ERP vendor includes the capability."
-          />
-          <div className="mt-8">
-            <ErpModuleReference />
-          </div>
-          <p className="mt-5 text-sm leading-6 text-muted">
-            CRM, HCM, PLM, field service and sustainability capabilities may be
-            separate products or integrated extensions. Confirm product
-            boundaries, licensing and data ownership for your selected
-            platform.
-          </p>
+          <ErpModuleExplorer />
         </Shell>
       </Section>
 
