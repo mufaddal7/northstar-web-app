@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     "",
     "/erp-implementation",
+    "/erp-architecture-data-security",
     "/erp-implementation/erpnext",
     "/erp-vs-crm",
     "/what-is-erp",
@@ -20,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/maturity-scan",
     "/industries",
     "/case-studies",
+    "/case-studies/agentic-ai-workflows",
+    "/case-studies/manufacturing-closed-loop",
     "/insights",
     "/news",
     "/about",

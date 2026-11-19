@@ -255,6 +255,46 @@ export default function ErpImplementationPage() {
       <Section tone="muted">
         <Shell className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
           <div>
+            <Eyebrow>Architecture and data security</Eyebrow>
+            <h2 className="font-display text-3xl leading-tight sm:text-4xl">
+              Keep implementation work separate from live operations.
+            </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-muted">
+              On request, we can set up separate Dev, UAT and Staging
+              environments and isolate your production environment. Synthetic
+              or masked data can be used for routine testing, so you do not
+              need to share live production records for development or
+              acceptance testing. If migration or support requires access to
+              real records, we agree the scope and access with you first.
+            </p>
+            <p className="mt-3 max-w-2xl leading-7 text-muted">
+              For compatible workflows, we can also assess optional
+              end-to-end encryption and its impact on integrations, reporting,
+              search and recovery.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
+            <Link
+              className="inline-flex min-h-12 items-center justify-between gap-3 rounded-sm border border-border px-5 py-3 text-sm font-bold transition-colors hover:border-brand-gold hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2"
+              href="/erp-architecture-data-security#environment-isolation"
+            >
+              On-demand environment isolation
+              <ArrowUpRight />
+            </Link>
+            <Link
+              className="inline-flex min-h-12 items-center justify-between gap-3 rounded-sm border border-border px-5 py-3 text-sm font-bold transition-colors hover:border-brand-gold hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2"
+              href="/erp-architecture-data-security#end-to-end-encryption"
+            >
+              End-to-end encryption options
+              <ArrowUpRight />
+            </Link>
+          </div>
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
+          <div>
             <Eyebrow>One option in the ERP landscape</Eyebrow>
             <h2 className="font-display text-3xl leading-tight sm:text-4xl">
               Exploring ERPNext?

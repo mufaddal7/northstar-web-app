@@ -40,6 +40,10 @@ const menuGroups: MenuGroup[] = [
         label: "ERPNext implementation",
         href: "/erp-implementation/erpnext",
       },
+      {
+        label: "ERP architecture & security",
+        href: "/erp-architecture-data-security",
+      },
       { label: "ERP comparisons", href: "/compare" },
       { label: "ERP vs CRM", href: "/erp-vs-crm" },
     ],
@@ -74,6 +78,7 @@ const menuGroups: MenuGroup[] = [
 
 const mobileLinks = [
   { label: "ERP", href: "/erp-implementation" },
+  { label: "ERP architecture & security", href: "/erp-architecture-data-security" },
   { label: "ERP comparisons", href: "/compare" },
   { label: "Business maturity scan", href: "/maturity-scan" },
   { label: "How we work", href: "/how-we-work" },

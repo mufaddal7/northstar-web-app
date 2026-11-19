@@ -11,6 +11,7 @@ const pageLabels: Record<string, string> = {
   "/compare/netsuite-vs-oracle-fusion-erp":
     "NetSuite vs Oracle Fusion Cloud ERP",
   "/contact": "Contact",
+  "/erp-architecture-data-security": "ERP Architecture & Data Security",
   "/erp-implementation": "ERP Implementation",
   "/erp-implementation/erpnext": "ERPNext Implementation",
   "/erp-vs-crm": "ERP vs CRM",
