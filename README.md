@@ -176,11 +176,23 @@ Example:
 ```env
 GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwfL3Zbrk7oXY-7QjPHj7hBVShAQEPFXA1uS5AbRYdnvVFvUWReaM_-4GTPbbtWFEFP/exec
 GOOGLE_SCRIPT_SECRET=replace-with-your-app-script-secret
+DATABASE_URL=replace-with-database-url
+GOOGLE_OAUTH_CLIENT_ID=replace-with-google-oauth-client-id
+GOOGLE_OAUTH_CLIENT_SECRET=replace-with-google-oauth-client-secret
+GOOGLE_OAUTH_REFRESH_TOKEN=replace-with-hello-mailbox-refresh-token
+EMAIL_FROM="Northstar <hello@northstar53.com>"
+EMAIL_REPLY_TO=hello@northstar53.com
 ```
 
-Set `GOOGLE_SCRIPT_SECRET` in `.env.local` for development and in your hosting
+The Gmail API credentials must belong to a Google Cloud OAuth client with the
+Gmail API enabled. Authorize the `hello@northstar53.com` mailbox with the
+`https://www.googleapis.com/auth/gmail.send` scope and retain its refresh token.
+The sender address must be the authorized mailbox or a configured Gmail
+send-as alias.
+
+Set these values in `.env.local` for development and in your hosting
 provider’s server-side environment for deployment. Never use a `NEXT_PUBLIC_`
-prefix for this key.
+prefix for credentials or tokens.
 
 ### Environment File Usage
 

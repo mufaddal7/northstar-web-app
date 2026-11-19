@@ -3,6 +3,7 @@ import type { NewsletterSource } from "@/lib/newsletter-ui-state";
 
 type NewsletterRow = {
   google_sheet_synced_at: string | Date | null;
+  welcome_email_sent_at: string | Date | null;
 };
 
 let sql: ReturnType<typeof neon<false, false>> | undefined;
@@ -29,9 +30,16 @@ async function ensureTable() {
         subscribed_at TIMESTAMPTZ NOT NULL,
         consented_at TIMESTAMPTZ NOT NULL,
         source TEXT NOT NULL,
-        google_sheet_synced_at TIMESTAMPTZ
+        google_sheet_synced_at TIMESTAMPTZ,
+        welcome_email_sent_at TIMESTAMPTZ
       )
     `
+      .then(async () => {
+        await getSql()`
+          ALTER TABLE newsletter_subscribers
+          ADD COLUMN IF NOT EXISTS welcome_email_sent_at TIMESTAMPTZ
+        `;
+      })
       .then(() => undefined)
       .catch((error: unknown) => {
         tableReady = undefined;
@@ -66,7 +74,7 @@ export async function registerNewsletterSubscriber({
       ${source}
     )
     ON CONFLICT (email) DO NOTHING
-    RETURNING google_sheet_synced_at
+    RETURNING google_sheet_synced_at, welcome_email_sent_at
   `;
 
   if (inserted.length) {
@@ -75,11 +83,14 @@ export async function registerNewsletterSubscriber({
       googleSheetSynced: Boolean(
         (inserted[0] as NewsletterRow).google_sheet_synced_at,
       ),
+      welcomeEmailSent: Boolean(
+        (inserted[0] as NewsletterRow).welcome_email_sent_at,
+      ),
     };
   }
 
   const existing = await db`
-    SELECT google_sheet_synced_at
+    SELECT google_sheet_synced_at, welcome_email_sent_at
     FROM newsletter_subscribers
     WHERE email = ${email}
     LIMIT 1
@@ -93,6 +104,9 @@ export async function registerNewsletterSubscriber({
     googleSheetSynced: Boolean(
       (existing[0] as NewsletterRow).google_sheet_synced_at,
     ),
+    welcomeEmailSent: Boolean(
+      (existing[0] as NewsletterRow).welcome_email_sent_at,
+    ),
   };
 }
 
@@ -101,6 +115,17 @@ export async function markNewsletterGoogleSheetSynced(email: string) {
   const rows = await getSql()`
     UPDATE newsletter_subscribers
     SET google_sheet_synced_at = NOW()
+    WHERE email = ${email}
+    RETURNING email
+  `;
+  return rows.length > 0;
+}
+
+export async function markNewsletterWelcomeEmailSent(email: string) {
+  await ensureTable();
+  const rows = await getSql()`
+    UPDATE newsletter_subscribers
+    SET welcome_email_sent_at = NOW()
     WHERE email = ${email}
     RETURNING email
   `;
