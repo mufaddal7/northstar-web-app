@@ -4,6 +4,7 @@ import { ArrowUpRight } from "@/components/icons";
 import { AgenticAiSection } from "@/components/agentic-ai-section";
 import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
+import { HomeBulletin } from "@/components/home-bulletin";
 import { ImplementationJourney } from "@/components/implementation-journey";
 import { ButtonLink, Eyebrow, Section, SectionHeading, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
@@ -408,6 +409,8 @@ export default function HomePage() {
           </div>
         </Shell>
       </Section>
+
+      <HomeBulletin />
 
       <CtaBand
         title="Don’t start with a software demo. Start with the work."
