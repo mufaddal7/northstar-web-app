@@ -209,18 +209,6 @@ const structuredData = {
       mainEntityOfPage: `${SITE_URL}${pagePath}`,
     },
     {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "What is ERP?",
-          item: `${SITE_URL}${pagePath}`,
-        },
-      ],
-    },
-    {
       "@type": "FAQPage",
       mainEntity: faqs.map(({ question, answer }) => ({
         "@type": "Question",

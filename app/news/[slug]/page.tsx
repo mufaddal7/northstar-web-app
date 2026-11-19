@@ -88,30 +88,6 @@ export default async function NewsArticlePage({ params }: Props) {
       acceptedAnswer: { "@type": "Answer", text: answer },
     })),
   };
-  const breadcrumbSchema = {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "News",
-        item: `${SITE_URL}/news`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: story.title,
-        item: `${SITE_URL}/news/${story.slug}`,
-      },
-    ],
-  };
-
   return (
     <>
       <script
@@ -119,7 +95,7 @@ export default async function NewsArticlePage({ params }: Props) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [articleSchema, faqSchema, breadcrumbSchema],
+            "@graph": [articleSchema, faqSchema],
           }),
         }}
       />

@@ -157,24 +157,6 @@ const structuredData = {
       mainEntityOfPage: `${SITE_URL}${pagePath}`,
     },
     {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Compare",
-          item: `${SITE_URL}/compare`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "NetSuite vs Oracle Fusion Cloud ERP",
-          item: `${SITE_URL}${pagePath}`,
-        },
-      ],
-    },
-    {
       "@type": "FAQPage",
       mainEntity: faqs.map(({ question, answer }) => ({
         "@type": "Question",

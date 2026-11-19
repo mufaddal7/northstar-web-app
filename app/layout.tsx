@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ServiceWorker } from "@/components/service-worker";
 import { MaturityScanPrompt } from "@/components/maturity-scan-prompt";
 import { NewsletterPrompt } from "@/components/newsletter-prompt";
@@ -81,6 +82,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
+        <Breadcrumbs />
         <main id="main-content">{children}</main>
         <SiteFooter />
         <MaturityScanPrompt />
