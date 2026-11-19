@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
 import { forwardContactSubmission } from "@/lib/contact-submission";
+import { sendEmail } from "@/lib/email-service";
+import { createContactAcknowledgementEmail } from "@/lib/emails/contact-acknowledgement";
 
 const fields = ["name", "email", "company", "interest", "challenge"] as const;
 
@@ -99,8 +101,29 @@ export async function POST(request: Request) {
       );
     }
 
+    let acknowledgementSent = true;
+    try {
+      await sendEmail({
+        to: values.email,
+        ...createContactAcknowledgementEmail({
+          name: values.name,
+          interest: values.interest,
+        }),
+      });
+    } catch (error) {
+      acknowledgementSent = false;
+      console.error(
+        `[contact:${requestId}] Submitter acknowledgement failed:`,
+        error,
+      );
+    }
+
     return NextResponse.json(
-      { message: "Thanks. Your message has been received.", requestId },
+      {
+        message: "Thanks. Your message has been received.",
+        acknowledgementSent,
+        requestId,
+      },
       { status: 200 },
     );
   } catch (error) {

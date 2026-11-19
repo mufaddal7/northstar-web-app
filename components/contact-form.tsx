@@ -33,6 +33,7 @@ export function ContactForm({
       const body = (await response.json()) as {
         message?: string;
         requestId?: string;
+        acknowledgementSent?: boolean;
       };
       if (!response.ok) {
         console.error("[contact-form] Contact API request failed.", {
@@ -48,7 +49,9 @@ export function ContactForm({
       form.reset();
       setStatus("success");
       setMessage(
-        "Thanks. Your message has been received and the team will be in touch.",
+        body.acknowledgementSent === false
+          ? "Your message has been received. We couldn’t send the confirmation email, but the team will be in touch."
+          : "Your message has been received. A confirmation email is on its way, and the team will be in touch.",
       );
     } catch (error) {
       if (!(error instanceof Error && error.message === "Unable to submit your inquiry right now.")) {
