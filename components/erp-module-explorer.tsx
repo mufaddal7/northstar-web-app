@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { ErpModuleReference } from "@/components/erp-module-reference";
-import { ErpModuleWordMap } from "@/components/erp-module-word-map";
 import {
   erpModuleGroups,
   type ModulePackaging,
@@ -64,14 +63,6 @@ export function ErpModuleExplorer() {
     groupFilter !== "all" ||
     packagingFilter !== "all";
 
-  function selectWord(term: string) {
-    setQuery((current) =>
-      current.toLowerCase() === term.toLowerCase() ? "" : term,
-    );
-    setGroupFilter("all");
-    setPackagingFilter("all");
-  }
-
   function clearFilters() {
     setQuery("");
     setGroupFilter("all");
@@ -80,86 +71,110 @@ export function ErpModuleExplorer() {
 
   return (
     <div className="mt-8">
-      <ErpModuleWordMap activeTerm={query} onSelectTerm={selectWord} />
-
       <section
         aria-labelledby="erp-module-reference-title"
-        className="mt-10"
-        id="module-reference"
+        className="mt-6"
         tabIndex={-1}
       >
-        <div className="mb-5">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
-            Grouped module reference
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
+              ERP module index
+            </p>
+            <h2
+              className="mt-2 font-display text-2xl leading-tight sm:text-3xl"
+              id="erp-module-reference-title"
+            >
+              Find the right business capability.
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm leading-6 text-muted">
+            Select a category or open a module for its detail and common
+            abbreviations.
           </p>
-          <h2
-            className="mt-2 font-display text-2xl leading-tight sm:text-3xl"
-            id="erp-module-reference-title"
-          >
-            Browse and filter ERP modules.
-          </h2>
         </div>
 
-        <div className="grid gap-3 rounded-sm border border-border bg-surface-muted p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="sm:col-span-2 lg:col-span-1">
-            <label
-              className="text-xs font-semibold text-foreground"
-              htmlFor="erp-module-search"
-            >
-              Search modules and keywords
-            </label>
-            <input
-              autoComplete="off"
-              className="mt-1 min-h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
-              id="erp-module-search"
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Try inventory, EPM or work orders"
-              type="search"
-              value={query}
-            />
+        <div className="rounded-sm border border-border bg-surface-muted p-4">
+          <div className="grid gap-3 lg:grid-cols-[minmax(0,1.5fr)_repeat(2,minmax(0,1fr))]">
+            <div>
+              <label
+                className="text-xs font-semibold text-foreground"
+                htmlFor="erp-module-search"
+              >
+                Search modules and keywords
+              </label>
+              <input
+                autoComplete="off"
+                className="mt-1 min-h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                id="erp-module-search"
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Try inventory, EPM or work orders"
+                type="search"
+                value={query}
+              />
+            </div>
+            <div>
+              <label
+                className="text-xs font-semibold text-foreground"
+                htmlFor="erp-module-group"
+              >
+                Business group
+              </label>
+              <select
+                className="mt-1 min-h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                id="erp-module-group"
+                onChange={(event) => setGroupFilter(event.target.value)}
+                value={groupFilter}
+              >
+                <option value="all">All groups</option>
+                {erpModuleGroups.map((group) => (
+                  <option key={group.id} value={group.id}>
+                    {group.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label
+                className="text-xs font-semibold text-foreground"
+                htmlFor="erp-module-packaging"
+              >
+                Common packaging
+              </label>
+              <select
+                className="mt-1 min-h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                id="erp-module-packaging"
+                onChange={(event) => setPackagingFilter(event.target.value)}
+                value={packagingFilter}
+              >
+                <option value="all">All packaging</option>
+                {packagingOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          <div>
-            <label
-              className="text-xs font-semibold text-foreground"
-              htmlFor="erp-module-group"
+          <nav aria-label="ERP module categories" className="mt-4 flex flex-wrap gap-2">
+            <button
+              className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${groupFilter === "all" ? "border-brand-navy bg-brand-navy text-white" : "border-border bg-surface text-muted hover:border-brand-gold hover:text-foreground"}`}
+              onClick={() => setGroupFilter("all")}
+              type="button"
             >
-              Business group
-            </label>
-            <select
-              className="mt-1 min-h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
-              id="erp-module-group"
-              onChange={(event) => setGroupFilter(event.target.value)}
-              value={groupFilter}
-            >
-              <option value="all">All groups</option>
-              {erpModuleGroups.map((group) => (
-                <option key={group.id} value={group.id}>
-                  {group.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label
-              className="text-xs font-semibold text-foreground"
-              htmlFor="erp-module-packaging"
-            >
-              Common packaging
-            </label>
-            <select
-              className="mt-1 min-h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
-              id="erp-module-packaging"
-              onChange={(event) => setPackagingFilter(event.target.value)}
-              value={packagingFilter}
-            >
-              <option value="all">All packaging</option>
-              {packagingOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
+              All categories
+            </button>
+            {erpModuleGroups.map((group) => (
+              <button
+                className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${groupFilter === group.id ? "border-brand-navy bg-brand-navy text-white" : "border-border bg-surface text-muted hover:border-brand-gold hover:text-foreground"}`}
+                key={group.id}
+                onClick={() => setGroupFilter(group.id)}
+                type="button"
+              >
+                {group.name}
+              </button>
+            ))}
+          </nav>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 py-4">

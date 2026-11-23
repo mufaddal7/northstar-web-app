@@ -103,7 +103,7 @@ const faqs = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-brand-navy py-16 text-white sm:py-24 lg:py-28">
+      <section className="relative isolate overflow-hidden bg-brand-navy py-12 text-white sm:py-14 lg:py-16">
         <div
           aria-hidden="true"
           className="absolute -right-36 -top-32 -z-10 h-[38rem] w-[38rem] rounded-full border border-white/10 sm:right-[-5rem]"
@@ -112,7 +112,7 @@ export default function HomePage() {
           <div className="absolute inset-28 rounded-full border border-brand-gold/30" />
           <div className="absolute inset-44 rounded-full border border-brand-gold/40" />
         </div>
-        <Shell className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <Shell className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <div className="max-w-3xl">
             <Eyebrow inverse>Business transformation · Technology services</Eyebrow>
             <h1 className="font-display text-4xl leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">

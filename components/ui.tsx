@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 type Tone = "default" | "muted" | "navy" | "slate";
 type ShellWidth = "default" | "narrow" | "medium";
+type PageHeroSize = "compact" | "default" | "spacious";
 
 const shellWidths: Record<ShellWidth, string> = {
   default: "max-w-[1280px]",
@@ -15,6 +16,12 @@ const sectionTones: Record<Tone, string> = {
   muted: "bg-surface-muted text-foreground",
   navy: "bg-brand-navy text-white",
   slate: "bg-brand-slate text-white",
+};
+
+const pageHeroSizes: Record<PageHeroSize, string> = {
+  compact: "py-12 sm:py-14 lg:py-16",
+  default: "py-16 sm:py-20 lg:py-24",
+  spacious: "py-20 sm:py-24 lg:py-32",
 };
 
 export function Shell({
@@ -71,15 +78,17 @@ export function PageHero({
   description,
   children,
   dark = false,
+  size = "compact",
 }: {
   eyebrow: string;
   title: ReactNode;
   description: string;
   children?: ReactNode;
   dark?: boolean;
+  size?: PageHeroSize;
 }) {
   return (
-    <section className={`relative overflow-hidden py-16 sm:py-20 lg:py-24 ${dark ? "bg-brand-navy text-white" : "bg-surface-muted text-foreground"}`}>
+    <section className={`relative overflow-hidden ${pageHeroSizes[size]} ${dark ? "bg-brand-navy text-white" : "bg-surface-muted text-foreground"}`}>
       <Shell className="relative z-10" width="medium">
         <Eyebrow inverse={dark}>{eyebrow}</Eyebrow>
         <h1 className="max-w-5xl font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
