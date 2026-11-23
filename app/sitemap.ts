@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/what-is-erp",
     "/compare",
     "/compare/netsuite-vs-oracle-fusion-erp",
+    "/compare/odoo-vs-netsuite",
     "/what-we-do",
     "/how-we-work",
     "/maturity-scan",

@@ -21,6 +21,14 @@ const comparisons = [
     label: "Read the comparison",
   },
   {
+    category: "ERP platforms",
+    href: "/compare/odoo-vs-netsuite",
+    title: "Odoo vs NetSuite",
+    summary:
+      "Compare Odoo Enterprise and NetSuite across functional scale, five-year cost, deployment control, APIs, DevOps and ownership risk.",
+    label: "Read the comparison",
+  },
+  {
     category: "Business systems",
     href: "/erp-vs-crm",
     title: "ERP vs CRM",

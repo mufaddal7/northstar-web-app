@@ -85,7 +85,7 @@ const mobileLinks = [
   { label: "ERP modules", href: "/erp-modules" },
   { label: "ERP architecture & security", href: "/erp-architecture-data-security" },
   { label: "ERP comparisons", href: "/compare" },
-  { label: "Business maturity scan", href: "/maturity-scan" },
+  { label: "🚀 Business modernization scan", href: "/maturity-scan" },
   { label: "How we work", href: "/how-we-work" },
   { label: "Industries", href: "/industries" },
   { label: "Insights", href: "/insights" },
@@ -175,6 +175,15 @@ export function SiteHeader() {
             onMouseEnter={() => setActiveMenu(null)}
           >
             ERP
+          </Link>
+          <Link
+            className="rounded-sm px-3 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-surface-muted hover:text-brand-gold focus-visible:bg-surface-muted"
+            href="/maturity-scan"
+            onClick={() => setActiveMenu(null)}
+            onFocus={() => setActiveMenu(null)}
+            onMouseEnter={() => setActiveMenu(null)}
+          >
+            🚀 Business modernization scan
           </Link>
           {menuGroups
             .filter(({ id }) => id === "services")
