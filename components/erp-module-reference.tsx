@@ -9,7 +9,17 @@ const packagingStyles: Record<ModulePackaging, string> = {
   "Core in manufacturing ERP": "bg-brand-navy text-white",
   "Common extension": "bg-brand-gold/15 text-foreground",
   "Often adjacent": "bg-surface-muted text-muted",
-  "Emerging capability": "border border-dashed border-brand-gold bg-surface text-foreground",
+  "Emerging capability":
+    "border border-dashed border-brand-gold bg-surface text-foreground",
+};
+
+const groupAccents: Record<string, string> = {
+  finance: "#b47d00",
+  "supply-chain": "#218449",
+  manufacturing: "#d45d16",
+  customer: "#216fc3",
+  "people-projects": "#c33e65",
+  emerging: "#7040a5",
 };
 
 function PackagingBadge({ value }: { value: ModulePackaging }) {
@@ -44,6 +54,7 @@ export function ErpModuleReference({ groups }: { groups: ErpModuleGroup[] }) {
             <h3
               className="font-display text-2xl leading-tight"
               id={`module-group-${group.id}`}
+              style={{ color: groupAccents[group.id] }}
             >
               {group.name}
             </h3>

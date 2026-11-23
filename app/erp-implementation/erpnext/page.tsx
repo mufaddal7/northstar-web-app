@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
+import { ContactForm } from "@/components/contact-form";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
 import { Eyebrow, PageHero, Section, SectionHeading, Shell } from "@/components/ui";
@@ -259,6 +260,21 @@ export default function ErpNextImplementationPage() {
               </details>
             ))}
           </div>
+        </Shell>
+      </Section>
+
+      <Section id="request-demo">
+        <Shell className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading
+            eyebrow="Request an ERPNext demo"
+            title="Explore ERPNext around the way your business works."
+            copy="Share your current priorities and we’ll arrange a practical conversation or walkthrough."
+          />
+          <ContactForm
+            initialInterest="ERPNext implementation"
+            source="erpnext_page"
+            submitLabel="Request an ERPNext demo"
+          />
         </Shell>
       </Section>
 

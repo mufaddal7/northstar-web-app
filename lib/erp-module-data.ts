@@ -22,7 +22,7 @@ export type ErpModuleGroup = {
 export const erpModuleGroups: ErpModuleGroup[] = [
   {
     id: "finance",
-    name: "Finance & governance",
+    name: "Finance & Accounts",
     description:
       "The records and controls used to understand money, obligations and financial performance.",
     modules: [
@@ -31,7 +31,11 @@ export const erpModuleGroups: ErpModuleGroup[] = [
         description:
           "General ledger, payables, receivables, cash, fixed assets, expenses, close and financial statements.",
         packaging: "Core in many suites",
-        keywords: ["General ledger (GL)", "Accounts payable (AP)", "Accounts receivable (AR)"],
+        keywords: [
+          "General ledger (GL)",
+          "Accounts payable (AP)",
+          "Accounts receivable (AR)",
+        ],
       },
       {
         name: "Tax Management",
@@ -41,14 +45,14 @@ export const erpModuleGroups: ErpModuleGroup[] = [
         keywords: ["Tax", "Statutory reporting"],
       },
       {
-        name: "Enterprise Performance Management (EPM)",
+        name: "Financial Planning, Budgeting, and Controlling (EPM)",
         description:
           "Budgeting, forecasting, financial consolidation, scenario planning and performance reporting.",
         packaging: "Often adjacent",
         keywords: ["EPM", "Budgeting", "Forecasting"],
       },
       {
-        name: "Governance, Risk & Compliance (GRC)",
+        name: "Financial Reporting and Consolidation",
         description:
           "Controls, audit evidence, policy workflows, risk registers and access or duty-separation reviews.",
         packaging: "Common extension",
@@ -58,7 +62,7 @@ export const erpModuleGroups: ErpModuleGroup[] = [
   },
   {
     id: "supply-chain",
-    name: "Supply chain & operations",
+    name: "Purchase Management",
     description:
       "How organizations source materials, manage stock, take orders and deliver goods.",
     modules: [
@@ -122,7 +126,7 @@ export const erpModuleGroups: ErpModuleGroup[] = [
   },
   {
     id: "manufacturing",
-    name: "Manufacturing, quality & assets",
+    name: "Production",
     description:
       "The capabilities that plan production, record execution and keep products and equipment within specification.",
     modules: [
@@ -131,7 +135,12 @@ export const erpModuleGroups: ErpModuleGroup[] = [
         description:
           "Bills of material, routings, work orders, material requirements and production schedules.",
         packaging: "Core in manufacturing ERP",
-        keywords: ["BOM", "Bill of materials", "Work orders", "Production planning"],
+        keywords: [
+          "BOM",
+          "Bill of materials",
+          "Work orders",
+          "Production planning",
+        ],
       },
       {
         name: "Manufacturing Execution (MES)",
@@ -165,7 +174,7 @@ export const erpModuleGroups: ErpModuleGroup[] = [
   },
   {
     id: "customer",
-    name: "Customer, service & revenue",
+    name: "Sales Management",
     description:
       "Front-office capabilities that connect customer demand, sales, service and commercial models to operations.",
     modules: [
@@ -208,7 +217,7 @@ export const erpModuleGroups: ErpModuleGroup[] = [
   },
   {
     id: "people-projects",
-    name: "People, projects & analytics",
+    name: "Human Resources",
     description:
       "Capabilities for workforce administration, project delivery and management insight.",
     modules: [

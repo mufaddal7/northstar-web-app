@@ -7,6 +7,8 @@ export type ContactSubmission = {
   company: string;
   interest: string;
   challenge: string;
+  source?: string;
+  pagePath?: string;
 };
 
 export type ContactSubmissionResult =
@@ -38,6 +40,8 @@ export async function forwardContactSubmission(
         company: values.company,
         interest: values.interest,
         challenge: values.challenge,
+        source: values.source || "contact_form",
+        pagePath: values.pagePath || "",
       }),
       cache: "no-store",
       signal: AbortSignal.timeout(15000),
@@ -83,29 +87,6 @@ export async function forwardContactSubmission(
           error,
         );
       }
-    }
-
-    if (!isNewsletterSubscription(values)) {
-      try {
-        await sendEmail({
-          to:
-            process.env.CONTACT_NOTIFICATION_EMAIL?.trim() ||
-            "burhanuddin@northstar53.com",
-          ...createContactNotificationEmail(values),
-        });
-      } catch (error) {
-        console.error(
-          `[contact:${requestId}] Internal contact notification failed:`,
-          error,
-        );
-      }
-    }
-
-    function isNewsletterSubscription(values: ContactSubmission) {
-      return values.challenge
-        .split(/\r?\n/, 1)[0]
-        .trim()
-        .startsWith("News Letter Subscription");
     }
 
     return { success: true };

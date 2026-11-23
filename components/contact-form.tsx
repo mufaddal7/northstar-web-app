@@ -1,6 +1,8 @@
 "use client";
 
 import { FormEvent, useId, useState } from "react";
+import { usePathname } from "next/navigation";
+import { trackEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -12,10 +14,15 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm({
   initialInterest = "",
+  source = "contact_form",
+  submitLabel = "Start the conversation",
 }: {
   initialInterest?: string;
+  source?: string;
+  submitLabel?: string;
 }) {
   const formId = useId();
+  const pathname = usePathname();
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -23,7 +30,12 @@ export function ContactForm({
     setStatus("loading");
     setMessage("");
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
+    const data = {
+      ...Object.fromEntries(new FormData(form)),
+      source,
+      pagePath: pathname,
+    };
+    trackEvent("contact_form_start", { source, page_path: pathname });
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -45,7 +57,8 @@ export function ContactForm({
       console.info("[contact-form] Contact API accepted the submission.", {
         requestId: body.requestId,
       });
-      window.gtag?.("event", "generate_lead", { method: "contact_form" });
+      trackEvent("generate_lead", { method: source, page_path: pathname });
+      trackEvent("contact_form_success", { source, page_path: pathname });
       form.reset();
       setStatus("success");
       setMessage(
@@ -58,6 +71,7 @@ export function ContactForm({
         console.error("[contact-form] Could not reach the contact API.", error);
       }
       setStatus("error");
+      trackEvent("contact_form_error", { source, page_path: pathname });
       setMessage(
         error instanceof Error
           ? error.message
@@ -138,7 +152,7 @@ export function ContactForm({
           ? "Sending…"
           : status === "success"
             ? "Message sent"
-            : "Start the conversation"}
+            : submitLabel}
       </button>
       {message ? (
         <p className={`text-sm ${status === "error" ? "text-status-error" : "text-status-success"}`} role="status">

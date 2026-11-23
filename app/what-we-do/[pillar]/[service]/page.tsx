@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
+import { ContactForm } from "@/components/contact-form";
+import { ContactDialog } from "@/components/contact-dialog";
 import { PageHero, Section, SectionHeading, Shell, Eyebrow } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 import {
@@ -38,6 +40,20 @@ export default async function ServicePage({ params }: Props) {
   const item = getService(pillarSlug, serviceSlug);
   if (!item) notFound();
   const { pillar, ...service } = item;
+  const initialInterest =
+    service.title.includes("ERP")
+      ? "ERP implementation"
+      : service.title.includes("CRM")
+        ? "CRM implementation"
+        : service.title.includes("AI")
+          ? "AI & Automation"
+          : service.title.includes("Data") || service.title.includes("Business Intelligence")
+            ? "Data & Analytics"
+            : service.title.includes("Strategy")
+              ? "Technology Strategy"
+              : service.title.includes("Modernization")
+                ? "Modernize existing systems"
+                : "Something else";
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -60,9 +76,15 @@ export default async function ServicePage({ params }: Props) {
         title={service.title}
         description={service.description}
       >
-        <Link href={`/what-we-do/${pillar.slug}`} className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold-light hover:underline">
-          Explore {pillar.name} <ArrowUpRight className="h-4 w-4" />
-        </Link>
+        <div className="flex flex-wrap items-center gap-4">
+          <ContactDialog
+            initialInterest={initialInterest}
+            label="Request a demo"
+          />
+          <Link href={`/what-we-do/${pillar.slug}`} className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold-light hover:underline">
+            Explore {pillar.name} <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
       </PageHero>
       <Section tone="muted">
         <Shell width="medium">
@@ -133,6 +155,26 @@ export default async function ServicePage({ params }: Props) {
           <Link className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline" href="/case-studies">
             Explore case studies <ArrowUpRight />
           </Link>
+        </Shell>
+      </Section>
+      <Section id="request-demo">
+        <Shell className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div>
+            <SectionHeading
+              eyebrow="Request a demo or consultation"
+              title={`See how ${service.title.toLowerCase()} could work for your business.`}
+              copy="Share your context and we’ll arrange a focused conversation or walkthrough around your priorities."
+            />
+            <p className="mt-6 text-sm leading-6 text-muted">
+              Prefer a quick conversation? Submit the form and tell us whether
+              you want a demo, an assessment or help planning the next step.
+            </p>
+          </div>
+          <ContactForm
+            initialInterest={initialInterest}
+            source={`service_page:${service.slug}`}
+            submitLabel="Request a demo or consultation"
+          />
         </Shell>
       </Section>
       <CtaBand

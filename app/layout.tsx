@@ -5,8 +5,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ServiceWorker } from "@/components/service-worker";
-import { MaturityScanPrompt } from "@/components/maturity-scan-prompt";
+import { InquiryPrompt } from "@/components/inquiry-prompt";
 import { NewsletterPrompt } from "@/components/newsletter-prompt";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import { SITE_URL } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -85,8 +86,9 @@ export default function RootLayout({
         <Breadcrumbs />
         <main id="main-content">{children}</main>
         <SiteFooter />
-        <MaturityScanPrompt />
+        <InquiryPrompt />
         <NewsletterPrompt />
+        <AnalyticsTracker />
         <ServiceWorker />
         <script type="application/ld+json">{structuredData}</script>
         <Script
@@ -98,7 +100,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){window.dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-TY80VCFXKZ');
+            gtag('config', 'G-TY80VCFXKZ', { send_page_view: false });
           `}
         </Script>
       </body>

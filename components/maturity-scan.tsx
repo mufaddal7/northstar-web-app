@@ -123,6 +123,11 @@ export function MaturityScan() {
   function chooseAnswer(optionId: string) {
     if (!currentQuestion) return;
     setAnswers((current) => ({ ...current, [currentQuestion.id]: optionId }));
+    window.gtag?.("event", "modernization_scan_answer_selected", {
+      question_id: currentQuestion.id,
+      question_number: questionIndex + 1,
+      option_id: optionId,
+    });
     setErrorMessage("");
   }
 
@@ -130,8 +135,14 @@ export function MaturityScan() {
     if (!currentAnswer) return;
     if (questionIndex === questions.length - 1) {
       setPhase("details");
+      window.gtag?.("event", "modernization_scan_questions_completed", {
+        question_count: questions.length,
+      });
     } else {
       setQuestionIndex((index) => index + 1);
+      window.gtag?.("event", "modernization_scan_question_advanced", {
+        question_number: questionIndex + 1,
+      });
     }
     focusScanStep();
   }
@@ -184,6 +195,10 @@ export function MaturityScan() {
       setResult(body.result);
       setReportEmailStatus(body.emailSent === false ? "failed" : "sent");
       setPhase("result");
+      window.gtag?.("event", "modernization_scan_result_viewed", {
+        score: body.result.score,
+        maturity_level: body.result.level,
+      });
       window.gtag?.("event", "generate_lead", {
         method: "business_maturity_scan",
         score: body.result.score,

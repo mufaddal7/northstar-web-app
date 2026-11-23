@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
+import { ContactForm } from "@/components/contact-form";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
 import { ErpReferenceArchitecture } from "@/components/erp-reference-architecture";
@@ -351,6 +352,21 @@ export default function ErpImplementationPage() {
           >
             Compare ERP and CRM <ArrowUpRight />
           </Link>
+        </Shell>
+      </Section>
+
+      <Section id="request-demo">
+        <Shell className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading
+            eyebrow="Request an ERP demo"
+            title="See how a connected ERP approach could fit your operations."
+            copy="Tell us what your teams need to connect and we’ll arrange a focused conversation or walkthrough."
+          />
+          <ContactForm
+            initialInterest="ERP implementation"
+            source="erp_implementation_page"
+            submitLabel="Request an ERP demo"
+          />
         </Shell>
       </Section>
 

@@ -1,7 +1,9 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ContactForm } from "@/components/contact-form";
+import { trackEvent } from "@/lib/analytics";
 
 export function ContactDialog({
   label = "Start an inquiry",
@@ -15,6 +17,7 @@ export function ContactDialog({
   secondary?: boolean;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const pathname = usePathname();
   const dialogId = useId();
   const titleId = useId();
   const descriptionId = useId();
@@ -23,6 +26,11 @@ export function ContactDialog({
   function openDialog() {
     setFormKey((key) => key + 1);
     dialogRef.current?.showModal();
+    trackEvent("inquiry_cta_click", {
+      label,
+      page_path: pathname,
+      interest: initialInterest || undefined,
+    });
   }
 
   return (
@@ -69,7 +77,11 @@ export function ContactDialog({
             Share a little context. We’ll get back to you and discuss the right
             next step. There’s no obligation.
           </p>
-          <ContactForm initialInterest={initialInterest} key={formKey} />
+          <ContactForm
+            initialInterest={initialInterest}
+            key={formKey}
+            source="inquiry_dialog"
+          />
         </div>
       </dialog>
     </>

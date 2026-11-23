@@ -93,7 +93,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const submission = await forwardContactSubmission(values, requestId);
+    const submission = await forwardContactSubmission(
+      {
+        ...values,
+        source:
+          typeof payload.source === "string"
+            ? payload.source.trim().slice(0, 100)
+            : "contact_form",
+        pagePath:
+          typeof payload.pagePath === "string"
+            ? payload.pagePath.trim().slice(0, 500)
+            : "",
+      },
+      requestId,
+    );
     if (!submission.success) {
       return NextResponse.json(
         { message: "Unable to submit your inquiry right now.", requestId },
