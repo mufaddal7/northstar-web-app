@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
@@ -161,6 +162,29 @@ export default function OdooVsNetSuitePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageHero dark eyebrow="ERP platform comparison" title={<>Odoo vs NetSuite: <span className="text-brand-gold-light">which one fits?</span></>} description="A practical comparison for a 150-employee manufacturing and distribution business with entities in India, the US and UAE. Compare capability, five-year cost, architecture and ownership risk before choosing.">
+        <div className="mb-2 flex flex-wrap items-center gap-3">
+          <div className="flex h-14 w-36 items-center justify-center rounded-sm bg-white px-4 py-2">
+            <Image
+              alt="Odoo Enterprise"
+              className="h-auto max-h-9 w-auto max-w-full object-contain"
+              height={196}
+              src="/external_logos/odoo.png"
+              width={621}
+            />
+          </div>
+          <span aria-hidden="true" className="text-xl text-white/50">
+            vs
+          </span>
+          <div className="flex h-14 w-36 items-center justify-center rounded-sm bg-white px-4 py-2">
+            <Image
+              alt="Oracle NetSuite"
+              className="h-auto max-h-9 w-auto max-w-full object-contain"
+              height={152}
+              src="/external_logos/oracle netsuite.png"
+              width={417}
+            />
+          </div>
+        </div>
         <div className="flex flex-col gap-3 sm:flex-row">
           <a className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-white/35 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10" href="#quick-verdict">Compare the options</a>
           <ContactDialog initialInterest="ERP implementation" label="Discuss your ERP shortlist" />
