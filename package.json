@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.1",
-    "@xyflow/react": "^13.0.2",
     "next": "16.3.5",
     "react": "19.3.0",
     "react-dom": "19.3.0"

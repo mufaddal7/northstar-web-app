@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tenor+Sans&display=swap");
 @import "tailwindcss";
-@import "@xyflow/react/dist/style.css";
 
 @theme inline {
   --color-brand-gold: var(--gold);
@@ -132,21 +131,6 @@
 @media (prefers-reduced-motion: reduce) {
   .maturity-scan-prompt {
     animation: none;
-  }
-
-  .react-flow__edge.animated path {
-    animation: none;
-  }
-}
-
-.react-flow__edge.animated .react-flow__edge-path {
-  stroke-dasharray: 9 9;
-  animation: erp-running-flow 1.25s linear infinite;
-}
-
-@keyframes erp-running-flow {
-  to {
-    stroke-dashoffset: -36;
   }
 }
 
