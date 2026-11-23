@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tenor+Sans&display=swap");
 @import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
 
 @theme inline {
   --color-brand-gold: var(--gold);
@@ -124,54 +125,6 @@
   }
 }
 
-.erp-architecture-flow {
-  fill: none;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 10 12;
-  animation: erp-architecture-flow 2.4s linear infinite;
-  marker-end: url("#erp-arrow");
-}
-
-.erp-architecture-flow--navy {
-  stroke: #243d72;
-}
-
-.erp-architecture-flow--gold {
-  stroke: #c58a09;
-}
-
-.erp-architecture-flow--green {
-  stroke: #24804b;
-}
-
-.erp-architecture-flow--orange {
-  stroke: #d86618;
-}
-
-.erp-architecture-flow--blue {
-  stroke: #2672c8;
-}
-
-.erp-architecture-flow--red {
-  stroke: #c43d62;
-}
-
-.erp-architecture-flow--purple {
-  stroke: #7544a8;
-}
-
-@keyframes erp-architecture-flow {
-  to {
-    stroke-dashoffset: -44;
-  }
-}
-
-.erp-architecture-mobile-arrow {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
 .maturity-scan-prompt {
   animation: maturity-scan-prompt-in 240ms ease-out both;
 }
@@ -179,6 +132,21 @@
 @media (prefers-reduced-motion: reduce) {
   .maturity-scan-prompt {
     animation: none;
+  }
+
+  .react-flow__edge.animated path {
+    animation: none;
+  }
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 9 9;
+  animation: erp-running-flow 1.25s linear infinite;
+}
+
+@keyframes erp-running-flow {
+  to {
+    stroke-dashoffset: -36;
   }
 }
 

@@ -251,7 +251,7 @@ export const erpModuleGroups: ErpModuleGroup[] = [
   },
   {
     id: "emerging",
-    name: "Less-known & newer capabilities",
+    name: "Newer capabilities",
     description:
       "Capabilities gaining attention; they may be separate products, extensions or emerging features rather than standard ERP modules.",
     modules: [

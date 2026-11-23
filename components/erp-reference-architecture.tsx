@@ -1,114 +1,127 @@
+"use client";
+
+import {
+  Controls,
+  Handle,
+  MiniMap,
+  Position,
+  ReactFlow,
+  ReactFlowProvider,
+  useReactFlow,
+  type Edge,
+  type Node,
+  type NodeProps,
+} from "@xyflow/react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type MouseEvent,
+} from "react";
 import { erpModuleGroups, type ErpModuleGroup } from "@/lib/erp-module-data";
 import { SectionHeading } from "@/components/ui";
 
-type GroupStyle = {
-  accent: string;
-  surface: string;
-  ink: string;
-  darkSurface: string;
-  darkInk: string;
+import "@xyflow/react/dist/style.css";
+
+type NodeKind = "experience" | "core" | "platform" | "plugins";
+
+type ArchitectureNodeData = {
+  title: string;
+  eyebrow?: string;
+  description?: string;
+  items?: string[];
+  kind: NodeKind;
 };
 
-const groupStyles: Record<string, GroupStyle> = {
-  finance: {
-    accent: "border-[#c58a09] bg-[#fff7df] text-[#624400]",
-    surface: "bg-[#fffdf5]",
-    ink: "text-[#624400]",
-    darkSurface: "dark:bg-[#4a3505]/40",
-    darkInk: "dark:text-[#ffe7a0]",
-  },
-  "supply-chain": {
-    accent: "border-[#24804b] bg-[#eaf8ef] text-[#124d2c]",
-    surface: "bg-[#f8fffa]",
-    ink: "text-[#124d2c]",
-    darkSurface: "dark:bg-[#124d2c]/45",
-    darkInk: "dark:text-[#b7f2c9]",
-  },
-  manufacturing: {
-    accent: "border-[#d86618] bg-[#fff0e6] text-[#77320e]",
-    surface: "bg-[#fffaf6]",
-    ink: "text-[#77320e]",
-    darkSurface: "dark:bg-[#77320e]/40",
-    darkInk: "dark:text-[#ffd0b5]",
-  },
-  customer: {
-    accent: "border-[#2672c8] bg-[#eaf3ff] text-[#123f78]",
-    surface: "bg-[#f8fbff]",
-    ink: "text-[#123f78]",
-    darkSurface: "dark:bg-[#123f78]/45",
-    darkInk: "dark:text-[#b9d8ff]",
-  },
-  "people-projects": {
-    accent: "border-[#c43d62] bg-[#fff0f4] text-[#741d38]",
-    surface: "bg-[#fffafd]",
-    ink: "text-[#741d38]",
-    darkSurface: "dark:bg-[#741d38]/45",
-    darkInk: "dark:text-[#ffc0d0]",
-  },
-  emerging: {
-    accent: "border-[#7544a8] bg-[#f3edff] text-[#422166]",
-    surface: "bg-[#fcfaff]",
-    ink: "text-[#422166]",
-    darkSurface: "dark:bg-[#422166]/45",
-    darkInk: "dark:text-[#dec7ff]",
-  },
+type ArchitectureNode = Node<ArchitectureNodeData, "architecture">;
+
+const palette = {
+  finance: { color: "#b47d00", surface: "#fff5d6", ink: "#5b4100" },
+  supply: { color: "#218449", surface: "#e5f7eb", ink: "#104b2b" },
+  manufacturing: { color: "#d45d16", surface: "#ffede1", ink: "#71300f" },
+  customer: { color: "#216fc3", surface: "#e7f1ff", ink: "#123e75" },
+  people: { color: "#c33e65", surface: "#ffedf2", ink: "#721b37" },
+  emerging: { color: "#7040a5", surface: "#f0e9ff", ink: "#402061" },
+} as const;
+
+const groupPaletteKey: Record<string, keyof typeof palette> = {
+  finance: "finance",
+  "supply-chain": "supply",
+  manufacturing: "manufacturing",
+  customer: "customer",
+  "people-projects": "people",
+  emerging: "emerging",
 };
 
-const experienceChannels = [
+const experienceItems = [
   "Customer portal",
-  "Sales & CRM",
+  "Sales & CRM (Customer Relationship Management)",
   "Supplier portal",
   "Mobile workforce",
+  "Chat Bot & AI assistant",
+  "WhatsApp & Messaging",
+  "Call center & service center",
 ];
 
-const platformServices = [
-  "Workflow & approvals",
-  "API & integrations",
-  "Identity & access",
-  "BI & dashboards",
-  "Audit & compliance",
+const platformItems = [
+  "Workflow & approvals (Business Process Management)",
+  "API & integrations (Application Programming Interface)",
+  "Identity & access (Identity and Access Management)",
+  "BI & dashboards (Business Intelligence)",
+  "Audit & compliance (Governance, Risk & Compliance)",
 ];
 
-const plugins = [
-  "WMS",
-  "TMS",
-  "MES",
-  "PLM",
-  "Tax engine",
-  "EDI",
-  "E-commerce",
-  "Document management",
+const pluginItems = [
+  "WMS (Warehouse Management System)",
+  "TMS (Transportation Management System)",
+  "MES (Manufacturing Execution System)",
+  "PLM (Product Lifecycle Management)",
+  "Tax engine (Tax Management)",
+  "EDI (Electronic Data Interchange)",
+  "E-commerce (Digital Commerce)",
+  "Document management (Enterprise Content Management)",
 ];
+
+const nodeTypes = { architecture: ArchitectureNode };
 
 export function ErpReferenceArchitecture() {
-  const leftGroups = erpModuleGroups.slice(0, 3);
-  const rightGroups = erpModuleGroups.slice(3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateViewport = () => setIsMobile(mediaQuery.matches);
+    updateViewport();
+    mediaQuery.addEventListener("change", updateViewport);
+    return () => mediaQuery.removeEventListener("change", updateViewport);
+  }, []);
+
+  const edges = useMemo(() => createEdges(isMobile), [isMobile]);
+  const nodes = useMemo(
+    () => layoutNodes(createNodes(isMobile), isMobile),
+    [isMobile],
+  );
 
   return (
     <section aria-labelledby="erp-reference-architecture-title">
-      <div className="mx-auto w-full max-w-[1800px] px-[clamp(1.25rem,4vw,4rem)]">
+      <div className="mx-auto w-full max-w-[1900px] px-[clamp(1rem,3vw,3rem)]">
         <SectionHeading
           eyebrow="Reference architecture"
-          title="Every business capability, connected to the core."
-          copy="A practical ERP blueprint: customer demand enters through the experience layer, every function shares one system of record, and specialist plugins extend the platform without creating disconnected islands."
+          title="A connected ERP operating model."
+          copy="Every business capability lives inside one ERP core. Platform services and specialist plugins extend it without fragmenting the operation."
         />
 
-        <figure className="relative mt-10 overflow-hidden rounded-[2rem] border border-[#cfd4df] bg-[#f8fafc] p-4 shadow-[0_30px_90px_rgb(12_19_42_/_0.12)] dark:border-white/15 dark:bg-[#10182e] sm:p-6 lg:p-10">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgb(197_160_89_/_0.16),transparent_28%),radial-gradient(circle_at_10%_90%,rgb(38_114_200_/_0.12),transparent_26%),radial-gradient(circle_at_90%_15%,rgb(117_68_168_/_0.1),transparent_24%)]"
-          />
-
-          <figcaption className="relative flex flex-col gap-3 border-b border-[#cfd4df] pb-6 dark:border-white/15 sm:flex-row sm:items-end sm:justify-between">
+        <figure className="mt-9 overflow-hidden rounded-[1.75rem] border border-[#cbd3df] bg-[#f7f9fc] shadow-[0_24px_70px_rgb(12_19_42_/_0.12)] dark:border-white/15 dark:bg-[#10182e]">
+          <figcaption className="flex flex-col gap-3 border-b border-[#cbd3df] px-5 py-5 dark:border-white/15 sm:flex-row sm:items-end sm:justify-between sm:px-7">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold">
                 Northstar ERP blueprint
               </p>
               <h2
-                className="mt-2 max-w-3xl font-display text-3xl leading-tight tracking-[-0.035em] sm:text-5xl"
+                className="mt-1 font-display text-3xl leading-tight tracking-[-0.035em] sm:text-4xl"
                 id="erp-reference-architecture-title"
               >
-                One shared source of truth.
+                One source of truth, many connected capabilities.
               </h2>
             </div>
             <div className="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
@@ -119,150 +132,342 @@ export function ErpReferenceArchitecture() {
                 33 modules
               </span>
               <span className="rounded-full border border-border bg-surface px-3 py-1.5">
-                API-ready
+                Running flows
               </span>
             </div>
           </figcaption>
 
-          <div className="relative mt-7">
-            <FlowLines />
-
-            <LayerLabel label="Experience & channels" detail="Where demand enters the operation" />
-            <div className="relative grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {experienceChannels.map((channel) => (
-                <div
-                  className="rounded-xl border-2 border-[#243d72] bg-[#eaf0ff] px-3 py-3 text-center text-xs font-bold text-[#132c5b] shadow-sm dark:border-[#7da5ff] dark:bg-[#162b55] dark:text-[#e3edff]"
-                  key={channel}
-                >
-                  {channel}
-                </div>
-              ))}
-            </div>
-
-            <div className="relative my-4 flex justify-center lg:my-7" aria-hidden="true">
-              <span className="erp-architecture-mobile-arrow text-brand-gold">↓</span>
-            </div>
-
-            <div className="relative grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(21rem,1.3fr)_minmax(0,1fr)] lg:gap-8">
-              <div className="grid gap-4">
-                {leftGroups.map((group) => (
-                  <ModuleDomain group={group} key={group.id} />
-                ))}
-              </div>
-
-              <CoreSystem />
-
-              <div className="grid gap-4">
-                {rightGroups.map((group) => (
-                  <ModuleDomain group={group} key={group.id} />
-                ))}
-              </div>
-            </div>
-
-            <div className="relative my-4 flex justify-center lg:my-7" aria-hidden="true">
-              <span className="erp-architecture-mobile-arrow text-brand-gold">↓</span>
-            </div>
-
-            <LayerLabel label="Platform services" detail="Controls, insight and connectivity across every module" />
-            <div className="relative grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
-              {platformServices.map((service) => (
-                <div
-                  className="rounded-xl border-2 border-[#287a9f] bg-[#e8f7fb] px-3 py-3 text-center text-xs font-bold text-[#12465c] shadow-sm dark:border-[#68c8e8] dark:bg-[#103b4d] dark:text-[#d4f4ff]"
-                  key={service}
-                >
-                  {service}
-                </div>
-              ))}
-            </div>
-
-            <div className="relative mt-6 rounded-2xl border-2 border-dashed border-[#b78217] bg-[#fff8e6] p-4 dark:border-[#e2bd62] dark:bg-[#3c2d0b] sm:p-5">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8b6208] dark:text-[#f3d37e]">
-                    Plugins & connected applications
-                  </p>
-                  <h3 className="mt-1 font-display text-2xl text-[#4e3707] dark:text-[#fff1bf]">
-                    Extend the ERP where specialist depth matters.
-                  </h3>
-                </div>
-                <p className="max-w-md text-sm leading-6 text-[#705a2b] dark:text-[#f5dfaa]/75">
-                  Connect through APIs, events and approved integration
-                  patterns while keeping ownership and master data clear.
-                </p>
-              </div>
-              <ul className="mt-4 flex flex-wrap gap-2" aria-label="Common ERP plugins">
-                {plugins.map((plugin) => (
-                  <li
-                    className="rounded-full border border-[#c9962c] bg-white px-3 py-1.5 text-xs font-bold text-[#634606] shadow-sm dark:border-[#e2bd62] dark:bg-[#59420d] dark:text-[#fff0bb]"
-                    key={plugin}
-                  >
-                    {plugin}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="relative h-[820px] sm:h-[700px] lg:h-[760px]">
+            <ArchitectureFlow edges={edges} isMobile={isMobile} nodes={nodes} />
           </div>
 
-          <div className="relative mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#cfd4df] pt-4 text-[10px] font-bold uppercase tracking-[0.12em] text-muted dark:border-white/15">
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-8 rounded-full bg-[#c58a09]" /> Finance
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-8 rounded-full bg-[#24804b]" /> Supply chain
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-8 rounded-full bg-[#d86618]" /> Operations
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-8 rounded-full bg-[#2672c8]" /> Customer
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-8 rounded-full bg-[#c43d62]" /> People
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="h-2.5 w-8 rounded-full bg-[#7544a8]" /> Emerging
-            </span>
+          <div className="border-t border-[#cbd3df] px-5 py-4 dark:border-white/15 sm:px-7">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
+              {Object.entries(palette).map(([name, style]) => (
+                <span className="flex items-center gap-2" key={name}>
+                  <span
+                    className="h-2.5 w-8 rounded-full"
+                    style={{ backgroundColor: style.color }}
+                  />
+                  {name}
+                </span>
+              ))}
+              <span className="ml-auto hidden normal-case tracking-normal sm:block">
+                Scroll to zoom · drag to pan
+              </span>
+            </div>
+            <p className="mt-3 text-xs leading-5 text-muted">
+              Conceptual reference architecture. Module boundaries, integrations
+              and plugin scope should be confirmed against the operating model,
+              platform and regulatory requirements.
+            </p>
           </div>
-          <p className="relative mt-3 text-xs leading-5 text-muted">
-            Conceptual reference architecture. Module boundaries, integration
-            choices and plugin scope should be confirmed against the operating
-            model, platform and regulatory requirements.
-          </p>
         </figure>
       </div>
     </section>
   );
 }
 
-function LayerLabel({ label, detail }: { label: string; detail: string }) {
+function createNodes(isMobile: boolean): ArchitectureNode[] {
+  return [
+    makeNode(
+      "experience",
+      {
+        title: "Experience & channels",
+        // eyebrow: "Where demand enters the operation",
+        items: experienceItems,
+        kind: "experience",
+      },
+      isMobile ? 360 : 980,
+    ),
+    makeNode(
+      "core",
+      {
+        title: "ERP core",
+        eyebrow: "System of record",
+        description:
+          "Shared master data, transaction processing, financial control, workflow and audit trail.",
+        kind: "core",
+      },
+      isMobile ? 360 : 1180,
+    ),
+    makeNode(
+      "platform",
+      {
+        title: "Platform services",
+        // eyebrow: "Connect, control and learn",
+        items: platformItems,
+        kind: "platform",
+      },
+      isMobile ? 360 : 900,
+    ),
+    makeNode(
+      "plugins",
+      {
+        title: "Plugins & connected applications",
+        // eyebrow: "Specialist depth without disconnected islands",
+        description:
+          "Approved extensions connected through APIs, events and integration patterns.",
+        items: pluginItems,
+        kind: "plugins",
+      },
+      isMobile ? 360 : 330,
+    ),
+  ];
+}
+
+function makeNode(
+  id: string,
+  data: ArchitectureNodeData,
+  width: number,
+): ArchitectureNode {
+  return {
+    id,
+    data,
+    position: { x: 0, y: 0 },
+    style: { width },
+    type: "architecture",
+  };
+}
+
+function createEdges(isMobile: boolean): Edge[] {
+  return [
+    makeEdge(
+      "experience-core",
+      "experience",
+      "core",
+      "#216fc3",
+      "source-bottom",
+      "target-top",
+    ),
+    makeEdge(
+      "core-platform",
+      "core",
+      "platform",
+      "#287a9f",
+      "source-bottom",
+      "target-top",
+    ),
+    makeEdge(
+      "core-plugins",
+      "core",
+      "plugins",
+      "#b78217",
+      isMobile ? "source-bottom" : "source-right",
+      isMobile ? "target-top" : "target-left",
+    ),
+  ];
+}
+
+function makeEdge(
+  id: string,
+  source: string,
+  target: string,
+  color: string,
+  sourceHandle: string,
+  targetHandle: string,
+): Edge {
+  return {
+    id,
+    source,
+    sourceHandle,
+    target,
+    targetHandle,
+    animated: true,
+    style: { stroke: color, strokeWidth: 3 },
+    type: "smoothstep",
+  };
+}
+
+function layoutNodes(nodes: ArchitectureNode[], isMobile: boolean) {
+  const byId = new Map(nodes.map((node) => [node.id, node]));
+  const core = byId.get("core");
+  const experience = byId.get("experience");
+  const platform = byId.get("platform");
+  const plugins = byId.get("plugins");
+
+  if (!core || !experience || !platform || !plugins) {
+    return nodes;
+  }
+
+  const gap = isMobile ? 32 : 36;
+  const platformGap = isMobile ? 32 : 2;
+  const coreWidth = nodeWidth(core);
+  const coreHeight = nodeHeight(core.data, isMobile);
+  const experienceWidth = nodeWidth(experience);
+  const platformWidth = nodeWidth(platform);
+  const coreX = isMobile ? 0 : 40;
+  const coreY = isMobile
+    ? nodeHeight(experience.data, true) + gap
+    : nodeHeight(experience.data, false) + gap;
+
+  const positions = new Map<string, { x: number; y: number }>([
+    [
+      "experience",
+      {
+        x: coreX + (coreWidth - experienceWidth) / 2,
+        y: 0,
+      },
+    ],
+    ["core", { x: coreX, y: coreY }],
+    [
+      "platform",
+      {
+        x: isMobile ? 0 : coreX + (coreWidth - platformWidth) / 2,
+        y: coreY + coreHeight + platformGap + 0,
+      },
+    ],
+    [
+      "plugins",
+      {
+        x: isMobile ? 0 : coreX + coreWidth + gap,
+        y: isMobile
+          ? coreY +
+            coreHeight +
+            platformGap +
+            nodeHeight(platform.data, true) +
+            gap
+          : coreY + 20,
+      },
+    ],
+  ]);
+
+  return nodes.map((node) => ({
+    ...node,
+    position: positions.get(node.id) ?? { x: 0, y: 0 },
+    style: {
+      width: nodeWidth(node),
+    },
+  }));
+}
+
+function nodeWidth(node: ArchitectureNode) {
+  return Number(node.style?.width ?? 280);
+}
+
+function nodeHeight(data: ArchitectureNodeData, isMobile: boolean) {
+  if (data.kind === "core") return isMobile ? 620 : 500;
+
+  const columns =
+    data.kind === "plugins"
+      ? 1
+      : data.kind === "experience"
+        ? isMobile
+          ? 2
+          : 4
+        : isMobile
+          ? 2
+          : 5;
+  const rows = Math.ceil((data.items?.length ?? 0) / columns);
+  const header = data.description ? 72 : 52;
+  const itemHeight = data.kind === "plugins" ? 38 : 40;
+
+  return header + rows * itemHeight + 28;
+}
+
+function nodeColor(id: string) {
+  if (id === "experience") return "#216fc3";
+  if (id === "core") return "#b98724";
+  if (id === "platform") return "#287a9f";
+  return "#b78217";
+}
+
+function ArchitectureNode({ data }: NodeProps<ArchitectureNode>) {
+  if (data.kind === "core") {
+    return <CoreNode />;
+  }
+
+  const style =
+    data.kind === "experience"
+      ? { color: "#216fc3", surface: "#e7f1ff", ink: "#123e75" }
+      : data.kind === "platform"
+        ? { color: "#287a9f", surface: "#e8f7fb", ink: "#12465c" }
+        : { color: "#b78217", surface: "#fff5d6", ink: "#5b4100" };
+
   return (
-    <div className="relative mb-3 flex flex-wrap items-baseline justify-between gap-2">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">{label}</p>
-      <p className="text-xs text-muted">{detail}</p>
+    <div
+      className="erp-reference-node flex h-auto flex-col rounded-xl border-2 p-3 shadow-[0_8px_24px_rgb(12_19_42_/_0.1)]"
+      style={{
+        backgroundColor: style.surface,
+        borderColor: style.color,
+        color: style.ink,
+      }}
+    >
+      <FlowHandles color={style.color} />
+      <p className="text-center text-[9px] font-bold uppercase tracking-[0.16em] opacity-65">
+        {data.eyebrow}
+      </p>
+      <h3 className="mt-1 text-center font-display text-xl leading-tight">
+        {data.title}
+      </h3>
+      {data.description ? (
+        <p className="mt-2 text-center text-[11px] leading-4 opacity-75">
+          {data.description}
+        </p>
+      ) : null}
+      <ModuleList items={data.items ?? []} kind={data.kind} />
     </div>
   );
 }
 
-function ModuleDomain({ group }: { group: ErpModuleGroup }) {
-  const style = groupStyles[group.id];
-
+function CoreNode() {
   return (
-    <section className={`relative rounded-2xl border-2 p-4 shadow-sm ${style.accent} ${style.darkSurface} ${style.darkInk}`}>
-      <div className="flex items-start justify-between gap-3 border-b border-current/20 pb-3">
+    <div className="erp-reference-node flex h-auto flex-col rounded-2xl border-2 border-[#b98724] bg-[#111c3b] p-4 pb-0 text-white shadow-[0_14px_38px_rgb(12_19_42_/_0.28)]">
+      <FlowHandles color="#b98724" />
+      <div className="flex items-start justify-between gap-4 border-b border-white/20 pb-3">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] opacity-70">
-            Module domain
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#f0cf7b]">
+            System of record
           </p>
-          <h3 className="mt-1 font-display text-xl leading-tight">{group.name}</h3>
+          <h3 className="mt-1 font-display text-3xl">ERP core</h3>
         </div>
-        <span className="rounded-full border border-current/25 px-2 py-1 text-[10px] font-bold">
+        <span className="rounded-full border border-[#e0bd67] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#f0cf7b]">
+          33 modules
+        </span>
+      </div>
+      <p className="mt-3 max-w-3xl text-[11px] leading-4 text-white/65">
+        Shared master data, transaction processing, financial control, workflow,
+        approvals and audit trail keep the operating model aligned.
+      </p>
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+        {erpModuleGroups.map((group) => {
+          const style = palette[groupPaletteKey[group.id]];
+          return <DomainCard group={group} key={group.id} style={style} />;
+        })}
+      </div>
+      <p className="mt-1 border-t border-white/15 pb-1 pt-1 text-center text-[10px] font-bold uppercase tracking-[0.14em] text-[#f0cf7b]">
+        Shared data · shared rules · shared visibility
+      </p>
+    </div>
+  );
+}
+
+function DomainCard({
+  group,
+  style,
+}: {
+  group: ErpModuleGroup;
+  style: { color: string; surface: string; ink: string };
+}) {
+  return (
+    <section
+      className="min-w-0 rounded-lg border p-2.5"
+      style={{
+        backgroundColor: style.surface,
+        borderColor: style.color,
+        color: style.ink,
+      }}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <h4 className="font-display text-sm leading-tight">{group.name}</h4>
+        <span className="rounded-full border border-current/25 px-1.5 py-0.5 text-[9px] font-bold">
           {group.modules.length}
         </span>
       </div>
-      <ul className="mt-3 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+      <ul className="mt-2 grid grid-cols-2 gap-1">
         {group.modules.map((module) => (
           <li
-            className={`rounded-lg border border-current/15 ${style.surface} px-2.5 py-2 text-[11px] font-bold leading-4 ${style.ink} ${style.darkSurface} ${style.darkInk}`}
+            className="min-w-0 rounded border border-current/15 bg-white/70 px-1.5 py-1 text-[8px] font-bold leading-3"
             key={module.name}
           >
             {module.name}
@@ -273,65 +478,137 @@ function ModuleDomain({ group }: { group: ErpModuleGroup }) {
   );
 }
 
-function CoreSystem() {
+function ModuleList({ items, kind }: { items: string[]; kind: NodeKind }) {
   return (
-    <section className="relative flex flex-col rounded-2xl border-2 border-[#b98724] bg-[#111c3b] p-5 text-white shadow-[0_18px_50px_rgb(12_19_42_/_0.28)] dark:border-[#e0bd67] dark:bg-[#0b1229] sm:p-6">
-      <div className="flex items-start justify-between gap-3 border-b border-white/20 pb-4">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#f0cf7b]">
-            ERP core
-          </p>
-          <h3 className="mt-1 font-display text-3xl leading-tight">
-            System of record
-          </h3>
-        </div>
-        <span className="rounded-full border border-[#e0bd67] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#f0cf7b]">
-          Core
-        </span>
-      </div>
-      <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
-        {[
-          ["Master data", "Customers · suppliers · items · employees"],
-          ["Transaction engine", "Orders · invoices · receipts · journals"],
-          ["Financial control", "GL · AP · AR · tax · close"],
-          ["Operational control", "Workflow · approvals · audit trail"],
-        ].map(([title, detail]) => (
-          <div className="rounded-xl border border-white/15 bg-white/[0.08] p-3" key={title}>
-            <p className="text-sm font-bold text-white">{title}</p>
-            <p className="mt-1 text-xs leading-5 text-white/65">{detail}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-auto pt-5 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f0cf7b]">
-          Shared data. Shared rules. Shared visibility.
-        </p>
-      </div>
-    </section>
+    <ul
+      className={`mt-3 flex flex-wrap justify-center gap-1.5 ${
+        kind === "plugins"
+          ? "flex-col"
+          : kind === "experience"
+            ? "[&>li]:basis-[calc(50%-0.375rem)] lg:[&>li]:basis-[calc(25%-0.375rem)]"
+            : kind === "platform"
+              ? "[&>li]:basis-[calc(50%-0.375rem)] lg:[&>li]:basis-[calc(20%-0.375rem)]"
+              : "[&>li]:basis-[calc(50%-0.375rem)]"
+      }`}
+    >
+      {items.map((item) => (
+        <li
+          className="flex min-h-8 w-full items-center justify-center rounded-md border border-current/15 bg-white/70 px-2 py-1.5 text-center text-[9px] font-bold leading-3"
+          key={item}
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function FlowLines() {
+function FlowHandles({ color }: { color: string }) {
   return (
-    <svg
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-[8.5rem] z-0 hidden h-[38rem] w-full lg:block"
-      preserveAspectRatio="none"
-      viewBox="0 0 1200 620"
+    <>
+      <Handle
+        id="target-top"
+        position={Position.Top}
+        type="target"
+        className="!h-2 !w-2 !border-0"
+        style={{ backgroundColor: color }}
+      />
+      <Handle
+        id="source-bottom"
+        position={Position.Bottom}
+        type="source"
+        className="!h-2 !w-2 !border-0"
+        style={{ backgroundColor: color }}
+      />
+      <Handle
+        id="target-left"
+        position={Position.Left}
+        type="target"
+        className="!h-2 !w-2 !border-0"
+        style={{ backgroundColor: color }}
+      />
+      <Handle
+        id="source-right"
+        position={Position.Right}
+        type="source"
+        className="!h-2 !w-2 !border-0"
+        style={{ backgroundColor: color }}
+      />
+    </>
+  );
+}
+
+function ArchitectureFlow({
+  edges,
+  isMobile,
+  nodes,
+}: {
+  edges: Edge[];
+  isMobile: boolean;
+  nodes: ArchitectureNode[];
+}) {
+  return (
+    <ReactFlowProvider>
+      <ArchitectureFlowCanvas edges={edges} isMobile={isMobile} nodes={nodes} />
+    </ReactFlowProvider>
+  );
+}
+
+function ArchitectureFlowCanvas({
+  edges,
+  isMobile,
+  nodes,
+}: {
+  edges: Edge[];
+  isMobile: boolean;
+  nodes: ArchitectureNode[];
+}) {
+  const { getZoom, setCenter } = useReactFlow();
+  const focusNode = useCallback(
+    (_event: MouseEvent, node: ArchitectureNode) => {
+      const width = Number(node.style?.width ?? 280);
+      const height = Number(node.style?.height ?? 180);
+      const nextZoom = Math.min(Math.max(getZoom() + 0.18, 0.85), 1.1);
+
+      void setCenter(
+        node.position.x + width / 2,
+        node.position.y + height / 2,
+        { duration: 320, zoom: nextZoom },
+      );
+    },
+    [getZoom, setCenter],
+  );
+
+  return (
+    <ReactFlow
+      aria-label="Interactive ERP reference architecture"
+      className="erp-reference-flow"
+      defaultEdgeOptions={{
+        animated: true,
+        type: "smoothstep",
+      }}
+      edges={edges}
+      fitView
+      fitViewOptions={{ padding: 0.03 }}
+      key={isMobile ? "mobile-layout" : "desktop-layout"}
+      nodes={nodes}
+      nodeTypes={nodeTypes}
+      nodesConnectable={false}
+      nodesDraggable={false}
+      onNodeClick={focusNode}
+      panOnDrag
+      proOptions={{ hideAttribution: true }}
+      zoomOnDoubleClick={false}
+      zoomOnScroll
     >
-      <defs>
-        <marker id="erp-arrow" markerHeight="8" markerWidth="8" orient="auto" refX="7" refY="4">
-          <path d="M0,0 L8,4 L0,8 z" fill="#b88725" />
-        </marker>
-      </defs>
-      <path className="erp-architecture-flow erp-architecture-flow--navy" d="M600 0 V52" />
-      <path className="erp-architecture-flow erp-architecture-flow--gold" d="M600 560 V620" />
-      <path className="erp-architecture-flow erp-architecture-flow--gold" d="M250 115 H475" />
-      <path className="erp-architecture-flow erp-architecture-flow--green" d="M250 310 H475" />
-      <path className="erp-architecture-flow erp-architecture-flow--orange" d="M250 505 H475" />
-      <path className="erp-architecture-flow erp-architecture-flow--blue" d="M950 115 H725" />
-      <path className="erp-architecture-flow erp-architecture-flow--red" d="M950 310 H725" />
-      <path className="erp-architecture-flow erp-architecture-flow--purple" d="M950 505 H725" />
-    </svg>
+      <Controls showInteractive={false} />
+      <MiniMap
+        aria-label="ERP architecture overview"
+        maskColor="rgb(12 19 42 / 10%)"
+        nodeColor={(node) => nodeColor(node.id)}
+        pannable
+        zoomable
+      />
+    </ReactFlow>
   );
 }
