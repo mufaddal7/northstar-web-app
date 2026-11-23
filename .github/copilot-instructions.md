@@ -1,38 +1,22 @@
-# Northstar project guidance
+# Northstar Project Guidance
 
-## Scope and brand
+## Scope & Architecture
+- **Workspace:** Work only in the active Next.js App Router codebase; ignore legacy `v1`, `v2`, and `v3` folders.
+- **Brand & Tokens:** Maintain Northstar’s navy-and-gold palette, theme tokens, logos, fonts, and light/dark mode support. Never hard-code surface colors where theme variables exist.
+- **Components & Styling:** Compose pages using `Shell`, `Section`, `PageHero`, `SectionHeading`, `ButtonLink`, and `CtaBand`. Scope Tailwind/CSS locally; modify global CSS only for site-wide tokens or base styles.
+- **Data & Security:** Keep secrets in environment variables. Use durable external storage (never local filesystem) for persistent state on Vercel.
 
-- Work in the Next.js application. Ignore legacy `v1`, `v2`, and `v3` folders and files.
-- Keep the Northstar look and feel: navy and gold, the existing theme tokens, logos, fonts, and reusable UI components.
-- Prefer the shared `Shell`, `Section`, `PageHero`, `SectionHeading`, `ButtonLink`, and `CtaBand` components over one-off page layouts.
-- Keep styling local to components or pages. Change global CSS only for site-wide foundations such as theme tokens, base styles, or shared behavior.
+## Responsive Design, UX & Accessibility
+- **Breakpoints & Large Screens:** Design mobile-first (`360px+`) and scale cleanly across `1920×1080` (FHD), `2560×1440` (QHD), `3440×1440` (ultrawide), and `3840×2160` (4K/high-DPI). Cap readable content with `max-width` containers (`1200px–1440px`) while letting section backgrounds bleed full-width. Use fluid units (`clamp()`, Grid/Flexbox), sharp SVG/high-DPI assets, and balanced vertical heights (`min-height` over rigid `100vh`). Prevent horizontal overflow.
+- **Accessibility & Motion:** Use semantic HTML, valid heading hierarchy, descriptive links, visible focus states, accessible control labels, and comfortable touch targets. Keep animations subtle and respect `prefers-reduced-motion`.
 
-## UX and accessibility
+## Copy & SEO
+- **Voice:** Write clear, business-focused copy leading with reader problems and practical outcomes. Define technical terms/acronyms. Avoid filler, hype, unverified claims, and **em dashes (`—`)**.
+- **Page Intent:** Give every page a single clear goal, relevant low-pressure CTA, and natural internal links.
+- **Metadata & Indexing:** Use the shared metadata helper on all public pages for unique titles, descriptions, canonical URLs, and OG/Twitter cards (using the branded share-card generator unless a custom cover adds clear value). Avoid `meta keywords` and keyword stuffing.
+- **Crawling & Schema:** Keep `app/sitemap.ts` and `app/robots.ts` synced with indexable routes. Set `noindex` on utility/offline/404 pages and exclude them from the sitemap. Ensure JSON-LD structured data strictly reflects visible on-page facts.
 
-- Design mobile-first and verify layouts at narrow phone widths as well as desktop. Prevent horizontal overflow, cramped content, and unstable or glitchy interactions.
-- Use semantic HTML, a clear heading hierarchy, descriptive link text, visible focus states, and accessible names for controls.
-- Make touch targets comfortable to use. Keep animations subtle, non-blocking, and disabled or simplified for reduced-motion preferences.
-- Respect the existing light and dark themes and use theme variables rather than hard-coded surface colors where practical.
-
-## Writing and content
-
-- Use clear, natural language that is easy for a business reader to understand. Explain necessary technical terms and acronyms.
-- Lead with the reader’s problem and practical outcome. Avoid filler, inflated claims, repetitive AI-sounding phrasing, and unsupported statistics or promises.
-- Do not use em dashes in website copy.
-- Give each page a distinct purpose and a useful next step. Keep calls to action relevant and low pressure.
-
-## SEO
-
-- Every public page needs a unique, descriptive title and meta description. Use the shared metadata helper and include a canonical URL.
-- Include Open Graph and Twitter metadata with an appropriate image. Use the existing branded image generation for share cards; create a page-specific cover when it adds value.
-- Keep `app/sitemap.ts` and `app/robots.ts` aligned with indexable routes. Do not add utility, offline, or not-found pages to the sitemap; mark them `noindex`.
-- Use accurate structured data that matches visible page content. Do not invent business locations, credentials, clients, results, or other claims.
-- Write for people and search intent. Do not add `meta keywords` or stuff keywords into titles and copy.
-- Link related pages naturally so visitors and crawlers can discover relevant services and insights.
-
-## Implementation and checks
-
-- Follow the existing Next.js App Router, TypeScript, Tailwind CSS, and component patterns. Reuse shared logic rather than duplicating it.
-- Keep secrets in environment variables; never commit credentials. Use durable external storage for data that must persist on Vercel serverless deployments.
-- For code changes, run the narrowest relevant checks. Available project checks are `yarn lint`, `yarn typecheck`, and `yarn build`.
-- Builds may rewrite `next-env.d.ts`; restore its tracked imports after validation if they change.
+## Verification
+- Reuse existing TypeScript/Tailwind utilities rather than duplicating logic.
+- Run the narrowest relevant check after changes: `yarn lint`, `yarn typecheck`, or `yarn build`.
+- If `yarn build` modifies `next-env.d.ts`, restore its tracked state before finishing.

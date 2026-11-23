@@ -120,7 +120,7 @@ export function Breadcrumbs() {
         aria-label="Breadcrumb"
         className="border-b border-border bg-surface text-sm"
       >
-        <div className="mx-auto w-full max-w-[1280px] px-5 py-3 sm:px-8 lg:px-12">
+        <div className="mx-auto w-full max-w-[1440px] px-[clamp(1.25rem,4vw,4rem)] py-3">
           <ol className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
             {items.map(({ href, label }, index) => {
               const isCurrent = index === items.length - 1;

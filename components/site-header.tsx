@@ -142,7 +142,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur-md">
       <div
-        className="relative mx-auto flex min-h-[72px] w-full max-w-[1280px] items-center justify-between gap-5 px-5 sm:px-8 lg:px-12"
+        className="relative mx-auto flex min-h-[72px] w-full max-w-[1440px] items-center justify-between gap-5 px-[clamp(1.25rem,4vw,4rem)]"
         onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
             setActiveMenu(null);

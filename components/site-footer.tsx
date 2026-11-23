@@ -6,7 +6,7 @@ import { BOOKING_URL, WHATSAPP_URL } from "@/lib/site-data";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-slate py-14 text-white/75 sm:py-16">
+    <footer className="bg-brand-slate py-[clamp(3.5rem,6vw,6rem)] text-white/75">
       <Shell>
         <div
           className="mb-12 grid scroll-mt-24 gap-5 rounded-sm border border-white/15 bg-white/[0.04] p-5 sm:grid-cols-[0.85fr_1.15fr] sm:items-center sm:p-6"

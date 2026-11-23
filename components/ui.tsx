@@ -6,9 +6,9 @@ type ShellWidth = "default" | "narrow" | "medium";
 type PageHeroSize = "compact" | "default" | "spacious";
 
 const shellWidths: Record<ShellWidth, string> = {
-  default: "max-w-[1280px]",
+  default: "max-w-[1440px]",
   narrow: "max-w-3xl",
-  medium: "max-w-5xl",
+  medium: "max-w-6xl",
 };
 
 const sectionTones: Record<Tone, string> = {
@@ -19,9 +19,9 @@ const sectionTones: Record<Tone, string> = {
 };
 
 const pageHeroSizes: Record<PageHeroSize, string> = {
-  compact: "py-12 sm:py-14 lg:py-16",
-  default: "py-16 sm:py-20 lg:py-24",
-  spacious: "py-20 sm:py-24 lg:py-32",
+  compact: "py-[clamp(3rem,5vw,5rem)]",
+  default: "py-[clamp(4rem,7vw,7rem)]",
+  spacious: "py-[clamp(5rem,9vw,9rem)]",
 };
 
 export function Shell({
@@ -34,7 +34,9 @@ export function Shell({
   width?: ShellWidth;
 }) {
   return (
-    <div className={`mx-auto w-full px-5 sm:px-8 lg:px-12 ${shellWidths[width]} ${className}`}>
+    <div
+      className={`mx-auto w-full px-[clamp(1.25rem,4vw,4rem)] ${shellWidths[width]} ${className}`}
+    >
       {children}
     </div>
   );
@@ -52,7 +54,10 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`py-14 sm:py-16 lg:py-20 ${sectionTones[tone]} ${className}`}>
+    <section
+      id={id}
+      className={`py-[clamp(3.5rem,6vw,6.5rem)] ${sectionTones[tone]} ${className}`}
+    >
       {children}
     </section>
   );
@@ -91,7 +96,7 @@ export function PageHero({
     <section className={`relative overflow-hidden ${pageHeroSizes[size]} ${dark ? "bg-brand-navy text-white" : "bg-surface-muted text-foreground"}`}>
       <Shell className="relative z-10" width="medium">
         <Eyebrow inverse={dark}>{eyebrow}</Eyebrow>
-        <h1 className="max-w-5xl font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-5xl font-display text-[clamp(2.5rem,4.5vw,5rem)] leading-[1.05] tracking-[-0.04em]">
           {title}
         </h1>
         <p className={`mt-6 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8 ${dark ? "text-white/75" : "text-muted"}`}>
@@ -117,7 +122,7 @@ export function SectionHeading({
   return (
     <div className="max-w-3xl">
       <Eyebrow inverse={inverse}>{eyebrow}</Eyebrow>
-      <h2 className="font-display text-3xl leading-tight tracking-[-0.035em] sm:text-4xl lg:text-5xl">
+      <h2 className="font-display text-[clamp(2rem,3.4vw,4.25rem)] leading-tight tracking-[-0.035em]">
         {title}
       </h2>
       {copy ? (
