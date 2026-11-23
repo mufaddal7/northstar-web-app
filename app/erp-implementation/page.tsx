@@ -4,6 +4,7 @@ import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
+import { ErpReferenceArchitecture } from "@/components/erp-reference-architecture";
 import {
   ButtonLink,
   Eyebrow,
@@ -184,6 +185,10 @@ export default function ErpImplementationPage() {
             running.
           </p>
         </Shell>
+      </Section>
+
+      <Section className="py-12 sm:py-16 lg:py-20">
+        <ErpReferenceArchitecture />
       </Section>
 
       <Section id="erp-scope">

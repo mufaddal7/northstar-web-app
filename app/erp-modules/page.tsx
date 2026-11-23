@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ErpModuleExplorer } from "@/components/erp-module-explorer";
+import { ErpReferenceArchitecture } from "@/components/erp-reference-architecture";
 import { Eyebrow, PageHero, Section, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -37,6 +38,10 @@ export default function ErpModulesPage() {
           </span>
         </div>
       </PageHero>
+
+      <Section className="py-12 sm:py-16 lg:py-20">
+        <ErpReferenceArchitecture />
+      </Section>
 
       <Section tone="muted" id="module-reference">
         <Shell width="medium">
