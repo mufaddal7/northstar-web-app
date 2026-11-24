@@ -5,7 +5,6 @@ import { ContactDialog } from "@/components/contact-dialog";
 import { ContactForm } from "@/components/contact-form";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
-import { ErpReferenceArchitecture } from "@/components/erp-reference-architecture";
 import {
   ButtonLink,
   Eyebrow,
@@ -188,8 +187,25 @@ export default function ErpImplementationPage() {
         </Shell>
       </Section>
 
-      <Section className="py-12 sm:py-16 lg:py-20">
-        <ErpReferenceArchitecture />
+      <Section tone="muted">
+        <Shell className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
+          <div>
+            <Eyebrow>Reference architecture</Eyebrow>
+            <h2 className="font-display text-3xl leading-tight sm:text-4xl">
+              See how ERP core, plugins, platforms and channels connect.
+            </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-muted">
+              Use the architecture view as a shared starting point before
+              confirming scope, integrations and security requirements.
+            </p>
+          </div>
+          <Link
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-5 py-3 text-sm font-bold transition-colors hover:border-brand-gold hover:bg-surface"
+            href="/erp-reference-architecture"
+          >
+            View reference architecture <ArrowUpRight />
+          </Link>
+        </Shell>
       </Section>
 
       <Section id="erp-scope">

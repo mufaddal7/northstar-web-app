@@ -3,8 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ErpModuleExplorer } from "@/components/erp-module-explorer";
-import { ErpReferenceArchitecture } from "@/components/erp-reference-architecture";
-import { Eyebrow, PageHero, Section, Shell } from "@/components/ui";
+import { Eyebrow, Section, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
 const pageTitle = "ERP Modules: Standard Categories and Capabilities";
@@ -20,43 +19,8 @@ export const metadata: Metadata = pageMetadata(
 export default function ErpModulesPage() {
   return (
     <>
-      <PageHero
-        dark
-        eyebrow="ERP reference"
-        title="ERP modules, in plain language."
-        description="A compact index of the business capabilities found in modern ERP suites and connected applications. Use standard names first, then confirm how each vendor packages them."
-      >
-        <div className="flex flex-wrap gap-3 text-sm text-white/75">
-          <span className="rounded-full border border-white/20 px-3 py-1.5">
-            6 categories
-          </span>
-          <span className="rounded-full border border-white/20 px-3 py-1.5">
-            33 capabilities
-          </span>
-          <span className="rounded-full border border-white/20 px-3 py-1.5">
-            Expand for detail
-          </span>
-        </div>
-      </PageHero>
-
-      <Section className="py-12 sm:py-16 lg:py-20">
-        <ErpReferenceArchitecture />
-      </Section>
-
-      <Section tone="muted" id="module-reference">
-        <Shell width="medium">
-          <div className="mb-8 max-w-3xl">
-            <Eyebrow>How to use this index</Eyebrow>
-            <h2 className="font-display text-3xl leading-tight sm:text-4xl">
-              Start with the capability, not the vendor menu.
-            </h2>
-            <p className="mt-4 leading-7 text-muted">
-              ERP products use different labels and bundle capabilities in
-              different editions. These category and module names follow
-              common industry language. Open any row to see what it covers and
-              the terms you may encounter in product documentation.
-            </p>
-          </div>
+      <Section tone="muted" className="!py-0" id="module-reference">
+        <Shell>
           <ErpModuleExplorer />
         </Shell>
       </Section>

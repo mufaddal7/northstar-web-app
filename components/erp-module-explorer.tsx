@@ -1,7 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ErpModuleReference } from "@/components/erp-module-reference";
+import Link from "next/link";
+import { ArrowUpRight } from "@/components/icons";
+import {
+  ErpCoreOverview,
+  ErpModuleReference,
+} from "@/components/erp-module-reference";
 import {
   erpModuleGroups,
   type ModulePackaging,
@@ -70,10 +75,33 @@ export function ErpModuleExplorer() {
   }
 
   return (
-    <div className="mt-8">
+    <div>
+      <ErpCoreOverview />
+
+      <div className="mt-12 max-w-3xl">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
+          How to use this index
+        </p>
+        <h2 className="font-display text-3xl leading-tight sm:text-4xl">
+          Start with the capability, not the vendor menu.
+        </h2>
+        <p className="mt-4 leading-7 text-muted">
+          ERP products use different labels and bundle capabilities in
+          different editions. These category and module names follow common
+          industry language. Open any row to see what it covers and the terms
+          you may encounter in product documentation.
+        </p>
+        <Link
+          className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+          href="/erp-reference-architecture"
+        >
+          View the full reference architecture <ArrowUpRight />
+        </Link>
+      </div>
+
       <section
         aria-labelledby="erp-module-reference-title"
-        className="mt-6"
+        className="mt-12"
         tabIndex={-1}
       >
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
