@@ -24,7 +24,8 @@ export const maturityQuestions: MaturityQuestion[] = [
     options: [
       {
         id: "local-routines",
-        label: "Team procedures exist; cross-team exceptions need manual coordination.",
+        label:
+          "Work runs smoothly within individual teams, but things often slow down when multiple departments need to work together.",
         score: 2,
         evidence:
           "Documented local routines provide a useful starting point for alignment.",
@@ -33,12 +34,12 @@ export const maturityQuestions: MaturityQuestion[] = [
         nextStep:
           "Map one high-volume workflow from start to finish, identify decision owners, and agree on a few hand-off measures.",
         serviceLabel: "Process & workflow optimization",
-        serviceHref:
-          "/what-we-do/modernize/process-workflow-optimization",
+        serviceHref: "/what-we-do/modernize/process-workflow-optimization",
       },
       {
         id: "person-dependent",
-        label: "Work relies on individual know-how and case-by-case decisions.",
+        label:
+          "There is no common way of working; everyone handles things in their own way.",
         score: 0,
         evidence:
           "Experienced staff are keeping important work moving despite limited formal support.",
@@ -47,12 +48,12 @@ export const maturityQuestions: MaturityQuestion[] = [
         nextStep:
           "Document the decisions and exceptions for one important workflow before selecting new tools.",
         serviceLabel: "Process & workflow optimization",
-        serviceHref:
-          "/what-we-do/modernize/process-workflow-optimization",
+        serviceHref: "/what-we-do/modernize/process-workflow-optimization",
       },
       {
         id: "owned-measured",
-        label: "An owner tracks outcomes and recurring exceptions.",
+        label:
+          "A designated person regularly reviews how work is going and makes sure repeated issues are addressed.",
         score: 4,
         evidence:
           "End-to-end ownership and regular review give teams a basis for making controlled improvements.",
@@ -65,7 +66,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "manual-handoffs",
-        label: "Teams pass work between separate tools and spreadsheets.",
+        label:
+          "Different teams use different systems and spreadsheets, so information has to be shared manually.",
         score: 1,
         evidence:
           "Teams have found practical ways to bridge gaps and keep work progressing.",
@@ -74,12 +76,12 @@ export const maturityQuestions: MaturityQuestion[] = [
         nextStep:
           "Trace where information is created, checked and re-entered before deciding whether to redesign or integrate the workflow.",
         serviceLabel: "Process & workflow optimization",
-        serviceHref:
-          "/what-we-do/modernize/process-workflow-optimization",
+        serviceHref: "/what-we-do/modernize/process-workflow-optimization",
       },
       {
         id: "shared-workflows",
-        label: "Shared workflows cover most cases; exceptions are reviewed.",
+        label:
+          "Work generally follows a common process, and anything that falls outside it is reviewed by the team.",
         score: 3,
         evidence:
           "Common workflows give teams a consistent way to complete routine work.",
@@ -88,8 +90,7 @@ export const maturityQuestions: MaturityQuestion[] = [
         nextStep:
           "Prioritize the exceptions with the greatest effect on service or effort, then test a focused process change.",
         serviceLabel: "Process & workflow optimization",
-        serviceHref:
-          "/what-we-do/modernize/process-workflow-optimization",
+        serviceHref: "/what-we-do/modernize/process-workflow-optimization",
       },
     ],
   },
@@ -100,7 +101,8 @@ export const maturityQuestions: MaturityQuestion[] = [
     options: [
       {
         id: "local-applications",
-        label: "Teams re-enter data between disconnected applications.",
+        label:
+          "Employees often have to enter the same information into different systems.",
         score: 1,
         evidence:
           "Teams can choose tools that meet immediate needs in their own areas.",
@@ -113,7 +115,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "managed-interfaces",
-        label: "Key integrations have owners and active monitoring.",
+        label:
+          "Important systems share information automatically, and someone regularly checks that everything is working properly.",
         score: 3,
         evidence:
           "Important integrations have defined ownership and reduce some avoidable manual transfer.",
@@ -126,7 +129,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "file-bridges",
-        label: "Files and spreadsheets move data between systems.",
+        label:
+          "We regularly rely on Excel files and shared documents to move information between different systems.",
         score: 0,
         evidence:
           "Staff are maintaining continuity across systems that do not connect directly.",
@@ -139,7 +143,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "intentional-architecture",
-        label: "Shared standards govern integrations, data ownership and change.",
+        label:
+          "We have clear rules for how our systems share information, who is responsible for it, and how changes are managed.",
         score: 4,
         evidence:
           "Clear standards and dependency awareness help teams evolve the environment with fewer surprises.",
@@ -152,7 +157,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "critical-integrations",
-        label: "Some systems connect; many flows need manual reconciliation.",
+        label:
+          "A few systems are connected, but people still have to compare records and fix differences themselves.",
         score: 2,
         evidence:
           "The most important systems are connected in at least some parts of the operation.",
@@ -161,8 +167,7 @@ export const maturityQuestions: MaturityQuestion[] = [
         nextStep:
           "Map the remaining manual reconciliations and rank them by business impact and frequency.",
         serviceLabel: "Process & workflow optimization",
-        serviceHref:
-          "/what-we-do/modernize/process-workflow-optimization",
+        serviceHref: "/what-we-do/modernize/process-workflow-optimization",
       },
     ],
   },
@@ -173,7 +178,8 @@ export const maturityQuestions: MaturityQuestion[] = [
     options: [
       {
         id: "shared-definitions",
-        label: "Core measures have shared definitions; some checks are manual.",
+        label:
+          "Teams generally agree on what the important numbers mean, but some information still needs to be checked manually.",
         score: 3,
         evidence:
           "Shared definitions give teams a more consistent basis for discussing performance.",
@@ -186,7 +192,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "independent-reports",
-        label: "Teams build separate reports and reconcile conflicting numbers.",
+        label:
+          "Different teams prepare their own reports, and the numbers don't always match.",
         score: 0,
         evidence:
           "Teams are already using available information to answer important business questions.",
@@ -199,7 +206,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "periodic-reporting",
-        label: "Reports arrive late or lack shared definitions.",
+        label:
+          "Important business reports are sometimes delayed, and different teams may understand the same figures differently.",
         score: 2,
         evidence:
           "The organization has established reporting routines and identifiable information needs.",
@@ -212,7 +220,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "governed-data",
-        label: "Data owners govern definitions, quality and traceability.",
+        label:
+          "Clear responsibilities and checks ensure that the information we use is accurate, consistent and easy to trace back to its source.",
         score: 4,
         evidence:
           "Governed measures and traceable data support more consistent, timely decisions.",
@@ -225,7 +234,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "spreadsheet-owners",
-        label: "A few people reconcile data in spreadsheets.",
+        label:
+          "A small number of people regularly check and update spreadsheets to make sure the information is accurate.",
         score: 1,
         evidence:
           "A small group has built valuable working knowledge about the data.",
@@ -245,7 +255,8 @@ export const maturityQuestions: MaturityQuestion[] = [
     options: [
       {
         id: "governed-portfolio",
-        label: "Outcomes, risks and capacity guide a governed roadmap.",
+        label:
+          "We follow a clear plan for improvements, balancing business needs, potential challenges and our team's ability to deliver.",
         score: 4,
         evidence:
           "Portfolio decisions connect delivery capacity and dependencies to intended business outcomes.",
@@ -258,7 +269,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "urgent-requests",
-        label: "Urgent fixes usually take priority.",
+        label:
+          "Urgent problems usually get attention first, while planned improvements often get pushed back.",
         score: 1,
         evidence:
           "Teams are responsive to emerging operational issues and immediate business demands.",
@@ -271,7 +283,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "sequenced-releases",
-        label: "Planned releases manage dependencies; outcomes are rarely reviewed.",
+        label:
+          "We have a plan for introducing changes, but don't regularly review whether they have actually improved the way we work.",
         score: 3,
         evidence:
           "Incremental delivery and dependency planning make change more manageable.",
@@ -284,7 +297,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "reactive-change",
-        label: "Changes are reactive, with unclear ownership and impact.",
+        label:
+          "Decisions to change the way we work are often made on the spot, without fully considering their wider impact.",
         score: 0,
         evidence:
           "The organization is identifying issues that need attention and building awareness of change demand.",
@@ -297,7 +311,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "roadmap-competes",
-        label: "A roadmap exists, but priorities compete for capacity.",
+        label:
+          "There is a list of planned improvements, but day-to-day work often makes it difficult to move them forward.",
         score: 2,
         evidence:
           "Leaders have articulated priorities and a starting sequence for planned work.",
@@ -317,7 +332,8 @@ export const maturityQuestions: MaturityQuestion[] = [
     options: [
       {
         id: "training-events",
-        label: "Training happens near launch; support is mostly reactive.",
+        label:
+          "People receive instructions shortly before a change goes live, and the business addresses difficulties as employees encounter them.",
         score: 2,
         evidence:
           "Teams recognize the need to prepare users before a change goes live.",
@@ -330,7 +346,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "embedded-ownership",
-        label: "Users shape changes; readiness and adoption are tracked throughout.",
+        label:
+          "Employees are involved in planning and testing changes, and the business checks whether people are actually using the new ways of working.",
         score: 4,
         evidence:
           "User participation and clear ownership support adoption beyond the launch date.",
@@ -343,7 +360,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "late-involvement",
-        label: "Users see changes after key decisions are made.",
+        label:
+          "Management decides what needs to change, and employees are brought into the process only when implementation begins.",
         score: 0,
         evidence:
           "Teams are moving change forward and can use early user involvement to reduce surprises.",
@@ -352,12 +370,12 @@ export const maturityQuestions: MaturityQuestion[] = [
         nextStep:
           "Invite representative users into discovery and test a realistic scenario before design is finalized.",
         serviceLabel: "Process & workflow optimization",
-        serviceHref:
-          "/what-we-do/modernize/process-workflow-optimization",
+        serviceHref: "/what-we-do/modernize/process-workflow-optimization",
       },
       {
         id: "role-ready",
-        label: "Roles and support are clear; feedback guides releases.",
+        label:
+          "Employees know where to get help and whom to approach, and their feedback helps improve future changes.",
         score: 3,
         evidence:
           "Defined roles and feedback channels give teams a practical foundation for adoption.",
@@ -370,7 +388,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "local-champions",
-        label: "Informal champions help, but adoption is not planned.",
+        label:
+          "Some team members take the lead in helping others, but preparing the wider workforce for change is largely informal.",
         score: 1,
         evidence:
           "Local champions provide useful knowledge and trust within their teams.",
@@ -390,7 +409,8 @@ export const maturityQuestions: MaturityQuestion[] = [
     options: [
       {
         id: "technology-queue",
-        label: "Requests drive choices; value and dependencies are rarely compared.",
+        label:
+          "We tend to invest in technology when someone asks for it, rather than evaluating which investments will deliver the greatest business value.",
         score: 1,
         evidence:
           "Teams are surfacing demand and identifying tools that may address real needs.",
@@ -403,7 +423,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "outcome-roadmap",
-        label: "A roadmap links outcomes, owners and dependencies.",
+        label:
+          "We follow a shared technology plan that connects business goals with planned investments and clear responsibilities.",
         score: 3,
         evidence:
           "The roadmap links strategic intent to accountable initiatives and delivery decisions.",
@@ -416,7 +437,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "agreed-priorities",
-        label: "Leaders set priorities; teams choose projects separately.",
+        label:
+          "Management sets the main business priorities, but individual teams decide which technology projects to pursue.",
         score: 2,
         evidence:
           "There is leadership alignment on direction, which can anchor more coordinated planning.",
@@ -429,7 +451,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "uncoordinated-investment",
-        label: "Teams invest separately, with little shared review.",
+        label:
+          "Technology decisions are made separately by different departments, with limited visibility into what others are investing in.",
         score: 0,
         evidence:
           "Individual teams are taking initiative to address their immediate needs.",
@@ -442,7 +465,8 @@ export const maturityQuestions: MaturityQuestion[] = [
       },
       {
         id: "governed-outcomes",
-        label: "Owners track outcomes and adjust plans as evidence changes.",
+        label:
+          "We measure the impact of technology investments and use what we learn to guide future decisions.",
         score: 4,
         evidence:
           "Clear accountability and outcome reviews make it easier to adapt investment decisions.",
@@ -558,9 +582,7 @@ export function buildMaturityResult(
     .sort((a, b) => a.score - b.score)
     .slice(0, 3);
   if (!focusAreas.length) {
-    focusAreas = [...dimensions]
-      .sort((a, b) => a.score - b.score)
-      .slice(0, 2);
+    focusAreas = [...dimensions].sort((a, b) => a.score - b.score).slice(0, 2);
   }
 
   const strongest = [...dimensions].sort((a, b) => b.score - a.score)[0];
