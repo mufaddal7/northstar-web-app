@@ -6,19 +6,22 @@ import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
 import { HomeBulletin } from "@/components/home-bulletin";
 import { ImplementationJourney } from "@/components/implementation-journey";
-import { ButtonLink, Eyebrow, Section, SectionHeading, Shell } from "@/components/ui";
+import {
+  ButtonLink,
+  Eyebrow,
+  Section,
+  SectionHeading,
+  Shell,
+} from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 import { WHATSAPP_URL } from "@/lib/site-data";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 
 const pageTitle = "Business Transformation & Technology Services";
 const pageDescription =
   "Northstar helps businesses modernize ERP and CRM systems, connect operational data, apply AI and automation, and build digital products around how teams work.";
 
-export const metadata: Metadata = pageMetadata(
-  pageTitle,
-  pageDescription,
-  "/",
-);
+export const metadata: Metadata = pageMetadata(pageTitle, pageDescription, "/");
 
 const serviceHighlights = [
   {
@@ -114,7 +117,9 @@ export default function HomePage() {
         </div>
         <Shell className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <div className="max-w-3xl">
-            <Eyebrow inverse>Business transformation · Technology services</Eyebrow>
+            <Eyebrow inverse>
+              Business transformation · Technology services
+            </Eyebrow>
             <h1 className="font-display text-4xl leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
               Make technology work for{" "}
               <span className="text-brand-gold-light">your business.</span>
@@ -138,7 +143,10 @@ export default function HomePage() {
             </div>
             <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-5 text-white/55">
               <span>Prefer to speak directly?</span>
-              <a className="font-semibold text-brand-gold-light hover:underline" href="tel:+916268535490">
+              <a
+                className="font-semibold text-brand-gold-light hover:underline"
+                href="tel:+916268535490"
+              >
                 +91 62685 35490
               </a>
               <span aria-hidden="true">·</span>
@@ -333,7 +341,6 @@ export default function HomePage() {
       </Section>
 
       <AgenticAiSection />
-
       <Section tone="muted">
         <Shell className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
@@ -342,8 +349,8 @@ export default function HomePage() {
               Good implementation is about more than configuration.
             </h2>
             <p className="mt-5 leading-7 text-muted">
-              The system is only useful when the process, information and
-              people around it are ready to work together.
+              The system is only useful when the process, information and people
+              around it are ready to work together.
             </p>
             <ContactDialog
               className="mt-7"
@@ -382,6 +389,7 @@ export default function HomePage() {
           </div>
         </Shell>
       </Section>
+      <ErpPeriodicTablePromo />
 
       <Section>
         <Shell className="grid gap-10 md:grid-cols-[0.7fr_1.3fr] lg:gap-16">
