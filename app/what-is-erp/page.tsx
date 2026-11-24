@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import {
   Eyebrow,
   PageHero,
@@ -296,6 +297,12 @@ export default function WhatIsErpPage() {
               ))}
             </div>
           </nav>
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

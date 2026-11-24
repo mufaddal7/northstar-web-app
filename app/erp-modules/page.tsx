@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ErpModuleExplorer } from "@/components/erp-module-explorer";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import { Eyebrow, Section, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -44,6 +45,12 @@ export default function ErpModulesPage() {
             Explore ERP implementation
             <ArrowUpRight />
           </Link>
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

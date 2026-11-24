@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
 import { CtaBand } from "@/components/cta-band";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import { Eyebrow, PageHero, Section, SectionHeading, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -274,6 +275,12 @@ export default function ErpVsCrmPage() {
               </details>
             ))}
           </div>
+        </Shell>
+      </Section>
+
+      <Section>
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

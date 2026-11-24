@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { ErpEnvironmentArchitecture } from "@/components/erp-environment-architecture";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import { CtaBand } from "@/components/cta-band";
 import {
   ButtonLink,
@@ -186,6 +187,12 @@ export default function ErpArchitectureDataSecurityPage() {
             ERP implementation
             <ArrowUpRight />
           </Link>
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

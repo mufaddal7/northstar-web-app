@@ -5,6 +5,7 @@ import { ContactDialog } from "@/components/contact-dialog";
 import { ContactForm } from "@/components/contact-form";
 import { CtaBand } from "@/components/cta-band";
 import { ImplementationJourney } from "@/components/implementation-journey";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import {
   ButtonLink,
   Eyebrow,
@@ -383,6 +384,12 @@ export default function ErpImplementationPage() {
             source="erp_implementation_page"
             submitLabel="Request an ERP demo"
           />
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

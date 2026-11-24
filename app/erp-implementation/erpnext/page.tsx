@@ -4,6 +4,7 @@ import { ArrowUpRight } from "@/components/icons";
 import { ContactDialog } from "@/components/contact-dialog";
 import { ContactForm } from "@/components/contact-form";
 import { CtaBand } from "@/components/cta-band";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import { ImplementationJourney } from "@/components/implementation-journey";
 import { Eyebrow, PageHero, Section, SectionHeading, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
@@ -275,6 +276,12 @@ export default function ErpNextImplementationPage() {
             source="erpnext_page"
             submitLabel="Request an ERPNext demo"
           />
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

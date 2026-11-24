@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
 import { ErpReferenceArchitecture } from "@/components/erp-reference-architecture";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import { ButtonLink, PageHero, Section, Shell } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -55,6 +56,12 @@ export default function ErpReferenceArchitecturePage() {
           >
             Open ERP module guide <ArrowUpRight />
           </Link>
+        </Shell>
+      </Section>
+
+      <Section>
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
 

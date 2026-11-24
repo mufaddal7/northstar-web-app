@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "@/components/icons";
 import { CtaBand } from "@/components/cta-band";
+import { ErpPeriodicTablePromo } from "@/components/erp-periodic-table-promo";
 import { Card, PageHero, Section, Shell, Eyebrow } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
 import { insightArticles, insightTopics } from "@/lib/site-data";
@@ -29,6 +30,11 @@ export default function InsightsPage() {
               <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
             </Card>
           ))}
+        </Shell>
+      </Section>
+      <Section>
+        <Shell>
+          <ErpPeriodicTablePromo />
         </Shell>
       </Section>
       <Section>
