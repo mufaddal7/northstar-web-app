@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/erp-architecture-data-security",
     "/erp-modules",
     "/erp-periodic-table",
+    "/agentic-ai-comparison",
     "/erp-reference-architecture",
     "/erp-implementation/erpnext",
     "/erp-vs-crm",
