@@ -342,6 +342,23 @@ export default function HomePage() {
 
       <AgenticAiSection />
       <Section tone="muted">
+        <Shell className="grid items-center gap-6 md:grid-cols-[1fr_auto]">
+          <div>
+            <Eyebrow>AI agent comparison</Eyebrow>
+            <h2 className="font-display text-3xl leading-tight sm:text-4xl">
+              Choosing between a chatbot, tools and an AI agent?
+            </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-muted">
+              Compare RAG, tool-augmented and agentic AI patterns by planning,
+              proactivity, tools and human control.
+            </p>
+          </div>
+          <ButtonLink href="/agentic-ai-comparison" secondary>
+            Compare AI agent patterns <ArrowUpRight />
+          </ButtonLink>
+        </Shell>
+      </Section>
+      <Section tone="muted">
         <Shell className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
             <Eyebrow>Make the change manageable</Eyebrow>

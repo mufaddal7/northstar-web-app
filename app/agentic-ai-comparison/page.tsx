@@ -14,8 +14,8 @@ import {
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
-  "RAG vs Tool-Augmented vs Agentic AI",
-  "Compare RAG chatbots, tool-augmented chatbots and agentic AI by reactivity, tool use, reasoning, planning, proactivity, scenarios and implementation tools.",
+  "RAG Chatbots, Tool-Augmented Chatbots and Agentic AI",
+  "Compare three AI system patterns: RAG chatbots, tool-augmented chatbots and agentic AI. See how retrieval, tools, planning, proactivity and human control differ.",
   "/agentic-ai-comparison",
 );
 
@@ -34,7 +34,7 @@ const approaches: Approach[] = [
     name: "RAG chatbot",
     shortName: "RAG",
     summary:
-      "Retrieves approved content and uses it to answer a question with relevant context.",
+      "Uses retrieval-augmented generation (RAG) to find approved content before generating a grounded answer.",
     bestFor:
       "Knowledge access, policy questions, product documentation and grounded support.",
     boundary:
@@ -52,7 +52,7 @@ const approaches: Approach[] = [
     name: "Tool-augmented chatbot",
     shortName: "Tools",
     summary:
-      "Retrieves context and calls defined tools or APIs to look up data or complete a bounded operation.",
+      "Uses a conversational interface plus explicit tools or APIs to look up live data or complete a bounded operation.",
     bestFor:
       "Status checks, calculations, guided self-service and single-step business actions.",
     boundary:
@@ -67,10 +67,10 @@ const approaches: Approach[] = [
     ],
   },
   {
-    name: "Agentic AI",
+    name: "Agentic AI system",
     shortName: "Agentic",
     summary:
-      "Interprets a goal, plans a sequence, uses tools, checks results and escalates when judgment or approval is needed.",
+      "Uses an agent loop to interpret a goal, plan steps, use tools, check results and escalate when judgment or approval is needed.",
     bestFor:
       "Exception resolution, multi-step operations, coordinated research and controlled workflow automation.",
     boundary:
@@ -93,24 +93,24 @@ const comparisonRows = [
     values: ["Yes", "Yes", "Yes"],
   },
   {
-    label: "Tool use",
-    description: "Can call approved search, data, calculation or business APIs.",
-    values: ["No", "Yes", "Yes"],
+    label: "External business tools",
+    description: "Can call approved APIs or systems beyond document retrieval.",
+    values: ["No (retrieval only)", "Yes", "Yes"],
   },
   {
-    label: "Reasoning",
-    description: "Can interpret context and weigh possible answers or actions.",
-    values: ["Limited", "Limited", "Yes"],
+    label: "Multi-step orchestration",
+    description: "Coordinates several dependent steps toward a result.",
+    values: ["No", "Limited", "Yes"],
   },
   {
     label: "Planning",
-    description: "Can break a goal into steps and decide what to do next.",
-    values: ["No", "Usually no", "Yes"],
+    description: "Can choose and sequence steps rather than follow one fixed call.",
+    values: ["No", "Bounded", "Goal-directed"],
   },
   {
     label: "Proactivity",
     description: "Can respond to events or pursue a goal without a new prompt.",
-    values: ["No", "Usually no", "Controlled"],
+    values: ["No", "Trigger-based", "Controlled"],
   },
   {
     label: "Human checkpoint",
@@ -220,8 +220,14 @@ const caseStudyLinks = [
 ];
 
 function StatusMark({ value }: { value: string }) {
-  const positive = value === "Yes" || value === "Controlled";
-  const limited = value === "Limited" || value === "Usually no";
+  const positive =
+    value === "Yes" || value === "Controlled" || value === "Goal-directed";
+  const limited =
+    value === "Limited" ||
+    value === "Bounded" ||
+    value === "Trigger-based" ||
+    value === "Recommended" ||
+    value === "No (retrieval only)";
 
   return (
     <span
@@ -246,14 +252,14 @@ export default function AgenticAiComparisonPage() {
     <>
       <PageHero
         dark
-        eyebrow="AI architecture guide"
+        eyebrow="AI agent comparison"
         title={
           <>
-            RAG, tools or{" "}
-            <span className="text-brand-gold-light">agents?</span>
+            RAG, tools and{" "}
+            <span className="text-brand-gold-light">agentic AI.</span>
           </>
         }
-        description="A practical comparison of three AI patterns, what each one can do, where each one stops, and how to choose the smallest approach that solves the business problem."
+        description="A technically grounded comparison of three overlapping AI system patterns. See where AI agents fit, what each pattern can do, and how to choose the right level of orchestration and control."
       >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="#comparison" secondary className="border-white/30 text-white hover:bg-white/10">
@@ -308,23 +314,73 @@ export default function AgenticAiComparisonPage() {
       <Section>
         <Shell>
           <SectionHeading
+            eyebrow="Avoid the terminology trap"
+            title="An AI agent is not the same thing as agentic AI."
+            copy="The terms are related, but they describe different things. Use the distinction to keep architecture, product and governance conversations precise."
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <Card className="border-brand-gold/50 bg-brand-gold/5">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
+                The component
+              </p>
+              <h2 className="mt-4 font-display text-3xl">AI agent</h2>
+              <p className="mt-4 leading-7 text-muted">
+                An AI agent is a software component that can interpret a goal,
+                use approved context and tools, make a bounded decision, and
+                return an answer or proposed action.
+              </p>
+              <p className="mt-4 border-t border-border pt-4 text-sm leading-6">
+                Think: <strong>who or what performs the task?</strong>
+              </p>
+            </Card>
+            <Card className="border-brand-navy/40 !bg-brand-navy !text-white">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] !text-brand-gold-light">
+                The operating pattern
+              </p>
+              <h2 className="mt-4 font-display text-3xl !text-white">Agentic AI</h2>
+              <p className="mt-4 leading-7 !text-white/75">
+                Agentic AI describes a system design or behavior in which an AI
+                agent can pursue a goal through planning, tool use, feedback,
+                escalation and workflow controls.
+              </p>
+              <p className="mt-4 border-t border-white/15 pt-4 text-sm leading-6 !text-white/80">
+                Think:{" "}
+                <strong>
+                  how much autonomy and coordination does the system have?
+                </strong>
+              </p>
+            </Card>
+          </div>
+          <p className="mt-6 border-l-2 border-brand-gold pl-4 text-sm leading-6 text-muted">
+            These are not mutually exclusive product categories. An AI agent
+            may use RAG, a tool-augmented chatbot may contain a simple agent
+            loop, and an agentic workflow may combine retrieval, tools and one
+            or more agents. This page compares the dominant operating pattern,
+            not a fixed vendor taxonomy.
+          </p>
+        </Shell>
+      </Section>
+
+      <Section>
+        <Shell>
+          <SectionHeading
             eyebrow="Comparison dashboard"
             title="What changes as the system moves from answers to action?"
             copy="The matrix is a decision aid, not a promise about every product. A well-designed implementation can add or restrict capabilities through permissions, workflow rules and operating controls."
           />
           <div className="mt-8 overflow-x-auto rounded-sm border border-border">
-            <table className="w-full min-w-[60rem] border-collapse text-left text-sm">
+            <table className="w-full min-w-[54rem] border-collapse text-left text-xs">
               <caption className="sr-only">
                 Comparison of RAG chatbots, tool-augmented chatbots and agentic
                 AI
               </caption>
               <thead className="bg-brand-navy text-white">
                 <tr>
-                  <th className="w-[28%] px-4 py-4 font-semibold" scope="col">
+                  <th className="w-[28%] px-3 py-3 font-semibold" scope="col">
                     Capability
                   </th>
                   {approaches.map((approach) => (
-                    <th className="min-w-48 px-4 py-4 font-semibold" key={approach.name} scope="col">
+                    <th className="min-w-44 px-3 py-3 font-semibold" key={approach.name} scope="col">
                       {approach.name}
                     </th>
                   ))}
@@ -333,14 +389,14 @@ export default function AgenticAiComparisonPage() {
               <tbody className="divide-y divide-border">
                 {comparisonRows.map((row) => (
                   <tr className="align-top even:bg-surface-muted" key={row.label}>
-                    <th className="px-4 py-4 font-semibold" scope="row">
+                    <th className="px-3 py-2.5 font-semibold" scope="row">
                       {row.label}
-                      <span className="mt-1 block max-w-xs text-xs font-normal leading-5 text-muted">
+                      <span className="mt-1 block max-w-xs text-[0.68rem] font-normal leading-4 text-muted">
                         {row.description}
                       </span>
                     </th>
                     {row.values.map((value, index) => (
-                      <td className="px-4 py-4" key={`${row.label}-${approaches[index].name}`}>
+                      <td className="px-3 py-2.5" key={`${row.label}-${approaches[index].name}`}>
                         <StatusMark value={value} />
                       </td>
                     ))}
@@ -437,6 +493,37 @@ export default function AgenticAiComparisonPage() {
                 <p className="mt-3 leading-7 text-muted">{signal.description}</p>
               </article>
             ))}
+          </div>
+        </Shell>
+      </Section>
+
+      <Section tone="muted">
+        <Shell>
+          <div className="border border-brand-gold/50 bg-brand-gold/10 p-6 sm:p-8">
+            <Eyebrow>AI GEO + SEO takeaway</Eyebrow>
+            <h2 className="font-display text-2xl leading-tight sm:text-3xl">
+              Make AI guidance easy to understand, verify and retrieve.
+            </h2>
+            <p className="mt-4 max-w-4xl leading-7 text-muted">
+              For people and AI search systems, lead with a clear definition,
+              name the decision the page helps with, compare alternatives
+              directly, and show concrete scenarios. Define acronyms on first
+              use, keep claims tied to visible evidence, use descriptive
+              headings and link related guidance naturally. Good GEO supports
+              good SEO because both reward useful, well-structured answers over
+              keyword repetition.
+            </p>
+            <div className="mt-5 grid gap-3 text-sm sm:grid-cols-3">
+              {[
+                "Answer the question near the top.",
+                "Use explicit terms and comparison language.",
+                "Support claims with examples and clear boundaries.",
+              ].map((point) => (
+                <p className="border-l-2 border-brand-gold pl-3 leading-6" key={point}>
+                  {point}
+                </p>
+              ))}
+            </div>
           </div>
         </Shell>
       </Section>

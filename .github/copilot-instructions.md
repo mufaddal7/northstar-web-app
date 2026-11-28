@@ -13,6 +13,7 @@
 ## Copy & SEO
 - **Voice:** Write clear, business-focused copy leading with reader problems and practical outcomes. Define technical terms/acronyms. Avoid filler, hype, unverified claims, and **em dashes (`—`)**.
 - **Page Intent:** Give every page a single clear goal, relevant low-pressure CTA, and natural internal links.
+- **GEO-friendly structure:** Make pages useful to both people and answer engines by answering the primary question early, defining terms on first use, using explicit comparison language, showing concrete scenarios, keeping claims visible and verifiable, and linking related guidance naturally. Use clear headings and concise takeaway blocks instead of keyword repetition.
 - **Metadata & Indexing:** Use the shared metadata helper on all public pages for unique titles, descriptions, canonical URLs, and OG/Twitter cards (using the branded share-card generator unless a custom cover adds clear value). Avoid `meta keywords` and keyword stuffing.
 - **Crawling & Schema:** Keep `app/sitemap.ts` and `app/robots.ts` synced with indexable routes. Set `noindex` on utility/offline/404 pages and exclude them from the sitemap. Ensure JSON-LD structured data strictly reflects visible on-page facts.
 

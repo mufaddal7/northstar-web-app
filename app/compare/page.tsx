@@ -29,6 +29,14 @@ const comparisons = [
     label: "Read the comparison",
   },
   {
+    category: "AI architecture",
+    href: "/agentic-ai-comparison",
+    title: "RAG Chatbots, Tool-Augmented Chatbots and Agentic AI",
+    summary:
+      "Compare how AI agents retrieve context, use tools, plan work and take controlled action across practical business scenarios.",
+    label: "Read the comparison",
+  },
+  {
     category: "Business systems",
     href: "/erp-vs-crm",
     title: "ERP vs CRM",
