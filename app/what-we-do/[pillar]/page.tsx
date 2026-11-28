@@ -53,6 +53,19 @@ export default async function PillarPage({ params }: Props) {
               </Link>
             ))}
           </div>
+          {slug === "intelligence" ? (
+            <div className="mt-6 border-l-2 border-brand-gold pl-4">
+              <p className="text-sm leading-6 text-muted">
+                Comparing AI terminology before choosing an architecture?
+              </p>
+              <Link
+                className="mt-2 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+                href="/ai-agent-vs-agentic-ai"
+              >
+                Understand AI agents and agentic AI <ArrowUpRight />
+              </Link>
+            </div>
+          ) : null}
         </Shell>
       </Section>
       <Section tone="muted">

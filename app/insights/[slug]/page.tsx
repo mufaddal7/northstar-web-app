@@ -228,6 +228,24 @@ export default async function InsightArticlePage({ params }: Props) {
                 </p>
               </section>
             ) : null}
+            {article.category.includes("AI") ? (
+              <aside className="mt-10 border border-brand-gold/50 bg-brand-gold/10 p-5 sm:p-6">
+                <Eyebrow>Related AI guide</Eyebrow>
+                <h2 className="font-display text-2xl leading-tight">
+                  AI agent vs agentic AI
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-muted">
+                  Clarify the difference between an AI agent, an agentic
+                  workflow and the tools that support them.
+                </p>
+                <Link
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+                  href="/ai-agent-vs-agentic-ai"
+                >
+                  Read the guide <ArrowUpRight />
+                </Link>
+              </aside>
+            ) : null}
           </article>
 
           <aside className="h-fit rounded-sm border border-border bg-surface-muted p-5 sm:p-6 lg:sticky lg:top-28">

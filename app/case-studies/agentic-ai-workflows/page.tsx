@@ -108,6 +108,12 @@ export default function AgenticAiCaseStudyPage() {
           </div>
 
           <AgenticAiWorkflowDiagram />
+          <Link
+            className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+            href="/ai-agent-vs-agentic-ai"
+          >
+            Understand AI agents and agentic AI <ArrowUpRight />
+          </Link>
         </Shell>
       </Section>
 

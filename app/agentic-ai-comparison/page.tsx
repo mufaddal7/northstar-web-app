@@ -358,6 +358,12 @@ export default function AgenticAiComparisonPage() {
             or more agents. This page compares the dominant operating pattern,
             not a fixed vendor taxonomy.
           </p>
+          <Link
+            className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+            href="/ai-agent-vs-agentic-ai"
+          >
+            Read the terminology guide <ArrowUpRight />
+          </Link>
         </Shell>
       </Section>
 

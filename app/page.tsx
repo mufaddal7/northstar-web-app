@@ -353,9 +353,17 @@ export default function HomePage() {
               proactivity, tools and human control.
             </p>
           </div>
-          <ButtonLink href="/agentic-ai-comparison" secondary>
-            Compare AI agent patterns <ArrowUpRight />
-          </ButtonLink>
+          <div className="flex flex-wrap items-center gap-4">
+            <ButtonLink href="/agentic-ai-comparison" secondary>
+              Compare AI patterns <ArrowUpRight />
+            </ButtonLink>
+            <Link
+              className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:underline"
+              href="/ai-agent-vs-agentic-ai"
+            >
+              AI agent vs agentic AI <ArrowUpRight />
+            </Link>
+          </div>
         </Shell>
       </Section>
       <Section tone="muted">
